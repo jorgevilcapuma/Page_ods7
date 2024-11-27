@@ -1,0 +1,688 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interactivo ODS</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Configuración de la fuente principal */
+
+      .country-info a {
+    color: #FFEB3B;
+    text-decoration: none;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.country-info .country-name {
+    font-weight: bold;
+}
+
+.country-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Carrusel de ODS */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.ods-list {
+    display: flex;
+    animation: scroll 20s linear infinite;
+    padding: 10px 0;
+    gap: 20px; /* Espacio entre las imágenes */
+}
+
+.ods-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ods-item img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.ods-item:hover {
+    border-color: #ff9800;
+    transform: scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ods-item:hover img {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Controles del Carrusel */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-control.left {
+    left: 10px;
+}
+
+.carousel-control.right {
+    right: 10px;
+}
+
+/* Diseño Responsivo */
+@media (max-width: 768px) {
+    .ods-item {
+        width: 170px;
+        height: 200px;
+        padding: 20px;
+    }
+
+    .ods-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .ods-info {
+        font-size: 1.2em;
+    }
+}
+
+/* Botón de Reset del Mapa */
+#reset-map {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    padding: 15px 20px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+#reset-map:hover {
+    background-color: #1b18c2;
+}
+
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #1976d2;
+    color: white;
+    font-size: 2.5em;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+    border-bottom: 4px solid #090495;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Información de ODS */
+.ods-info {
+    text-align: center;
+    margin: 20px 10px;
+    font-size: 1.3em;
+    color: #444;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+
+/* Mapa */
+#map {
+    width: 100%;
+    height: 75vh;
+    border-top: 3px solid #4CAF50;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 20px 20px;
+}
+
+/* Información de País */
+.country-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+}
+
+.country-info a {
+    color: #FFD700; /* Color amarillo dorado */
+    text-decoration: none;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Efecto de transición para el color */
+}
+
+.country-info a:hover {
+    color: hsl(61, 100%, 52%); /* Cambio de color al pasar el ratón (tomate) */
+}
+
+.country-info .country-name {
+    font-weight: bold;
+    font-size: 1.2rem; /* Tamaño de fuente un poco mayor */
+    color: #333; /* Color de texto más oscuro para resaltar el nombre */
+}
+
+
+.country-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Carrusel de ODS */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 40px 0;
+}
+
+/* Estilos para la lista de ODS */
+.ods-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.ods-item {
+    text-align: center;
+    cursor: pointer;
+}
+
+.ods-item img {
+    width: 95px;
+    height: 95px;
+}
+
+/* Botón de Reset del Mapa */
+#reset-map {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    padding: 15px 20px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+#reset-map:hover {
+    background-color: #1b18c2;
+}
+
+
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-teal-800 text-white p-4 flex items-center justify-center">
+        <h1 class="text-xl font-bold">Mapa Interactivo de los Objetivos de Desarrollo Sostenible (ODS)</h1>
+    </header>
+    <div class="text-center p-4">
+        <p class="text-lg">Haz clic en un país para ver su información.</p>
+        <a href="/public/index.html/historia.html" target="_blank" class="text-red-500 hover:underline">Ver más detalles aquí</a>.
+    </div>
+    <div id="map" class="relative">
+        <button id="reset-map" aria-label="Reiniciar Mapa">X</button>
+    </div>
+    <div class="ods-list p-4">
+        <div class="ods-item" onclick="addMarker(0, 0, 'Objetivo 1: Fin de la pobreza', 'Erradicar la pobreza en todas sus formas y en todo el mundo.'); toggleMapColor('ODS1', '#FF0000')">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.p1MV7F0AONXsrwXP2zjLaQHaHa&pid=Api&P=0&h=180" alt="Objetivo 1">
+            <p>ODS 1</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(10, 10, 'Objetivo 2: Hambre cero', 'Acabar con el hambre, lograr la seguridad alimentaria y la mejora de la nutrición.'); toggleMapColor('ODS2', '#FFA500')">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.QFXUWb64XezEMiPi7NABwAHaHa&pid=Api&P=0&h=180" alt="Objetivo 2">
+            <p>ODS 2</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(20, 20, 'Objetivo 3: Salud y bienestar', 'Garantizar una vida sana y promover el bienestar para todos en todas las edades.'); toggleMapColor('ODS3', '#FFFF00')">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.eeZlIiXOkQV5iULgNGeEogHaHa&pid=Api&P=0&h=180" alt="Objetivo 3">
+            <p>ODS 3</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(-10, -10, 'Objetivo 4: Educación de calidad', 'Asegurar una educación inclusiva, equitativa y de calidad.'); toggleMapColor('ODS4', '#008000')">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.YhLvxqJA0IbdKvMbSi9PtAHaHa&pid=Api&P=0&h=180" alt="Objetivo 4">
+            <p>ODS 4</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(15, 50, 'Objetivo 5: Igualdad de género', 'Lograr la igualdad de género y empoderar a todas las mujeres y niñas.'); toggleMapColor('ODS5', '#0000FF')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Sustainable_Development_Goal-es-13.jpg/320px-Sustainable_Development_Goal-es-13.jpg" alt="Objetivo 5">
+            <p>ODS 5</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(-20, 60, 'Objetivo 6: Agua limpia y saneamiento', 'Garantizar la disponibilidad y la gestión sostenible del agua y el saneamiento.'); toggleMapColor('ODS6', '#800080')">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.Zv6-Fr_z-kjziqVVOy26zwHaHa&pid=Api&P=0&h=1800" alt="Objetivo 6">
+            <p>ODS 6</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(15, -50, 'Objetivo 7: Energía asequible y no contaminante', 'Asegurar el acceso de todos a servicios energéticos fiables, sostenibles y modernos.'); toggleMapColor('ODS7', '#FFFF33')">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.l2kJ1176CldDjej8k9SLfQHaEK&pid=Api&P=0&h=180" alt="Objetivo 7">
+            <p>ODS 7</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(-30, 100, 'Objetivo 8: Trabajo decente y crecimiento económico', 'Promover el crecimiento económico sostenido, inclusivo y sostenible.'); toggleMapColor('ODS8', '#8B4513')">
+            <img src="https://th.bing.com/th?q=ODS+8+Logo+Alta+Calidad&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.5&pid=InlineBlock&mkt=es-XL&cc=PE&setlang=es&adlt=moderate&t=1&mw=247" alt="Objetivo 8">
+            <p>ODS 8</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(25, 75, 'Objetivo 9: Industria, innovación e infraestructura', 'Construir infraestructuras resilientes, promover la industrialización inclusiva y sostenible.'); toggleMapColor('ODS9', '#2E8B57')">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.SthL5iKe5YiH8AbFGNagZQHaHa&pid=Api&P=0&h=180" alt="Objetivo 9">
+            <p>ODS 9</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(5, 30, 'Objetivo 10: Reducción de las desigualdades', 'Reducir la desigualdad en y entre los países.'); toggleMapColor('ODS10', '#1E90FF')">
+            <img src="https://tse3.explicit.bing.net/th?id=OIP.bfcknl9r-_jpvvLXqK3-rwHaHa&pid=Api&P=0&h=180" alt="Objetivo 10">
+            <p>ODS 10</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(0, -20, 'Objetivo 11: Ciudades y comunidades sostenibles', 'Hacer que las ciudades y los asentamientos humanos sean inclusivos, seguros, resilientes y sostenibles.'); toggleMapColor('ODS11', '#8A2BE2')">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.21uyd44PCRwfGCo_YuAKRAHaHd&pid=Api&P=0&h=180" alt="Objetivo 11">
+            <p>ODS 11</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(10, 30, 'Objetivo 12: Producción y consumo responsables', 'Asegurar modalidades de consumo y producción sostenibles.'); toggleMapColor('ODS12', '#DAA520')">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.Nd4OKIv_O6oPZZKKv1mFAQHaHa&pid=Api&P=0&h=180" alt="Objetivo 12">
+            <p>ODS 12</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(-5, 40, 'Objetivo 13: Acción por el clima', 'Tomar medidas urgentes para combatir el cambio climático y sus efectos.'); toggleMapColor('ODS13', '#DC143C')">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.6W3gFII05V3nh0t3EEs56AHaFj&pid=Api&P=0&h=180" alt="Objetivo 13">
+            <p>ODS 13</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(0, 0, 'Objetivo 14: Vida submarina', 'Conservar y utilizar sosteniblemente los océanos, los mares y los recursos marinos.'); toggleMapColor('ODS14', '#FF6347')">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.ONR73JuGm2dBNyxau1m_4AHaHa&pid=Api&P=0&h=180" alt="Objetivo 14">
+            <p>ODS 14</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(30, -70, 'Objetivo 15: Vida de ecosistemas terrestres', 'Proteger, restaurar y promover el uso sostenible de los ecosistemas terrestres.'); toggleMapColor('ODS15', '#32CD32')">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.bm3OIpF6NN_7ihAyR1KQvAHaHa&pid=Api&P=0&h=180" alt="Objetivo 15">
+            <p>ODS 15</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(20, -90, 'Objetivo 16: Paz, justicia e instituciones sólidas', 'Promover sociedades pacíficas e inclusivas para el desarrollo sostenible.'); toggleMapColor('ODS16', '#FFD700')">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.QaguKKHMwiQzFaNJq5gFswHaHa&pid=Api&P=0&h=180" alt="Objetivo 16">
+            <p>ODS 16</p>
+        </div>
+        <div class="ods-item" onclick="addMarker(-10, -10, 'Objetivo 17: Alianzas para lograr los objetivos', 'Fortalecer los medios de implementación y revitalizar la alianza global para el desarrollo sostenible.'); toggleMapColor('ODS17', '#000080')">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.k5lj1laN0epNA4VBjTjZngHaHa&pid=Api&P=0&h=180" alt="Objetivo 17">
+            <p>ODS 17</p>
+        </div>
+    </div>
+    <script>
+       // Inicialización del mapa
+var map = L.map('map').setView([0, 0], 2); // Coordenadas iniciales centradas en el mapa mundial
+
+// Capa de mapas de OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Variable para almacenar el país seleccionado
+var selectedCountryLayer = null;
+
+// Función para obtener la imagen del país (puedes sustituir con URLs de imágenes específicas)
+function getCountryImage(countryName) {
+    const countryImages = {
+        // América
+        "United States": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg",
+        "Canada": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Canada.svg",
+        "Brazil": "https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg",
+        "Argentina": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg",
+        "Mexico": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Flag_of_Mexico.svg",
+        "Chile": "https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Chile.svg",
+        "Peru": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Peru.svg",
+        "Colombia": "https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Colombia.svg",
+        "Venezuela": "https://upload.wikimedia.org/wikipedia/commons/0/06/Flag_of_Venezuela.svg",
+        "Ecuador": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Flag_of_Ecuador.svg",
+        "Bolivia": "https://upload.wikimedia.org/wikipedia/commons/4/48/Flag_of_Bolivia.svg",
+        "Paraguay": "https://tse2.mm.bing.net/th?id=OIP.ndvVqZhlkZLcoHTCYdm5kQHaEU&pid=Api&P=0&h=180",
+        "Uruguay": "https://tse3.mm.bing.net/th?id=OIP.HhuzFykcZ1FUg--hM6e03gHaEK&pid=Api&P=0&h=180",
+        "Guatemala": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Flag_of_Guatemala.svg",
+        "Honduras": "https://tse1.mm.bing.net/th?id=OIP.JBQLTCb9HJuywFDMvPmrsQHaEx&pid=Api&P=0&h=180",
+        "El Salvador": "https://upload.wikimedia.org/wikipedia/commons/8/89/Flag_of_El_Salvador.svg",
+        "Nicaragua": "https://upload.wikimedia.org/wikipedia/commons/1/19/Flag_of_Nicaragua.svg",
+        "Costa Rica": "https://cdn.pixabay.com/photo/2016/06/03/18/33/flag-1434063_960_720.jpg",
+        "Panama": "https://tse4.mm.bing.net/th?id=OIP.r1C6g0_i-RyPzMDUs2IAywHaEy&pid=Api&P=0&h=180",
+        "Belize": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Flag_of_Belize.svg",
+        "Cuba": "https://tse1.mm.bing.net/th?id=OIP.RkUNxtIA5gPlGinO04XyBAHaEo&pid=Api&P=0&h=180",
+        "Jamaica": "https://tse2.mm.bing.net/th?id=OIP.wJH0cUOQb0RUIN9wcfnzsgHaEK&pid=Api&P=0&h=180",
+        "Dominican Republic": "https://tse4.mm.bing.net/th?id=OIP.7Df93kpL4xvyLy7P1GBBJQHaEo&pid=Api&P=0&h=180",
+        "Saint Lucia": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Flag_of_Saint_Lucia.svg",
+        "Barbados": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Flag_of_Barbados.svg",
+        "Trinidad and Tobago": "https://upload.wikimedia.org/wikipedia/commons/6/64/Flag_of_Trinidad_and_Tobago.svg",
+        "Guyana": "https://tse3.mm.bing.net/th?id=OIP.2LMNbf2b9nGBXHe98YiZqwHaEc&pid=Api&P=0&h=180",
+        "Suriname": "https://tse3.mm.bing.net/th?id=OIP.ilmlwcvYBK8Ubcez-_milwHaE8&pid=Api&P=0&h=180",
+        "Greenland": "https://tse2.mm.bing.net/th?id=OIP.j6Mjk6C1cmDsPYdwsjKfIQHaEL&pid=Api&P=0&h=180",
+        // Europa
+        "Albania": "https://upload.wikimedia.org/wikipedia/commons/3/36/Flag_of_Albania.svg",
+        "Portugal": "https://tse2.mm.bing.net/th?id=OIP.MkV6i0qJXQv1ob0TfiRuAQHaER&pid=Api&P=0&h=180",
+        "Andorra": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Flag_of_Andorra.svg",
+        "Armenia": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_Armenia.svg",
+        "Austria": "https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg",
+        "Azerbaijan": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_Azerbaijan.svg",
+        "Belarus": "https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_Belarus.svg",
+        "Belgium": "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Belgium.svg",
+        "Bosnia and Herzegovina": "https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_Bosnia_and_Herzegovina.svg",
+        "Bulgaria": "https://upload.wikimedia.org/wikipedia/commons/7/70/Flag_of_Bulgaria.svg",
+        "Croatia": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Flag_of_Croatia.svg",
+        "Cyprus": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Flag_of_Cyprus.svg",
+        "Czech Republic": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Flag_of_the_Czech_Republic.svg",
+        "Denmark": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Denmark.svg",
+        "Estonia": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Flag_of_Estonia.svg",
+        "Finland": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Flag_of_Finland.svg",
+        "France": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
+        "Georgia": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Georgia.svg",
+        "Germany": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg",
+        "Greece": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg",
+        "Hungary": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Flag_of_Hungary.svg",
+        "Iceland": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Flag_of_Iceland.svg",
+        "Ireland": "https://upload.wikimedia.org/wikipedia/commons/4/45/Flag_of_Ireland.svg",
+        "Italy": "https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg",
+        "Kazakhstan": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Flag_of_Kazakhstan.svg",
+        "Kosovo": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Flag_of_Kosovo.svg",
+        "Latvia": "https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Latvia.svg",
+        "Liechtenstein": "https://upload.wikimedia.org/wikipedia/commons/4/42/Flag_of_Liechtenstein.svg",
+        "Lithuania": "https://upload.wikimedia.org/wikipedia/commons/1/10/Flag_of_Lithuania.svg",
+        "Luxembourg": "https://upload.wikimedia.org/wikipedia/commons/6/63/Flag_of_Luxembourg.svg",
+        "Malta": "https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_Malta.svg",
+        "Moldova": "https://upload.wikimedia.org/wikipedia/commons/2/27/Flag_of_Moldova.svg",
+        "Monaco": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Flag_of_Monaco.svg",
+        "Montenegro": "https://upload.wikimedia.org/wikipedia/commons/6/63/Flag_of_Montenegro.svg",
+        "Netherlands": "https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg",
+        "North Macedonia": "https://upload.wikimedia.org/wikipedia/commons/7/73/Flag_of_North_Macedonia.svg",
+        "Norway": "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Norway.svg",
+        "Poland": "https://upload.wikimedia.org/wikipedia/commons/1/12/Flag_of_Poland.svg",
+        "Portugal": "https://tse2.mm.bing.net/th?id=OIP.MkV6i0qJXQv1ob0TfiRuAQHaER&pid=Api&P=0&h=180",
+        "Romania": "https://upload.wikimedia.org/wikipedia/commons/7/73/Flag_of_Romania.svg",
+        "Russia": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg",
+        "San Marino": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_San_Marino.svg",
+        "Serbia": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Flag_of_Serbia.svg",
+        "Slovakia": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Flag_of_Slovakia.svg",
+        "Slovenia": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Flag_of_Slovenia.svg",
+        "Spain": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg",
+        "Sweden": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Sweden.svg",
+        "Switzerland": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Switzerland.svg",
+        "Turkey": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg",
+        "Ukraine": "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg",
+        "United Kingdom": "https://tse2.mm.bing.net/th?id=OIP.W9BIHANV_2rSuJYidY5mUQHaFP&pid=Api&P=0&h=180",
+        "Uzbekistan": "https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Uzbekistan.svg",
+        "Vatican City": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Flag_of_Vatican_City.svg",
+        "Norway": "https://tse3.mm.bing.net/th?id=OIP.uQIWwCJoJAPAIpcH1-uZ6wHaEK&pid=Api&P=0&h=180",
+        "Bulgaria": "https://tse4.mm.bing.net/th?id=OIP.kbg7LQW8YhXmsvfahWyJxwHaEK&pid=Api&P=0&h=180",
+        "Iraq": "https://tse3.mm.bing.net/th?id=OIP.uWy5bD8lQSDQVgNjFtPExwHaE8&pid=Api&P=0&h=180",
+        "Saudi Arabia": "https://tse3.mm.bing.net/th?id=OIP.PGp6StQ17Vp64sSW_ZXKXQHaEK&pid=Api&P=0&h=180",
+        "Iran": "https://tse2.mm.bing.net/th?id=OIP._vhqJJQUiRw9En27BAyD3gHaFC&pid=Api&P=0&h=180",
+        "Pakistan": "https://tse4.mm.bing.net/th?id=OIP.R-JkwatZKWTSdm491rc8FwHaEK&pid=Api&P=0&h=180",
+        "NTurkmenistan": "https://tse4.mm.bing.net/th?id=OIP.46jXTwDInPwry4olXcmYXAHaE8&pid=Api&P=0&h=180",
+        "Papua New Guinea": "https://tse3.mm.bing.net/th?id=OIP.uQIWwCJoJAPAIpcH1-uZ6wHaEK&pid=Api&P=0&h=180",
+        "Turkmenistan": "https://tse2.mm.bing.net/th?id=OIP.pXnjhkAsRwDlOFbtLF6lyQAAAA&pid=Api&P=0&h=180",
+        "Yemen": "https://tse4.explicit.bing.net/th?id=OIP.XjqyHH1vC5oidUAdHBgkNgHaE7&pid=Api&P=0&h=180",
+        "Oman": "https://tse1.mm.bing.net/th?id=OIP.cQI1R-Y3b19aBEeXCOFGNgHaEL&pid=Api&P=0&h=180",
+        "Norway": "https://tse3.mm.bing.net/th?id=OIP.uQIWwCJoJAPAIpcH1-uZ6wHaEK&pid=Api&P=0&h=180",
+        "Norway": "https://tse3.mm.bing.net/th?id=OIP.uQIWwCJoJAPAIpcH1-uZ6wHaEK&pid=Api&P=0&h=180",
+
+
+        // Asia & Oceanía
+        "China": "https://astelus.com/wp-content/uploads/2024/04/el-color-rojo-en-la-bandera-de-china-1152x759.png.webp",
+        "India": "https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_India.svg",
+        "Japan": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg",
+        "South Korea": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_South_Korea.svg",
+        "Indonesia": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg",
+        "Pakistan": "https://tse4.mm.bing.net/th?id=OIP.R-JkwatZKWTSdm491rc8FwHaEK&pid=Api&P=0&h=180",
+        "Bangladesh": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg",
+        "Philippines": "https://upload.wikimedia.org/wikipedia/commons/9/99/Flag_of_the_Philippines.svg",
+        "Vietnam": "https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg",
+        "Thailand": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Flag_of_Thailand.svg",
+        "Myanmar": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Flag_of_Myanmar.svg",
+        "Nepal": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Flag_of_Nepal.svg",
+        "Sri Lanka": "https://upload.wikimedia.org/wikipedia/commons/1/11/Flag_of_Sri_Lanka.svg",
+        "Maldives": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Flag_of_Maldives.svg",
+        "Afghanistan": "https://tse2.mm.bing.net/th?id=OIP.6NNNdMAwecFt95Vo2_BKYAHaEc&pid=Api&P=0&h=180",
+        "Bhutan": "https://upload.wikimedia.org/wikipedia/commons/9/91/Flag_of_Bhutan.svg",
+        "Mongolia": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Mongolia.svg",
+        "Australia": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Australia.svg",
+        "New Zealand": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Flag_of_New_Zealand.svg",
+        "Fiji": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Flag_of_Fiji.svg",
+        "Papua New Guinea": "https://tse4.mm.bing.net/th?id=OIP.irINcpz7EPRgqx1vUX93ZwHaEK&pid=Api&P=0&h=180",
+        "Solomon Islands": "https://upload.wikimedia.org/wikipedia/commons/3/39/Flag_of_the_Solomon_Islands.svg",
+        "Vanuatu": "https://upload.wikimedia.org/wikipedia/commons/6/63/Flag_of_Vanuatu.svg",
+        "Samoa": "https://upload.wikimedia.org/wikipedia/commons/6/68/Flag_of_Samoa.svg",
+        "Tonga": "https://upload.wikimedia.org/wikipedia/commons/2/24/Flag_of_Tonga.svg",
+        "Kiribati": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_Kiribati.svg",
+        "Tuvalu": "https://upload.wikimedia.org/wikipedia/commons/6/60/Flag_of_Tuvalu.svg",
+        "Nauru": "https://upload.wikimedia.org/wikipedia/commons/3/30/Flag_of_Nauru.svg",
+        "Papua New Guinea": "https://tse4.mm.bing.net/th?id=OIP.irINcpz7EPRgqx1vUX93ZwHaEK&pid=Api&P=0&h=180",
+        "Solomon Islands": "https://upload.wikimedia.org/wikipedia/commons/5/53/Flag_of_the_Solomon_Islands.svg",
+        "Vanuatu": "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Vanuatu.svg",
+        "Samoa": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Flag_of_Samoa.svg",
+        "Tonga": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Tonga.svg",
+        "Kiribati": "https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_Kiribati.svg",
+        "Marshall Islands": "https://upload.wikimedia.org/wikipedia/commons/7/73/Flag_of_the_Marshall_Islands.svg",
+        "Nauru": "https://upload.wikimedia.org/wikipedia/commons/3/30/Flag_of_Nauru.svg",
+        "Tuvalu": "https://upload.wikimedia.org/wikipedia/commons/3/38/Flag_of_Tuvalu.svg",
+        "Wallis and Futuna": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Flag_of_Wallis_and_Futuna.svg",
+        "American Samoa": "https://upload.wikimedia.org/wikipedia/commons/5/53/Flag_of_American_Samoa.svg",
+        "French Polynesia": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Flag_of_French_Polynesia.svg",
+        "New Caledonia": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Flag_of_New_Caledonia.svg",
+        "Pitcairn Islands": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_the_Pitcairn_Islands.svg",
+        "Cook Islands": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Flag_of_the_Cook_Islands.svg",
+        "Niue": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Flag_of_Niue.svg",
+        "Tokelau": "https://upload.wikimedia.org/wikipedia/commons/4/43/Flag_of_Tokelau.svg",
+        "Belarus": "https://tse2.mm.bing.net/th?id=OIP.ge1-KK9f89r_fAMiPIQIDgHaEK&pid=Api&P=0&h=180",
+        "Kazakhstan": "https://tse1.mm.bing.net/th?id=OIP.Y1rCNm5SLmf5A8QXVTy2gAHaEo&pid=Api&P=0&h=180",
+        "Egipto": "https://tse2.mm.bing.net/th?id=OIP.6lzgbZLrf1EC4woN59QXYwHaE4&pid=Api&P=0&h=180",
+        // África
+        "Sudáfrica": "https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg",
+        "Nigeria": "https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_Nigeria.svg",
+        "Egypt": "https://tse2.mm.bing.net/th?id=OIP.6lzgbZLrf1EC4woN59QXYwHaE4&pid=Api&P=0&h=180",
+        "Kenia": "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Kenya.svg",
+        "Etiopía": "https://tse2.mm.bing.net/th?id=OIP.2LxDFLm7CrhFk7GnjEwDgAHaEK&pid=Api&P=0&h=180",
+        "Argelia": "https://tse2.mm.bing.net/th?id=OIP._k3PCqDyfC6rreXg3bPfUQHaEc&pid=Api&P=0&h=180",
+        "Marruecos": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg",
+        "Túnez": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Flag_of_Tunisia.svg",
+        "Senegal": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Flag_of_Senegal.svg",
+        "Ghana": "https://upload.wikimedia.org/wikipedia/commons/1/19/Flag_of_Ghana.svg",
+        "Costa de Marfil": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Cote_d%27Ivoire.svg",
+        "Uganda": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Flag_of_Uganda.svg",
+        "Tanzania": "https://upload.wikimedia.org/wikipedia/commons/3/38/Flag_of_Tanzania.svg",
+        "Angola": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Angola.svg",
+        "Zimbabwe": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Flag_of_Zimbabwe.svg",
+        "Mozambique": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Flag_of_Mozambique.svg",
+        "Ruanda": "https://upload.wikimedia.org/wikipedia/commons/1/17/Flag_of_Rwanda.svg",
+        "Libya": "https://tse4.explicit.bing.net/th?id=OIP.vzYife_ikCA9inr4GxTlNwHaEK&pid=Api&P=0&h=180",
+        "Algeria": "https://tse3.mm.bing.net/th?id=OIP.CtQDShfDMgINw2gTmegMJQHaEK&pid=Api&P=0&h=180",
+        "Mali": "https://tse2.mm.bing.net/th?id=OIP.e0NpumGCQNfdvfrwU1OKfwHaEK&pid=Api&P=0&h=180",
+        "Mauritania": "https://tse1.mm.bing.net/th?id=OIP.8N0irA4p8T6AYALXX2m9GAHaE7&pid=Api&P=0&h=180",
+        "Democratic Republic of the Congo": "https://tse1.mm.bing.net/th?id=OIP.bGtO3gSVEVJyFIwhBQwczAHaEK&pid=Api&P=0&h=180",
+        "Sudan": "https://tse4.mm.bing.net/th?id=OIP.6pMBd3EwsrYIdwEaXqwM8wHaEK&pid=Api&P=0&h=180",
+        "Namibia": "https://tse4.mm.bing.net/th?id=OIP.kI_PPxbFQxDTsEnPPoSk3QHaE8&pid=Api&P=0&h=180",
+        "South Africa": "https://tse1.mm.bing.net/th?id=OIP.KazcoXv7gyrLWx7jynjihQHaE8&pid=Api&P=0&h=180",
+        "Botswana": "https://tse1.mm.bing.net/th?id=OIP.-FGdTgmLeAg2RooT1-UXtAHaEK&pid=Api&P=0&h=180",
+        "Madagascar": "https://tse2.mm.bing.net/th?id=OIP.KQiX7grdd3FxY6UIKaOZogHaD4&pid=Api&P=0&h=180",
+        "Niger": "https://tse1.mm.bing.net/th?id=OIP.zinSFwdV4mnxmiLbRIwEuwHaEo&pid=Api&P=0&h=180",
+        "Chad": "https://tse3.mm.bing.net/th?id=OIP.ia1LY65PxZLeoLSznm9HJgHaEK&pid=Api&P=0&h=180",
+        "Central African Republic": "https://tse2.mm.bing.net/th?id=OIP.5kIk9GVyXiXCNI8b8rMzywHaE6&pid=Api&P=0&h=180",
+        "United Republic of Tanzania": "https://tse1.mm.bing.net/th?id=OIP.jG_lRuPPLKh-zFhh7glVVAHaE8&pid=Api&P=0&h=180",
+        "Somalia": "https://tse1.mm.bing.net/th?id=OIP._xc9BdmMP7Mao4hvLcRdhgHaEK&pid=Api&P=0&h=180",
+        "Ethiopia": "https://tse2.mm.bing.net/th?id=OIP.2LxDFLm7CrhFk7GnjEwDgAHaEK&pid=Api&P=0&h=180",
+        "Kenya": "https://tse2.mm.bing.net/th?id=OIP.0qoA1MDuDAOeM7QQUksv-gHaEK&pid=Api&P=0&h=180",
+        "South Sudan": "https://tse3.mm.bing.net/th?id=OIP.zEMh2lvMIBKQkAoxjvnQbwHaDt&pid=Api&P=0&h=180",
+        "Cameroon": "https://tse1.mm.bing.net/th?id=OIP.Iv5G-VgHbNLaWT1rm4QUgQHaEK&pid=Api&P=0&h=180",
+        "Ivory Coast": "https://tse3.mm.bing.net/th?id=OIP.Os5Pz5d-VPLykCOiT2ycvQHaFj&pid=Api&P=0&h=180",
+        "Gabon": "https://tse3.mm.bing.net/th?id=OIP.cESZjp5nb5Qld32nu1XiYgHaE4&pid=Api&P=0&h=180",
+        "Guinea": "https://tse1.mm.bing.net/th?id=OIP.s6FfBH43-5toNmRf28bthQHaEo&pid=Api&P=0&h=180",
+        "Liberia": "https://tse1.mm.bing.net/th?id=OIP.hBNSlSp_Z1Kytl_KFgbw8wHaE7&pid=Api&P=0&h=180",
+        "Laos": "https://tse4.mm.bing.net/th?id=OIP.t8ieD_h9W37N2WuXWiG_KgHaEx&pid=Api&P=0&h=180",
+    };
+
+    return countryImages[countryName] || "https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg";
+}
+
+// Crear el mapa base con OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var geojsonLayer; // Variable para la capa GeoJSON
+var selectedCountryLayer = null; // Variable para almacenar el país seleccionado
+var activeODS = null; // Almacenar el estado del ODS activo
+
+// Función para mostrar información del país con su imagen y enlace
+function showCountryInfo(lat, lon, countryName, countryLink) {
+const countryImageUrl = getCountryImage(countryName); // Obtener la imagen del país
+
+const infoContent = ` 
+<div class="country-info">
+    <img src="${countryImageUrl}" alt="Imagen del país" class="country-image" />
+    <div class="country-name">${countryName}</div>
+    <div>Aún quedan desafíos importantes en los ODS.</div>
+    <a href="${countryLink}" target="_blank">Ver más sobre ${countryName}</a>
+</div>
+`;
+L.popup()
+.setLatLng([lat, lon])
+.setContent(infoContent)
+.openOn(map);
+}
+
+// Función para restablecer el estilo del país previamente seleccionado
+function resetCountryStyle() {
+if (selectedCountryLayer) {
+geojsonLayer.resetStyle(selectedCountryLayer);
+selectedCountryLayer = null;
+}
+}
+
+// Función para generar un color aleatorio
+function getRandomColor() {
+const colors = ['#FF5722', '#4CAF50', '#3F51B5', '#FFC107', '#009688', '#E91E63'];
+return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Función para cambiar el color de todos los países según el ODS seleccionado
+function changeCountryColorsForODS(odsColor) {
+geojsonLayer.eachLayer(function (layer) {
+layer.setStyle({
+    color: odsColor, // Color del borde del país
+    fillColor: odsColor, // Color de relleno del país
+    weight: 2,
+    fillOpacity: 0.7
+});
+});
+}
+
+// Cargar capa GeoJSON y configurar eventos
+geojsonLayer = L.geoJson(null, {
+style: function (feature) {
+return {
+    color: "#4CAF50", // Color base para todos los países
+    weight: 1,
+    fillOpacity: 0.5
+};
+},
+onEachFeature: function (feature, layer) {
+layer.on({
+    click: function (e) {
+        const countryName = feature.properties.name;
+        const latlng = e.latlng;
+        const countryLink = `https://en.wikipedia.org/wiki/${countryName.replace(/\s+/g, '_')}`;
+
+        resetCountryStyle(); // Restablecer el estilo del país previamente seleccionado
+
+        const randomColor = getRandomColor(); // Generar un color aleatorio
+
+        // Cambiar el estilo del país seleccionado
+        layer.setStyle({
+            color: randomColor,
+            fillColor: randomColor,
+            weight: 2,
+            fillOpacity: 0.7
+        });
+
+        selectedCountryLayer = layer; // Almacenar la capa seleccionada
+        showCountryInfo(latlng.lat, latlng.lng, countryName, countryLink); // Mostrar la información del país
+    }
+});
+}
+}).addTo(map);
+
+// Cargar datos GeoJSON
+fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+.then(response => response.json())
+.then(data => {
+geojsonLayer.addData(data);
+});
+
+// Función para agregar marcador en el mapa
+function addMarker(lat, lng, title, description) {
+var popupContent = `<h3>${title}</h3><p>${description}</p>`;
+L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
+map.setView([lat, lng], 5); // Cambiar la vista del mapa al marcador seleccionado
+}
+
+// Función para alternar el color del mapa basado en el ODS seleccionado
+function toggleMapColor(ods, color) {
+if (activeODS === ods) {
+// Restablecer al color original
+geojsonLayer.eachLayer(function (layer) {
+    layer.setStyle({
+        fillColor: "#ccc",  // Color de relleno original
+        fillOpacity: 0.7,
+        weight: 2,
+        color: "#555"  // Color del borde original
+    });
+});
+activeODS = null;  // Restablecer el ODS activo
+} else {
+// Cambiar el color de todos los países según el ODS seleccionado
+changeCountryColorsForODS(color);
+activeODS = ods;  // Establecer el ODS activo
+}
+}
+
+// Función para reiniciar completamente el mapa
+document.getElementById('reset-map').addEventListener('click', function () {
+// Restablecer la vista inicial del mapa (coordenadas y zoom)
+map.setView([51.505, -0.09], 2);
+
+// Eliminar todas las capas añadidas (marcadores, etc.)
+addedLayers.forEach(function(layer) {
+map.removeLayer(layer);
+});
+
+// Limpiar el array de capas añadidas
+addedLayers = [];
+});
+
+
+
+    </script>
+</body>
+</html>

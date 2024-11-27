@@ -1,0 +1,96 @@
+.cards-container .hidden {
+    display: none;
+}
+
+.cards-container .bg-color-1 {
+    background-color: #E5243B;
+}
+
+.cards-container .bg-color-2 {
+    background-color: #DDA63A;
+}
+
+.cards-container .bg-color-3 {
+    background-color: #4C9F38;
+}
+
+.cards-container .bg-color-4 {
+    background-color: #C5192D;
+}
+
+.cards-container .bg-color-5 {
+    background-color: #FF3A21;
+}
+
+.cards-container .bg-color-6 {
+    background-color: #26BDE2;
+}
+
+.cards-container .bg-color-7 {
+    background-color: #FCC30B;
+}
+
+.cards-container .bg-color-8 {
+    background-color: #A21942;
+}
+
+.cards-container .bg-color-9 {
+    background-color: #FD6925;
+}
+
+.cards-container .bg-color-10 {
+    background-color: #DD1367;
+}
+
+.cards-container .bg-color-11 {
+    background-color: #FD9D24;
+}
+
+.cards-container .bg-color-12 {
+    background-color: #BF8B2E;
+}
+
+.cards-container .bg-color-13 {
+    background-color: #3F7E44;
+}
+
+.cards-container .bg-color-14 {
+    background-color: #0A97D9;
+}
+
+.cards-container .bg-color-15 {
+    background-color: #56C02B;
+}
+
+.cards-container .bg-color-16 {
+    background-color: #00689D;
+}
+
+.cards-container .bg-color-17 {
+    background-color: #19486A;
+}
+
+.cards-container .bg-color-18 {
+    background-color: #DD1367;
+}
+
+.cards-container .bg-color-19 {
+    background-color: #f1d710;
+}
+.cards-container .bg-color-20 {
+    background-color: #16650f;
+}
+
+.cards-container .description {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}

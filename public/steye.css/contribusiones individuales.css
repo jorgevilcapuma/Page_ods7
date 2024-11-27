@@ -1,0 +1,61 @@
+/* Clase raíz para aislar el carrusel */
+.mi-carrusel .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.mi-carrusel .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.mi-carrusel .carousel-item {
+    flex: none;
+    width: 90%; /* Aumenta el ancho de las tarjetas */
+    max-width: 450px; /* Aumenta el ancho máximo de las tarjetas */
+    background-color: #ffffff;
+    padding: 40px; /* Aumenta el espacio interior */
+    border-radius: 8px; /* Esquinas menos redondeadas */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.mi-carrusel .carousel-item img {
+    width: 250px; /* Aumenta el tamaño de las imágenes */
+    height: 150px; /* Aumenta el tamaño de las imágenes */
+    border-radius: 8px; /* Cambia a un borde cuadrado */
+    object-fit: cover;
+    border: 4px solid #ffffff;
+    margin-top: -75px; /* Ajusta la posición vertical para centrar la imagen */
+}
+
+.mi-carrusel .dot-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.mi-carrusel .dot {
+    width: 18px; /* Tamaño de los dots */
+    height: 18px;
+    background-color: #d1d5db;
+    border-radius: 4px; /* Forma cuadrada */
+    transition: background-color 0.4s, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.mi-carrusel .dot:hover,
+.mi-carrusel .dot.active {
+    background-color: #10b981;
+    width: 32px; /* Efecto de estiramiento */
+}
+
+
+
+
+

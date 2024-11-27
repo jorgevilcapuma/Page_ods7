@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #104068;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    padding: 50px;
+    background-image: url(''); /* Reemplaza con la imagen de fondo */
+    background-size: cover;
+    background-position: center;
+}
+
+.about-section {
+    max-width: 40%;
+}
+
+.about-section h2 {
+    font-size: 24px;
+    color: #00e2a5;
+}
+
+.about-section h1 {
+    font-size: 36px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.about-section p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
+.contact-section-container {
+    width: 50%; /* Reducimos el ancho del contenedor del formulario */
+    margin-left: 0; /* Se mantiene pegado al lado izquierdo */
+}
+
+.contact-section {
+    background-color: #0c1e35;
+    padding: 20px; /* Reducimos el padding para que no se vea tan grande */
+    border-radius: 0px;
+    max-width: 100%; /* Ocupa todo el ancho disponible */
+    margin-left: 10px;
+}
+
+.contact-section h2 {
+    font-size: 22px; /* Reducimos el tamaño del título del formulario */
+    margin-bottom: 20px;
+    color: #00e2a5;
+    text-align: center;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Reducimos el margen inferior entre los campos */
+}
+
+.form-row label {
+    margin-bottom: 5px;
+    color: #00e2a5; /* Cambia este valor al color que prefieras */
+    font-size: 14px; /* Puedes ajustar el tamaño si lo deseas */
+}
+
+.form-row input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px; /* Reducimos el padding de los campos */
+    border: none;
+    border-radius: 5px;
+}
+
+.contact-form textarea {
+    resize: none;
+    height: 120px; /* Ajustamos la altura del campo de mensaje */
+}
+
+button {
+    background-color: #00e2a5;
+    color: #001d35;
+    padding: 12px; /* Reducimos el tamaño del botón */
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #00c292;
+}
+
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: 10px;
+    max-width: 100px;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+}
+
+
+
+/*PERSONAJE Y CUADRO DE DIALOGO */
+
+/* Contenedor que tiene la imagen del personaje y el cuadro de diálogo */
+.character-container {
+    position: fixed;
+    bottom: 30px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para la imagen del personaje */
+.character {
+    width: 130px;
+    height: auto;
+}
+
+/* Estilo del cuadro de diálogo */
+.dialogue-box {
+    background-color: white;
+    border: 2px solid #333; /* Borde del cuadro de diálogo */
+    padding: 15px;
+    border-radius: 15px;
+    margin-left: 10px;
+    position: relative;
+    max-width: 250px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    transition: background-color 0.5s ease; /* Transición suave para color de fondo */
+}
+
+/* Estilo del texto dentro del cuadro de diálogo */
+#dialogue-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    font-family: 'Comic Sans MS', cursive; /* Fuente divertida para el texto */
+}
+
+/* Punta del cuadro de diálogo con borde */
+.dialogue-box::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -26px; /* Ajusta la posición más a la izquierda para el borde */
+    transform: translateY(-50%);
+    border-width: 12px;
+    border-style: solid;
+    border-color: transparent #333 transparent transparent; /* Borde de la punta */
+}
+
+/* Punta del cuadro de diálogo */
+.dialogue-box::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent white transparent transparent; /* Punta blanca del globo */
+}
+
+/* Cambiar color del cuadro cuando el usuario interactúa */
+.dialogue-box:hover {
+    background-color: #f0f0f0;
+}
+
+/* Agregar animación para el cambio de texto */
+#dialogue-text {
+    transition: opacity 0.5s ease-in-out;
+}

@@ -1,0 +1,2112 @@
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <link href="https://sinia.minam.gob.pe/portal/wp-content/plugins/esam/assets/images/ods/header-link-icon-ods.png" rel="icon" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <title>ODS - Team 19</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    <link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet" />
+    <style>
+        nav a,
+        #mobile-menu a {
+            transition: background-color 0.3s ease;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            line-height: 1.5;
+            font-size: 1rem;
+        }
+
+        nav a:hover,
+        #mobile-menu a:hover,
+        nav a.active,
+        #mobile-menu a.active {
+            background-color: #FF0000;
+            color: #FFFFFF;
+        }
+
+        .carousel {
+            position: relative;
+        }
+
+        .carousel-items {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            display: none;
+        }
+
+        .carousel-item.active {
+            display: block;
+        }
+
+        .mi-carousel-seccion .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        .mi-carousel-seccion .carousel img {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            width: 100%;
+            height: 30rem;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .mi-carousel-seccion .custom-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .title-left {
+            text-align: left;
+        }
+
+        .title-left .line {
+            display: block;
+            width: 50px;
+            height: 5px;
+            background-color: #17B6D2;
+            margin-bottom: 10px;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .wrapper .image {
+            flex: 1;
+            max-width: 50%;
+            padding: 20px;
+        }
+
+        .wrapper .text {
+            flex: 1;
+            max-width: 50%;
+            padding: 20px;
+        }
+
+        .wrapper .text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .wrapper .text p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #000;
+            min-width: 10rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #FF0000;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <header class="w-full bg-black">
+        <nav class="flex justify-between items-center p-6">
+            <div class="text-white text-2xl font-bold flex items-center space-x-4">
+                <img src="https://storage.googleapis.com/a1aa/image/F8DfTHfNV4lylUC825Uuzm6fuRcRtQXWcUd07V0biTrtcCmnA.jpg" alt="Logotipo" style="height: 4rem; width: 7rem;">
+                <span class="small-text" style="font-size: 14px;">ENERGÍA ASEQUIBLE Y NO CONTAMINANTE</span>
+            </div>
+
+            <div class="hidden lg:flex space-x-6" id="nav-menu">
+                <!-- Otros enlaces principales -->
+                <a href="index.html" onclick="setActive(this)" class="text-white hover:underline px-6" style="font-size: 16px;">Inicio</a>
+                <a href="/public/index.html/explore las ods.html" onclick="setActive(this)" class="text-white hover:underline px-6" style="font-size: 16px;">Explora tu ODS</a>
+                <a href="/public/index.html/historia.html" onclick="setActive(this)" class="text-white hover:underline px-6" style="font-size: 16px;">Historia</a>
+                <a href="/archivo.html/nosotros.html" onclick="setActive(this)" class="text-white hover:underline px-6" style="font-size: 16px;">Nosotros</a>
+                <!-- Menú desplegable Importancia -->
+                <div class="relative dropdown mt-4">
+                    <a href="/public/index.html/inportancia.html" class="text-white hover:underline px-6" style="font-size: 16px;">Importancia</a>
+                    <div class="absolute hidden dropdown-menu bg-black text-white mt-2 rounded-lg shadow-lg">
+                        <a href="/public/index.html/ods7.html" onclick="setActive(this)" class="block px-4 py-2 hover:bg-gray-800">ODS7</a>
+                    </div>
+                </div>
+            
+                <!-- Enlace Contacto -->
+                <a href="/public/index.html/Contacto.html" onclick="setActive(this)" class="text-white hover:underline px-6" style="font-size: 16px;">Contacto</a>
+            </div>
+            
+            
+
+            <div class="md:hidden">
+                <button id="menu-button" class="text-white focus:outline-none" aria-label="Abrir menú móvil">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-black text-white">
+        <div class="flex flex-col items-center space-y-4 py-4">
+            <a href="/index.html" onclick="setActive(this)" class="hover:text-gray-400 px-6 py-2">Inicio</a>
+            <a href="/public/index.html/explore las ods.html" onclick="setActive(this)" class="hover:text-gray-400 px-6 py-2">Explora tu ODS</a>
+            <a href="/public/index.html/historia.html" onclick="setActive(this)" class="hover:text-gray-400 px-6 py-2">Historia</a>
+            <a href="" onclick="setActive(this)" class="hover:text-gray-400 px-6 py-2">Nosotros</a>
+
+            <div class="dropdown relative">
+                <a href="/public/index.html/inportancia.html" class="hover:text-gray-400 px-6 py-2">Importancia</a>
+                <div class="dropdown-menu absolute hidden bg-black text-white">
+                    <a href="/public/index.html/ods7.html" onclick="setActive(this)" class="hover:text-gray-400 px-6 py-2">ODS7</a>
+                </div>
+            </div>
+            <a href="/public/index.html/Contacto.html" onclick="setActive(this)" class="hover:text-gray-400 px-6 py-2">Contacto</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('menu-button').addEventListener('click', function () {
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        function setActive(element) {
+            document.querySelectorAll('nav a, #mobile-menu a').forEach(function (link) {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
+    <section class="relative h-[80vh]" id="home">
+        <div class="carousel relative h-full overflow-hidden">
+            <div class="carousel-items h-full w-full">
+                <div class="carousel-item relative object-cover w-full h-full">
+                    <img alt="Imagen de paneles solares en un tejado" class="w-full h-full" height="800" src="https://storage.googleapis.com/a1aa/image/AXWpe6sOeos6k0UyQfrFvSoqHtaff8h6EwNUSxgEc7klEFaeE.jpg" width="1200" />
+                    <div class="absolute inset-0 flex items-center justify-start bg-black bg-opacity-50 text-white p-4 text-left">
+                        <div>
+                            <h2 class="text-xl font-bold">Energía Solar</h2>
+                            <p>Paneles solares en un tejado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item relative object-cover w-full h-full">
+                    <img alt="Imagen de aerogeneradores en un campo" class="w-full h-full" height="800" src="https://storage.googleapis.com/a1aa/image/e5eX1ehvYNJjRJZDNqnhx3HVvNLJ4p79dxsQ9EQwBDsHRhmnA.jpg" width="1200" />
+                    <div class="absolute inset-0 flex items-center justify-start bg-black bg-opacity-50 text-white p-4 text-left">
+                        <div>
+                            <h2 class="text-xl font-bold">Energía Eólica</h2>
+                            <p>Aerogeneradores en un campo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item relative object-cover w-full h-full">
+                    <img alt="Imagen de una presa hidroeléctrica" class="w-full h-full" height="800" src="https://storage.googleapis.com/a1aa/image/0AvbolCXxr4HK1FdpFCBbecM8mgqSe44HVuVfkyePRyFiCNPB.jpg" width="1200" />
+                    <div class="absolute inset-0 flex items-center justify-start bg-black bg-opacity-50 text-white p-4 text-left">
+                        <div>
+                            <h2 class="text-xl font-bold">Energía Hidroeléctrica</h2>
+                            <p>Presa hidroeléctrica</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item relative object-cover w-full h-full">
+                    <img alt="Imagen de una planta de energía geotérmica" class="w-full h-full" height="800" src="https://storage.googleapis.com/a1aa/image/LxrbYsk80SbXFBX93EBDxMAPmma3YX8g5ffFOpmbT3MgoQzTA.jpg" width="1200" />
+                    <div class="absolute inset-0 flex items-center justify-start bg-black bg-opacity-50 text-white p-4 text-left">
+                        <div>
+                            <h2 class="text-xl font-bold">Energía Geotérmica</h2>
+                            <p>Planta de energía geotérmica</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item relative object-cover w-full h-full">
+                    <img alt="Imagen de una planta de energía de biomasa" class="w-full h-full" height="800" src="https://storage.googleapis.com/a1aa/image/J4pr3EWzoGLDLdGbhVsR2Zic8qv95oCS3nEqCn0sidhHK08E.jpg" width="1200" />
+                    <div class="absolute inset-0 flex items-center justify-start bg-black bg-opacity-50 text-white p-4 text-left">
+                        <div>
+                            <h2 class="text-xl font-bold">Energía de Biomasa</h2>
+                            <p>Planta de energía de biomasa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="prev absolute top-1/2 left-4 transform -translate-y-1/2 text-white bg-black bg-opacity-50 px-4 py-2 rounded hover:bg-opacity-70">◀</button>
+            <button class="next absolute top-1/2 right-4 transform -translate-y-1/2 text-white bg-black bg-opacity-50 px-4 py-2 rounded hover:bg-opacity-70">▶</button>
+        </div>
+        <div class="content absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[50%] text-center text-white flex items-center">
+            <a class="nav-logo" href="index.html" style="display: flex; align-items: center; text-align: left; text-decoration: none;">
+                <img src="https://www.agroalimentariasclm.coop/images/publicaciones/ods/web-herramienta.png" alt="Imagen ODS" style="width: 25rem; height: auto; margin-right: 30px;">
+                <div style="display: inline-block;">
+                    <h1 class="text-4xl font-bold mb-6">Explora tu ODS</h1>
+                    <p class="text-lg mb-8">Descubre cómo podemos ayudar a lograr los Objetivos de Desarrollo Sostenible.</p>
+                    <button class="cta-button bg-blue-600 text-white px-8 py-3 rounded-lg text-xl hover:bg-blue-700">Explorar</button>
+                </div>
+            </a>
+        </div>
+    </section>
+    <script>
+        (function () {
+            let currentIndex = 0;
+            const items = document.querySelectorAll('.carousel-item');
+            const itemCount = items.length;
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+
+            // Mostrar la imagen actual
+            function showItem(index) {
+                items.forEach((item, i) => {
+                    item.classList.remove('active');
+                    if (i === index) item.classList.add('active');
+                });
+            }
+
+            // Cambiar a la siguiente imagen
+            function showNextItem() {
+                currentIndex = (currentIndex + 1) % itemCount;
+                showItem(currentIndex);
+            }
+
+            // Cambiar a la imagen anterior
+            function showPrevItem() {
+                currentIndex = (currentIndex - 1 + itemCount) % itemCount;
+                showItem(currentIndex);
+            }
+
+            // Configurar controles manuales
+            nextButton.addEventListener('click', showNextItem);
+            prevButton.addEventListener('click', showPrevItem);
+
+            // Cambiar automáticamente cada 3 segundos
+            setInterval(showNextItem, 3000);
+
+            // Mostrar la primera imagen al cargar
+            showItem(currentIndex);
+        })();
+    </script>
+ 
+    <section class="mi-carousel-seccion max-w-full mx-auto p-10 bg-white rounded-lg shadow-lg custom-container">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+            <!-- Carrusel de imágenes -->
+            <div class="md:w-1/2 flex items-center justify-center">
+                <div class="carousel">
+                    <img alt="Infografía sobre energía limpia" height="400"
+                        src="https://tse1.mm.bing.net/th?id=OIP.7iIsTdLTBUINSWz9fjCWDAHaDy&pid=Api&P=0&h=180"
+                        width="600" />
+                    <img alt="Póster educativo sobre energías renovables" height="400"
+                        src="https://storage.googleapis.com/a1aa/image/suux0RAaJ6odORW1zm0x7nCarJFek85e4vfH2PQghfpLZ3DPB.jpg"
+                        width="600" />
+                    <img alt="Guía detallada sobre eficiencia energética" height="400"
+                        src="https://storage.googleapis.com/a1aa/image/2IFSzfoCf5keXpWYryVK916fnpGQe08c79PhnkTCFSVCyuHeE.jpg"
+                        width="600" />
+                    <img alt="Presentación interactiva sobre energía solar" height="400"
+                        src="https://storage.googleapis.com/a1aa/image/QOKOuPpGof0aP6NOYkepcUy8TfDdSXwiaLUSNhC9eXnNZ3DPB.jpg"
+                        width="600" />
+                    <img alt="Juego educativo sobre energías limpias" height="400"
+                        src="https://storage.googleapis.com/a1aa/image/ZEWSJieSrqUnFKV2TQSGmYj4XWheKRv4IWqxqOZs0Sfss7hnA.jpg"
+                        width="600" />
+                </div>
+            </div>
+            <!-- Texto de descripción -->
+            <div class="md:w-1/2 p-8">
+                <h1 class="text-3xl font-bold text-black mb-4">
+                    17 Objetivos para Transformar Nuestro Mundo
+                </h1>
+                <p class="text-black mb-4">
+                    El Objetivo de Desarrollo Sostenible 7 busca garantizar el acceso a una energía asequible, segura,
+                    sostenible y moderna para todos. Para lograrlo, es fundamental la participación tanto individual
+                    como colectiva. A nivel personal, podemos adoptar medidas como el uso de bombillas LED, la reducción
+                    del consumo energético y la preferencia por electrodomésticos eficientes. Además, es importante
+                    fomentar el uso de energías renovables en nuestros hogares, como la instalación de paneles solares.
+                </p>
+                <p class="text-black mb-4">
+                    Colectivamente, las comunidades pueden organizarse para promover proyectos de energía limpia, como
+                    parques eólicos comunitarios o cooperativas solares. Las políticas públicas también juegan un papel
+                    crucial, incentivando la inversión en infraestructuras sostenibles y la investigación en tecnologías
+                    innovadoras. La colaboración entre gobiernos, empresas y organizaciones no gubernamentales es
+                    esencial para crear un entorno propicio que facilite la transición hacia una energía no
+                    contaminante.
+                </p>
+                <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded transition duration-300">
+                    Leer Biografía
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- Sección de Introducción -->
+    <section id="introduction">
+        <div class="title title-left">
+            <span class="line">
+            </span>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <h3>
+            </h3>
+        </div>
+        <div class="wrapper">
+            <div class="text">
+                <h2 style="color: blue; text-align: center;">
+                    Introducción
+                </h2>
+        
+                <br />
+                <p class="text-black">
+                    El 25 de septiembre de 2015, los líderes mundiales se reunieron en la sede de las Naciones Unidas
+                    para adoptar un ambicioso conjunto de 17 Objetivos de Desarrollo Sostenible (ODS), marcando un hito
+                    histórico en la lucha global contra los mayores desafíos que enfrenta la humanidad. Estos objetivos
+                    están diseñados para erradicar la pobreza extrema, combatir la desigualdad y la injusticia, y
+                    proteger el medio ambiente, estableciendo una hoja de ruta hacia un futuro más equitativo y
+                    sostenible para todos.
+
+                    Cada uno de los ODS está acompañado de metas específicas, sumando un total de 169 metas que abordan
+                    cuestiones críticas como la educación de calidad, el acceso a la salud, la igualdad de género, la
+                    acción climática y la construcción de sociedades pacíficas e inclusivas. Este plan global, conocido
+                    como la Agenda 2030 para el Desarrollo Sostenible, también subraya la importancia de la cooperación
+                    entre gobiernos, empresas, organizaciones internacionales y la sociedad civil para garantizar su
+                    cumplimiento.
+
+                    Con un horizonte de 15 años, los ODS buscan generar un impacto profundo en las condiciones de vida
+                    de las personas y en la salud del planeta, priorizando a las comunidades más vulnerables y
+                    promoviendo un desarrollo equilibrado que no comprometa las necesidades de las futuras generaciones.
+                    <br />
+                    <br />
+                    <br />
+                    Para alcanzar estas metas, todo el mundo tiene que hacer su parte: los gobiernos, el sector privado,
+                    la sociedad civil y personas como usted.
+                </p>
+
+            </div>
+            <div class="image">
+                <img alt="ODS Image 1"
+                    src="https://www.iseazy.com/wp-content/uploads/2022/09/objetives-sustainable-development-es.png.webp" />
+            </div>
+
+            <head>
+                <meta charset="utf-8" />
+                <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+                <title>
+                    Acciones para Contribuir a los ODS
+                </title>
+                <script src="https://cdn.tailwindcss.com">
+                </script>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+                    rel="stylesheet" />
+            </head>
+
+            <body class="bg-gray-200 p-6">
+                <!-- Sección de contenido -->
+                <div
+                    class="flex flex-col md:flex-row items-center justify-between max-w-full mx-auto p-10 bg-gray-300 rounded-lg shadow-lg">
+                    <!-- Texto de la izquierda -->
+                    <div class="md:w-1/2 p-8">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-4">
+                            Acciones individuales y colectivas para contribuir a los Objetivos de Desarrollo Sostenible
+                            (ODS)
+                        </h1>
+                        <p class="text-gray-600 mb-4">
+                            Los Objetivos de Desarrollo Sostenible (ODS) son un llamado universal a la acción para poner
+                            fin a la pobreza, proteger el planeta y mejorar las vidas y perspectivas de las personas en
+                            todo el mundo. Aquí hay algunas acciones que puedes tomar para contribuir a uno de los ODS:
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            <strong> las 17 ODS : Energía Asequible y No Contaminante</strong> - Usa energía renovable y
+                            mejora la eficiencia energética. El Objetivo de Desarrollo Sostenible 7 busca garantizar el
+                            acceso a una energía asequible, segura, sostenible y moderna para todos. Para lograrlo, es
+                            fundamental la participación tanto individual como colectiva. A nivel personal, podemos
+                            adoptar medidas como el uso de bombillas LED, la reducción del consumo energético y la
+                            preferencia por electrodomésticos eficientes. Además, es importante fomentar el uso de
+                            energías renovables en nuestros hogares, como la instalación de paneles solares.
+                        </p>
+                        <button
+                            class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded transition duration-300">
+                            Leer Más
+                        </button>
+                    </div>
+                    <!-- Imagen de la derecha -->
+                    <div class="md:w-1/2 flex items-center justify-center">
+                        <img alt="Imagen representativa de los 17 Objetivos de Desarrollo Sostenible"
+                            class="w-3/4 h-[30rem] object-cover border border-gray-300 rounded-lg shadow-md"
+                            height="400"
+                            src="https://storage.googleapis.com/a1aa/image/jnlHrnvR78b6JR2bXKYeZx8wegxbiGN4l6XepYSEphoID0mnA.jpg"
+                            width="600" />
+                    </div>
+                </div>
+        </div>
+        </div>
+        </div>
+
+
+        </div>
+    </section>
+    </button>
+
+
+    <!-- Aqui termina  descricioon descion organisaciones-->
+
+    <!-- aqyui  una descicion sobre vrecursos y hrraminetas
+-->
+    <footer>
+        <div class="my-flip-card-container">
+            <html lang="es">
+
+            <head>
+                <meta charset="utf-8" />
+                <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+                <title>
+                    Tarjetas Giratorias de los 17 ODS
+                </title>
+                <script src="https://cdn.tailwindcss.com">
+                </script>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+                    rel="stylesheet" />
+                <style>
+                    body {
+                        color: #ffffff;
+                    }
+
+                    h1 {
+                        font-size: 4rem;
+                        margin-top: 0;
+                        margin-bottom: 80px;
+                    }
+
+                    h1 span {
+                        color: #17B6D2;
+                    }
+
+                    p {
+                        margin: 0;
+                    }
+
+                    .cards-grid {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        grid-gap: 40px;
+                        padding-bottom: 60px;
+                    }
+
+                    /* FLIP CARD */
+                    .flip-card {
+                        width: 250px;
+                        height: 250px;
+                        perspective: 2000px;
+                    }
+
+                    .flip-card-inner {
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                        border-radius: 20px;
+                        transition: all 550ms cubic-bezier(0.1, 0.22, 0.8, 1.13);
+                        transform-style: preserve-3d;
+                    }
+
+                    .flip-card-front,
+                    .flip-card-back {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 20px;
+                        backface-visibility: hidden;
+                    }
+
+                    .flip-card-front {
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                    }
+
+                    .flip-card-back {
+                        font-size: 1rem;
+                        text-align: center;
+                        display: grid;
+                        place-items: center;
+                        padding: 20px;
+                        transform: rotateY(180deg);
+                    }
+
+                    .flip-card:hover .flip-card-inner {
+                        transform: rotateY(-180deg);
+                    }
+                </style>
+            </head>
+
+            <body>
+
+                <body>
+
+                    <body>
+                        <!-- Banner de ODS con enlace -->
+                        <header>
+                            <img src="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2015/09/ODSbann.jpg"
+                                alt="" width="100%">
+                            <div>
+                            </div>
+                        </header>
+                        <div class="cards-grid">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-01.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #E5243B;">
+                                        ODS 1: Fin de la Pobreza. Poner fin a la pobreza en todas sus formas en todo el
+                                        mundo.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-02.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #DDA63A;">
+                                        ODS 2: Hambre Cero. Poner fin al hambre, lograr la seguridad alimentaria y la
+                                        mejora de la nutrición, y promover la agricultura sostenible.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://tse3.mm.bing.net/th?id=OIP.eeZlIiXOkQV5iULgNGeEogHaHa&pid=Api&P=0&h=180');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #4C9F38;">
+                                        ODS 3: Salud y Bienestar. Garantizar una vida sana y promover el bienestar para
+                                        todos en todas las edades.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-04.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #C5192D;">
+                                        ODS 4: Educación de Calidad. Garantizar una educación inclusiva, equitativa y de
+                                        calidad, y promover oportunidades de aprendizaje durante toda la vida para
+                                        todos.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-05.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #FF3A21;">
+                                        ODS 5: Igualdad de Género. Lograr la igualdad entre los géneros y empoderar a
+                                        todas las mujeres y niñas.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://tse4.mm.bing.net/th?id=OIP.Zv6-Fr_z-kjziqVVOy26zwHaHa&pid=Api&P=0&h=1800');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #26BDE2;">
+                                        ODS 6: Agua Limpia y Saneamiento. Garantizar la disponibilidad de agua y su
+                                        gestión sostenible y el saneamiento para todos.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-07.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #FCC30B;">
+                                        ODS 7: Energía Asequible y No Contaminante. Garantizar el acceso a una energía
+                                        asequible, segura, sostenible y moderna para todos.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-08.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #A21942;">
+                                        ODS 8: Trabajo Decente y Crecimiento Económico. Promover el crecimiento
+                                        económico sostenido, inclusivo y sostenible, el empleo pleno y productivo, y el
+                                        trabajo decente para todos.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2015/09/S_SDG_Icons-01-09.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #FD6925;">
+                                        ODS 9: Industria, Innovación e Infraestructura. Construir infraestructuras
+                                        resilientes, promover la industrialización inclusiva y sostenible, y fomentar la
+                                        innovación.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2015/09/S_SDG_Icons-01-10-1.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #DD1367;">
+                                        ODS 10: Reducción de las Desigualdades. Reducir la desigualdad en y entre los
+                                        países.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-11.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #FD9D24;">
+                                        ODS 11: Ciudades y Comunidades Sostenibles. Lograr que las ciudades y los
+                                        asentamientos humanos sean inclusivos, seguros, resilientes y sostenibles.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2015/09/S_SDG_Icons-01-12.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #BF8B2E;">
+                                        ODS 12: Producción y Consumo Responsables. Garantizar modalidades de consumo y
+                                        producción sostenibles.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-13.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #3F7E44;">
+                                        ODS 13: Acción por el Clima. Adoptar medidas urgentes para combatir el cambio
+                                        climático y sus efectos.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-14.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #0A97D9;">
+                                        ODS 14: Vida Submarina. Conservar y utilizar sosteniblemente los océanos, los
+                                        mares y los recursos marinos para el desarrollo sostenible.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-15.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #56C02B;">
+                                        ODS 15: Vida de Ecosistemas Terrestres. Gestionar sosteniblemente los bosques,
+                                        luchar contra la desertificación, detener e invertir la degradación de las
+                                        tierras y detener la pérdida de biodiversidad.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-16.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #00689D;">
+                                        ODS 16: Paz, Justicia e Instituciones Sólidas. Promover sociedades pacíficas e
+                                        inclusivas para el desarrollo sostenible, proporcionar acceso a la justicia para
+                                        todos.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-17.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #19486A;">
+                                        ODS 17: Alianzas para Lograr los Objetivos. Fortalecer los medios de ejecución y
+                                        revitalizar la alianza mundial para el desarrollo sostenible.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front"
+                                        style="background-image: url('https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2015/09/S_SDG_Icons-01-18.jpg');">
+                                    </div>
+                                    <div class="flip-card-back" style="background-color: #184961;">
+                                        Estos 17 ODS, Los 17 Objetivos de Desarrollo Sostenible (ODS) forman parte de la
+                                        Agenda 2030 de las Naciones Unidas, diseñados para abordar los principales
+                                        desafíos globales como pobreza, desigualdad y cambio climático.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-12">
+                            <a href="https://www.un.org/sustainabledevelopment/es/objetivos-de-desarrollo-sostenible/"
+                                class="inline-block px-8 py-4 bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold rounded-full shadow-lg transform transition-all duration-300 hover:scale-110 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
+                                target="_blank">
+                                Conoce más sobre los ODS
+                            </a>
+                            <section>.</section>
+                        </div>
+        </div>
+
+        <!-- Aqui termina  descricioon descion organisaciones-->
+
+        <!-- aqyui  una descicion sobre vrecursos y hrraminetas
+-->
+        <html>
+
+        <head>
+            <meta charset="utf-8" />
+            <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+            <title>
+                Historia de los ODS: Explicar el Origen y el Contexto de los ODS
+            </title>
+            <script src="https://cdn.tailwindcss.com">
+            </script>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap"
+                rel="stylesheet" />
+            <style>
+                body {
+                    font-family: 'Roboto', sans-serif;
+                }
+            </style>
+        </head>
+
+        <body class="bg-white p-6">
+            <!-- Sección de contenido -->
+            <div
+                class="flex flex-col md:flex-row items-center justify-between max-w-full mx-auto p-10 bg-white rounded-lg shadow-lg">
+                <!-- Imagen de la izquierda -->
+                <div class="md:w-1/2 flex items-center justify-center">
+                    <img alt="Imagen de una reunión de la ONU donde se discuten los Objetivos de Desarrollo Sostenible"
+                        class="w-3/4 h-[30rem] object-cover border border-gray-300 rounded-lg shadow-md" height="400"
+                        src="https://storage.googleapis.com/a1aa/image/YRo5vONfCb2jYadjwWIBBSfu0hvO6I3uVi3npcbEDiRSZbzTA.jpg"
+                        width="600" />
+                </div>
+                <!-- Texto de la derecha -->
+                <div class="md:w-1/2 p-8">
+                    <h1 class="text-3xl font-bold text-gray-800 mb-4">
+                        Historia de los ODS: Explicar el Origen y el Contexto de los ODS
+                    </h1>
+                    <p class="text-gray-600 mb-4">
+                        Los Objetivos de Desarrollo Sostenible (ODS) fueron adoptados por todos los Estados Miembros de
+                        las Naciones Unidas en 2015 como un llamado universal para poner fin a la pobreza, proteger el
+                        planeta y garantizar que todas las personas gocen de paz y prosperidad para 2030.
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        Los ODS son una evolución de los Objetivos de Desarrollo del Milenio (ODM), que se centraron en
+                        abordar la pobreza extrema, el hambre, las enfermedades, la falta de vivienda adecuada y la
+                        exclusión, al tiempo que promovían la igualdad de género, la educación y la sostenibilidad
+                        ambiental.
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        A diferencia de los ODM, los ODS son más amplios y abordan las causas fundamentales de la
+                        pobreza y la necesidad universal de desarrollo que funcione para todas las personas. Los 17 ODS
+                        son integrados y reconocen que la acción en un área afectará los resultados en otras, y que el
+                        desarrollo debe equilibrar la sostenibilidad social, económica y ambiental.
+                    </p>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded transition duration-300">
+                        Aprender Más
+                    </button>
+                </div>
+            </div>
+            <head>
+             <script src="https://cdn.tailwindcss.com">
+             </script>
+             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+             <style>
+              body {
+                       font-family: 'Roboto', sans-serif;
+                   }
+             </style>
+            </head>
+            <body>
+             <section class="bg-white p-12 rounded-lg shadow-lg">
+              <h2 class="text-xl font-bold mb-4" style="color: rgb(25, 31, 202); font-size: 2rem;">
+               Origen y Contexto de los ODS
+              </h2>
+              <p class="mb-4" style="color: black;">
+               Los Objetivos de Desarrollo Sostenible (ODS) son una colección de 17 objetivos globales diseñados para ser un "plan para lograr un futuro mejor y más sostenible para todos". Fueron establecidos en 2015 por la Asamblea General de las Naciones Unidas y están destinados a ser alcanzados para el año 2030.
+              </p>
+              <p class="mb-4" style="color: black;">
+               Los Objetivos de Desarrollo Sostenible (ODS) se basan en los principios establecidos en la Resolución A/RES/66/288, conocida como "El futuro que queremos". Este documento es el resultado de un extenso proceso de negociación entre los Estados miembros de las Naciones Unidas y refleja un compromiso global con el desarrollo sostenible. La resolución fue adoptada durante la Conferencia de las Naciones Unidas sobre el Desarrollo Sostenible (también conocida como Río+20), celebrada en Río de Janeiro, Brasil, en junio de 2012.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+               <div>
+                <h3 class="text-lg font-bold mb-2" style="color: black;">
+                 Objetivos Principales
+                </h3>
+                <ul class="list-disc list-inside mb-4" style="color: black;">
+                 <li>
+                  Fin de la pobreza
+                 </li>
+                 <li>
+                  Hambre cero
+                 </li>
+                 <li>
+                  Salud y bienestar
+                 </li>
+                 <li>
+                  Educación de calidad
+                 </li>
+                 <li>
+                  Igualdad de género
+                 </li>
+                 <li>
+                  Agua limpia y saneamiento
+                 </li>
+                 <li>
+                  Energía asequible y no contaminante
+                 </li>
+                 <li>
+                  Trabajo decente y crecimiento económico
+                 </li>
+                 <li>
+                  Industria, innovación e infraestructura
+                 </li>
+                </ul>
+               </div>
+               <div>
+                <h3 class="text-lg font-bold mb-2" style="color: black;">
+                 Más Objetivos
+                </h3>
+                <ul class="list-disc list-inside mb-4" style="color: black;">
+                 <li>
+                  Reducción de las desigualdades
+                 </li>
+                 <li>
+                  Ciudades y comunidades sostenibles
+                 </li>
+                 <li>
+                  Producción y consumo responsables
+                 </li>
+                 <li>
+                  Acción por el clima
+                 </li>
+                 <li>
+                  Vida submarina
+                 </li>
+                 <li>
+                  Vida de ecosistemas terrestres
+                 </li>
+                 <li>
+                  Paz, justicia e instituciones sólidas
+                 </li>
+                 <li>
+                  Alianzas para lograr los objetivos
+                 </li>
+                </ul>
+               </div>
+              </div>
+              <p class="mb-4" style="color: black;">
+               Cada uno de los 17 Objetivos de Desarrollo Sostenible (ODS) tiene un conjunto de metas específicas que deben alcanzarse a lo largo de un período de 15 años, hasta el 2030. Estas metas están orientadas a abordar los desafíos globales más urgentes, como la erradicación de la pobreza, la protección del planeta, la promoción del bienestar para todos y el fomento de la paz. Para alcanzar estos objetivos ambiciosos, es crucial que todos los sectores de la sociedad jueguen un papel activo.
+              </p>
+             </section>
+             <div class="container mx-auto p-4">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+               <div class="relative mb-4">
+                <img alt="Imagen de una comunidad trabajando junta para alcanzar los ODS" class="w-full h-auto rounded-lg shadow-md" height="400" src="https://storage.googleapis.com/a1aa/image/ILiy8hnd6D4eWCLZfRUes122eP5a23YcOLGmNAyr7UIsUKOPB.jpg" width="600"/>
+                <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 text-white p-2 rounded-b-lg">
+                 Comunidades trabajando juntas para alcanzar los ODS.
+                </div>
+               </div>
+               <div class="relative mb-4">
+                <img alt="Imagen de un grupo de personas plantando árboles para promover la vida de ecosistemas terrestres" class="w-full h-auto rounded-lg shadow-md" height="400" src="https://storage.googleapis.com/a1aa/image/pkbnFP9e0X3oHaXTogCcIfYL1KtKota3YmBSNEfAeKfpoUceE.jpg" width="600"/>
+                <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 text-white p-2 rounded-b-lg">
+                 Personas plantando árboles para promover la vida de ecosistemas terrestres.
+                </div>
+               </div>
+               <div class="relative mb-4">
+                <img alt="Imagen de una ciudad sostenible con edificios verdes y transporte público eficiente" class="w-full h-auto rounded-lg shadow-md" height="400" src="https://storage.googleapis.com/a1aa/image/fH4YOkvX0g3f7EOvQb3VfhSfoApzIF0zJE5nXIk6NrfIpUceE.jpg" width="600"/>
+                <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 text-white p-2 rounded-b-lg">
+                 Ciudad sostenible con edificios verdes y transporte público eficiente.
+                </div>
+               </div>
+               <div class="relative mb-4">
+                <img alt="Imagen de un aula con niños recibiendo educación de calidad" class="w-full h-auto rounded-lg shadow-md" height="400" src="https://storage.googleapis.com/a1aa/image/RTz9k1YxSaYbExXzjkeeEw8opgztZfYYbwY7TGbZYUYHKFnnA.jpg" width="600"/>
+                <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 text-white p-2 rounded-b-lg">
+                 Aula con niños recibiendo educación de calidad.
+                </div>
+               </div>
+               <div class="relative mb-4">
+                <img alt="Imagen de una reunión de personas discutiendo sobre la reducción de desigualdades" class="w-full h-auto rounded-lg shadow-md" height="400" src="https://storage.googleapis.com/a1aa/image/HJ4iEBxHozKCL5RBSlaLMvBS2Ik26fuQsM2GfqnvaPSHlizTA.jpg" width="600"/>
+                <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 text-white p-2 rounded-b-lg">
+                 Reunión de personas discutiendo sobre la reducción de desigualdades.
+                </div>
+               </div>
+               <div class="relative mb-4">
+                <img alt="Imagen de un grupo de personas participando en una campaña de limpieza de playas" class="w-full h-auto rounded-lg shadow-md" height="400" src="https://storage.googleapis.com/a1aa/image/vNZplj9SksKeWqsOsCSQKYZzlCIWM41fF8Pd24d8L07IlizTA.jpg" width="600"/>
+                <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 text-white p-2 rounded-b-lg">
+                 Personas participando en una campaña de limpieza de playas.
+                </div>
+               </div>
+              </div>
+             </div>
+             <section id="history" class="py-12">
+              <div class="container mx-auto px-4">
+               <div class="flex flex-col md:flex-row items-start md:items-center">
+                <div class="md:w-1/2 mb-4 md:mb-0 md:pr-8">
+                 <h2 class="text-2xl font-bold mb-4" style="color: black;">
+                  Origen de las ODS
+                 </h2>
+                 <p class="mb-4" style="color: black;">
+                  Los Objetivos de Desarrollo Sostenible (ODS) nacieron como una evolución de los Objetivos de Desarrollo del Milenio (ODM), que fueron establecidos por la ONU en el año 2000 para abordar problemas como la pobreza extrema y la mortalidad infantil.
+                 </p>
+                 <p class="mb-4" style="color: black;">
+                  Aunque los ODM lograron avances importantes, dejaron algunas áreas sin resolver, como la desigualdad y el cambio climático.
+                 </p>
+                 <p class="mb-4" style="color: black;">
+                  En 2015, tras una serie de consultas globales, la ONU lanzó los ODS como parte de la Agenda 2030. Estos 17 objetivos buscan abordar de manera más integral y global los desafíos que enfrenta el mundo, incluyendo la pobreza, la educación, la salud, el medio ambiente y la justicia. Los ODS son universales y se aplican a todos los países, con el objetivo de crear un futuro más sostenible y equitativo para todos.
+                 </p>
+                </div>
+                <div class="md:w-4/6"> <!-- Cambiar w-2/6 a w-4/6 para mayor ancho -->
+                    <div class="video-wrapper" style="border: 6px solid black; padding: 5px; display: inline-block; width: 100%;">
+                        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen="" 
+                                class="w-full h-80 md:h-96" 
+                                frameborder="0" 
+                                src="https://www.youtube.com/embed/345IxGgjF9s" 
+                                title="YouTube video player">
+                        </iframe>
+                    </div>
+               </div>
+              </div>
+             </section>
+              
+                 <script src="https://cdn.tailwindcss.com">
+                 </script>
+                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+                 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+                 <style>
+                   .info-box {
+                     transition: opacity 0.3s ease;
+                   }
+                   .hidden-description p {
+                     display: none;
+                   }
+                   .info-box:hover p {
+                     display: block;
+                   }
+                 </style>
+                </head>
+                <body class="bg-white p-6">
+                 <!-- Sección de contenido -->
+                 <div class="flex flex-col md:flex-row items-center justify-between max-w-full mx-auto p-10 bg-white rounded-lg shadow-lg">
+                  <!-- Texto de la izquierda -->
+                  <div class="md:w-1/2 p-8">
+                   <h1 class="text-3xl font-bold text-gray-800 mb-4">
+                    Importancia Global de los ODS: Relevancia para Todos los Países y Personas
+                   </h1>
+                   <p class="text-gray-600 mb-4">
+                    Los Objetivos de Desarrollo Sostenible (ODS) son una serie de metas globales adoptadas por todos los Estados Miembros de las Naciones Unidas en 2015, como parte de la Agenda 2030 para el Desarrollo Sostenible. Estos objetivos buscan erradicar la pobreza, proteger el planeta y asegurar la prosperidad para todos.
+                   </p>
+                   <p class="text-gray-600 mb-4">
+                    La relevancia de los ODS es universal, ya que abordan desafíos que afectan a todas las naciones y personas, independientemente de su ubicación geográfica o nivel de desarrollo. Desde la lucha contra el cambio climático hasta la promoción de la igualdad de género, los ODS proporcionan un marco integral para el desarrollo sostenible.
+                   </p>
+                   <p class="text-gray-600 mb-4">
+                    La implementación de los ODS requiere la colaboración de gobiernos, sector privado, sociedad civil y ciudadanos. Cada uno de nosotros tiene un papel que desempeñar en la creación de un futuro más sostenible y equitativo. Al trabajar juntos, podemos lograr un impacto significativo y duradero en la calidad de vida de las generaciones presentes y futuras.
+                   </p>
+                   <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded transition duration-300">
+                    Descubrir Más
+                   </button>
+                  </div>
+                  <!-- Imagen de la derecha -->
+                  <div class="md:w-1/2 flex items-center justify-center">
+                   <img alt="Imagen de personas de diferentes nacionalidades colaborando para alcanzar los ODS" class="w-3/4 h-[30rem] object-cover border border-gray-300 rounded-lg shadow-md" height="400" src="https://storage.googleapis.com/a1aa/image/KtiBKvSFufWHYaffzYZez6pXg2y5cyzN7agbASpNHGRLfddeE.jpg" width="600"/>
+                  </div>
+                 </div>
+                 <section>
+
+
+                 <!-- Sección de recursos y herramientas -->
+                 <div class="text-center py-10">
+                    <p class="text-gray-600 mt-2" style="color: #1a4b1e; font-size: 2rem; line-height: 1.8;">
+                        Descubre por qué los Objetivos de Desarrollo Sostenible son relevantes para todos los países y todas las personas.
+                    </p>
+                    
+                 </div>
+                 <div class="flex justify-center space-x-6 px-6 flex-wrap">
+                  <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+                   <img alt="A diverse group of people holding hands around a globe" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/WlxxifntmRUUYiUmBJf0Dpn3YuGcvtA25tAHrD3w7SM0vrzTA.jpg" width="600"/>
+                   <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+                    <div class="font-bold text-xl mb-2 text-blue-600">
+                     Unidad Global
+                    </div>
+                    <p class="text-gray-700 text-base">
+                     Los ODS promueven la unidad global para abordar desafíos comunes.
+                    </p>
+                   </div>
+                  </div>
+                  <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+                   <img alt="A child receiving education in a classroom" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/lsEvYxJgOULJIJ6RyOo8pHN8MVGHrcpMqTqyk3F1lZJf315JA.jpg" width="600"/>
+                   <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+                    <div class="font-bold text-xl mb-2 text-blue-600">
+                     Educación de Calidad
+                    </div>
+                    <p class="text-gray-700 text-base">
+                     La educación de calidad es esencial para el desarrollo sostenible.
+                    </p>
+                   </div>
+                  </div>
+                  <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+                   <img alt="A healthcare worker providing medical care to a patient" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/G43VeWeaXjkCnUWZ857zasUOWfoCe0X6Uecvms5m5st79ddeE.jpg" width="600"/>
+                   <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+                    <div class="font-bold text-xl mb-2 text-blue-600">
+                     Salud y Bienestar
+                    </div>
+                    <p class="text-gray-700 text-base">
+                     Garantizar la salud y el bienestar para todos es un objetivo clave.
+                    </p>
+                   </div>
+                  </div>
+                  <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+                   <img alt="A group of people working together on a clean energy project" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/n3mpokvu1zotDJ9KjvrinEYu3pYeN9PjeisY39XDNX17vrzTA.jpg" width="600"/>
+                   <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+                    <div class="font-bold text-xl mb-2 text-blue-600">
+                     Energía Asequible y No Contaminante
+                    </div>
+                    <p class="text-gray-700 text-base">
+                     Promover el acceso a energía asequible y limpia es crucial para el desarrollo sostenible.
+                    </p>
+                   </div>
+                  </div>
+                  <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+                   <img alt="A diverse group of people working on a sustainable agriculture project" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/UlvMb6r9IIbSIBrSD4kdTYZt6Gp0Q4copNvxG4YeiVn4315JA.jpg" width="600"/>
+                   <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+                    <div class="font-bold text-xl mb-2 text-blue-600">
+                     Agricultura Sostenible
+                    </div>
+                    <p class="text-gray-700 text-base">
+                     La agricultura sostenible es vital para la seguridad alimentaria global.
+                    </p>
+                   </div>
+                  </div>
+                  <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+                   <img alt="A group of people participating in a community clean-up event" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/rlnPg2b2fy3TUqpeYus42PeYbFWDWqgwT0tyvAp09tCyfuOPB.jpg" width="600"/>
+                   <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+                    <div class="font-bold text-xl mb-2 text-blue-600">
+                     Comunidades Sostenibles
+                    </div>
+                    <p class="text-gray-700 text-base">
+                     Fomentar comunidades sostenibles y resilientes es esencial para el desarrollo global.
+                    </p>
+                   </div>
+                  </div>
+                  <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+                   <img alt="A forest with diverse flora and fauna" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/aR7PB4y9UCpHPVOO1z6z16ukH9FM8Czkew0dY1nEkbA7315JA.jpg" width="600"/>
+                   <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+                    <div class="font-bold text-xl mb-2 text-blue-600">
+                     Conservación de Bosques
+                    </div>
+                    <p class="text-gray-700 text-base">
+                     La conservación y restauración de bosques es crucial para la biodiversidad y el clima.
+                    </p>
+                   </div>
+                  </div>
+                  <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+                   <img alt="A group of people working on a water purification project" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/NfVozF2EsgRmekMfUYm3d39Yg5MxlMdNGVZdsXjKNbwxfuOPB.jpg" width="600"/>
+                   <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+                    <div class="font-bold text-xl mb-2 text-blue-600">
+                     Agua Limpia y Saneamiento
+                    </div>
+                    <p class="text-gray-700 text-base">
+                     Asegurar el acceso a agua limpia y saneamiento es fundamental para la salud pública.
+                    </p>
+                   </div>
+                  </div>
+                 </div>
+                </section>
+               
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen">
+    <div class="bg-cover bg-center h-[55vh]" style="background-image: url('https://www.repsol.com/content/dam/repsol-corporate/es/energia-e-innovacion/placas-solares-campo-1.jpg');">
+        <div class="flex flex-col items-center justify-center h-full">
+            <h1 class="text-white text-center text-2xl md:text-4xl font-semibold mb-4">
+                Desarrollo Sostenible 2024: Nuestro compromiso con un futuro más verde y responsable.
+            </h1>
+            <div class="flex flex-col md:flex-row justify-center items-center text-white text-center space-y-4 md:space-y-0 md:space-x-8 mb-8">
+                <p class="max-w-xs">
+                    Promovemos iniciativas que contribuyen a la sostenibilidad ambiental.
+                </p>
+                <p class="max-w-xs">
+                    Nos comprometemos con la reducción de emisiones y el uso de energías renovables.
+                </p>
+                <p class="max-w-xs">
+                    Fomentamos la economía circular y la responsabilidad social corporativa.
+                </p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+              
+                <a href="#" class="bg-white text-black px-4 py-2 rounded">
+                    Conocer más
+                </a>
+            </div>
+        </div>
+    </div>
+    <section>.</section>
+    <html lang="es">
+        <head>
+         <meta charset="utf-8"/>
+         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+         <title>
+          Energía Limpia y Sostenible
+         </title>
+         <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
+         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+         <script src="https://cdn.tailwindcss.com">
+         </script>
+         <style>
+          @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Tilt+Neon&display=swap");
+       
+               /* CONTENEDOR PRINCIPAL */
+               .my-swiper-section {
+                   display: flex;
+                   justify-content: center;
+                   align-items: center;
+                   min-height: 100vh;
+                   width: 100%;
+                   background-image: radial-gradient(
+                       at 46.6% 46.9%,
+                       hsl(276, 33%, 97%) 0px,
+                       transparent 50%
+                   );
+               }
+       
+               .my-swiper-section .swiper {
+                   width: 62%;
+                   padding-top: 50px;
+                   padding-bottom: 50px;
+               }
+       
+               .my-swiper-section .swiper-slide {
+                   display: flex;
+                   flex-direction: column;
+                   justify-content: center;
+                   align-items: center;
+                   max-width: 400px;
+                   height: 600px;
+                   padding: 15px;
+                   border-radius: 10px;
+                   background-color: #eaeaea;
+                   box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
+                               0 1px 0 0 rgba(255, 255, 255, 0.66) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+               }
+       
+               .my-swiper-section .swiper-slide > img {
+                   width: 100%;
+                   height: 70%;
+                   object-fit: cover;
+                   border-radius: 5px;
+                   filter: saturate(0.9) contrast(0.85) brightness(1.05);
+                   margin-bottom: 15px;
+               }
+       
+               .my-swiper-section .title {
+                   display: flex;
+                   flex-direction: column;
+                   justify-content: center;
+                   align-items: center;
+                   font-family: "Permanent Marker", cursive;
+               }
+       
+               .my-swiper-section .swiper-pagination {
+                   --swiper-pagination-color: #7f31ac;
+                   --swiper-pagination-bullet-size: 10px;
+                   --swiper-pagination-bullet-horizontal-gap: 5px;
+               }
+       
+               /* Ajustes específicos para pantallas de hasta 768px */
+               @media screen and (max-width: 768px) {
+                   .my-swiper-section .swiper {
+                       width: 100%;
+                       padding: 0 20px;
+                   }
+                   .my-swiper-section .swiper-slide {
+                       max-width: 100%;
+                       margin: 0 auto;
+                   }
+               }
+         </style>
+        </head>
+        <body>
+         <section class="my-swiper-section">
+          <div class="swiper">
+           <p style="text-align: center; font-size: 2rem; font-weight: bold; margin-top: 20px; color: rgb(19, 84, 19);">
+            Nuestro compromiso es proporcionar energía limpia y accesible para todos, promoviendo un futuro sostenible.
+           </p>
+           <section>.</section>
+           <section>.</section>
+           <div class="swiper-wrapper">
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Cero Emisiones
+             </h2>
+             <img alt="Icono de cero emisiones" height="300" src="https://storage.googleapis.com/a1aa/image/kmeI83Y9zOyhYCvJXb0TfiOgDy5rIhRekeblOXD0TLDwHfe8E.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Usando electricidad proveniente de la energía solar, ayudarás a reducir las emisiones de CO₂. ¡Juntos lograremos el cambio!
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Fuente Inagotable
+             </h2>
+             <img alt="Icono de fuente inagotable" height="300" src="https://storage.googleapis.com/a1aa/image/thWw59oUMXKjBNoM5Wt2TjIjGUxZIoCt8e1sRA0raftBy3zTA.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               El sol es una fuente de energía que nunca se acaba. En España tenemos una media de 2,500 - 3,000 horas de luz al año.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Planes Energías para Ahorrar
+             </h2>
+             <img alt="Icono de planes energías para ahorrar" height="300" src="https://storage.googleapis.com/a1aa/image/0LNcu3K95L6tGhNTaAI4H8SU6QOxoJl76smE1et5seL9x3zTA.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Consigue 20 cts./ al año Wavjet sumando energía solar a tu hogar. Descubre el plan perfecto para ti y empieza a ahorrar.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Innovación Tecnológica
+             </h2>
+             <img alt="Icono de innovación tecnológica" height="300" src="https://storage.googleapis.com/a1aa/image/6Olrib6CPeXQWy71IE7X4MLCud8mFlAfvZzxr7brJYc6x3zTA.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Desarrollamos tecnologías avanzadas para maximizar la eficiencia y accesibilidad de la energía solar.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Compromiso Ambiental
+             </h2>
+             <img alt="Icono de compromiso ambiental" height="300" src="https://storage.googleapis.com/a1aa/image/TpxH2gThYAbfAqiZ0e3jYd8bIOcDDmmRBOnjRQ7Kiwg3x3zTA.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Nuestro objetivo es reducir la huella de carbono y proteger los recursos naturales para las futuras generaciones.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Educación y Concienciación
+             </h2>
+             <img alt="Icono de educación y concienciación" height="300" src="https://storage.googleapis.com/a1aa/image/2fM26fgqG9p8forfN229YR29wyNHRuPNVXsAffBYhPFGe475JA.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Promovemos la educación sobre la importancia de la energía limpia y sostenible en comunidades y escuelas.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Eficiencia Energética
+             </h2>
+             <img alt="Icono de eficiencia energética" height="300" src="https://storage.googleapis.com/a1aa/image/vxsu5XBZJs6FPNMxenTVeegeU7kezSI68tXbu505EvwqOe98E.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Implementamos soluciones para mejorar la eficiencia energética en hogares y empresas, reduciendo el consumo y los costos.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Energía Renovable
+             </h2>
+             <img alt="Icono de energía renovable" height="300" src="https://storage.googleapis.com/a1aa/image/jORhPvccCjanEd2zIKdDGhsFem2byBkIyv83VP1fuh40x3zTA.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Fomentamos el uso de energías renovables como la solar, eólica y geotérmica para un futuro más limpio y sostenible.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Reducción de Residuos
+             </h2>
+             <img alt="Icono de reducción de residuos" height="300" src="https://storage.googleapis.com/a1aa/image/YlEVwQ63PKJACNv6IoIQYdXjDM2jod4FzCpJEMVRzBtf475JA.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Trabajamos en la reducción de residuos y la promoción del reciclaje para minimizar el impacto ambiental.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Transporte Sostenible
+             </h2>
+             <img alt="Icono de transporte sostenible" height="300" src="https://storage.googleapis.com/a1aa/image/vJmhlNJVx17sO54J1GHBZzTL9QYFZ70mhpQCyuSDFB2e475JA.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Apoyamos el desarrollo de vehículos eléctricos y otras formas de transporte sostenible para reducir la contaminación.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Comunidades Verdes
+             </h2>
+             <img alt="Icono de comunidades verdes" height="300" src="https://storage.googleapis.com/a1aa/image/D9tJXwKKge10b6IvRcagUzeIz9sZfXTsbDAhI1ceaXwfPe98E.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Fomentamos la creación de comunidades verdes con espacios naturales y prácticas sostenibles.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Investigación y Desarrollo
+             </h2>
+             <img alt="Icono de investigación y desarrollo" height="300" src="https://storage.googleapis.com/a1aa/image/Kiw4RsfGuEWFfUeAUTSIbZuKwq6fBzyK3JVV51fZEOdFQe98E.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Invertimos en investigación y desarrollo para encontrar nuevas soluciones energéticas y mejorar las existentes.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Colaboración Global
+             </h2>
+             <img alt="Icono de colaboración global" height="300" src="https://storage.googleapis.com/a1aa/image/pTOEx6eVGZSnOCr5MeNFrChRdy7vjVCRAw0UIo8KHfcFkvnnA.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Trabajamos con organizaciones globales para promover la energía limpia y sostenible en todo el mundo.
+              </p>
+             </div>
+            </div>
+            <div class="swiper-slide">
+             <h2 class="text-xl font-semibold mb-2" style="color: black;">
+              Acceso Universal
+             </h2>
+             <img alt="Icono de acceso universal" height="300" src="https://storage.googleapis.com/a1aa/image/U7NAgjGatnYBEpeUn4ZajEuvMchIOLFS2Ge0lmAHn54yx3zTA.jpg" width="300"/>
+             <div class="title" style="color: black;">
+              <p>
+               Nos esforzamos por proporcionar acceso universal a la energía limpia, especialmente en comunidades desfavorecidas.
+              </p>
+             </div>
+            </div>
+           </div>
+           <div class="swiper-pagination">
+           </div>
+          </div>
+         </section>
+         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js">
+         </script>
+         <script>
+          var swiper = new Swiper(".swiper", {
+                   effect: "coverflow",
+                   grabCursor: true,
+                   centeredSlides: true,
+                   initialSlide: 1,
+                   slidesPerView: 3,
+                   loop: true,
+                   coverflowEffect: {
+                       rotate: 50,
+                       stretch: 0,
+                       depth: 100,
+                       modifier: 1,
+                       slideShadows: true,
+                   },
+                   pagination: {
+                       el: ".swiper-pagination",
+                   },
+               });
+         </script>
+     
+     <html>
+        <head>
+         <meta charset="utf-8"/>
+         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+         <title>
+          Proyectos Exitosos de Energía No Contaminante
+         </title>
+         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+         <script src="https://cdn.tailwindcss.com">
+         </script>
+         <style>
+          /* Estilos específicos para esta sección */
+               .mi-carousel-seccion .carousel {
+                   display: flex;
+                   overflow-x: auto;
+                   scroll-snap-type: x mandatory;
+               }
+               .mi-carousel-seccion .carousel img {
+                   scroll-snap-align: start;
+                   flex-shrink: 0;
+                   width: 100%;
+                   height: 30rem;
+                   object-fit: cover;
+                   border: 2px solid #ddd;
+                   border-radius: 10px;
+                   margin-right: 10px;
+               }
+               .mi-carousel-seccion .custom-container {
+                   background-color: #ffffff;
+                   border-radius: 10px;
+                   padding: 2.5rem;
+                   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+               }
+         </style>
+        </head>
+        <body class="bg-yellow-100 p-6">
+         <!-- Contenedor principal -->
+         <section class="mi-carousel-seccion max-w-full mx-auto p-10 bg-white rounded-lg shadow-lg custom-container">
+          <div class="flex flex-col md:flex-row items-center justify-between">
+           <!-- Texto de descripción -->
+           <div class="md:w-1/2 p-8">
+            <h1 class="text-3xl font-bold text-black mb-4">
+             Proyectos Exitosos de Energía No Contaminante
+            </h1>
+            <p class="text-black mb-4">
+             La transición hacia una energía no contaminante es una realidad gracias a diversos proyectos exitosos alrededor del mundo. Estos proyectos no solo demuestran la viabilidad de las energías renovables, sino que también sirven como modelos a seguir para futuras iniciativas.
+            </p>
+            <p class="text-black mb-4">
+             Un ejemplo destacado es el parque eólico de Hornsea en el Reino Unido, que es actualmente el parque eólico marino más grande del mundo. Este proyecto ha logrado generar suficiente energía para abastecer a más de un millón de hogares.
+            </p>
+            <p class="text-black mb-4">
+             Otro proyecto notable es la planta solar de Noor en Marruecos, una de las plantas solares más grandes del mundo. Noor ha sido fundamental para reducir la dependencia del país en combustibles fósiles y ha creado miles de empleos locales.
+            </p>
+            <p class="text-black mb-4">
+             En Islandia, la planta de energía geotérmica de Hellisheiði es un ejemplo de cómo aprovechar los recursos naturales para generar energía limpia. Esta planta no solo proporciona electricidad, sino también calefacción para la capital, Reikiavik.
+            </p>
+            <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded transition duration-300">
+             Leer Más
+            </button>
+           </div>
+           <!-- Carrusel de imágenes -->
+           <div class="md:w-1/2 flex items-center justify-center">
+            <div class="carousel">
+             <img alt="Parque eólico en funcionamiento" height="400" src="https://storage.googleapis.com/a1aa/image/eWBvUk2SdCWZdKAaCVmWt70aeelyU3TWEErpM8CtiOtqQ0nnA.jpg" width="600"/>
+             <img alt="Paneles solares en un campo abierto" height="400" src="https://storage.googleapis.com/a1aa/image/3sIEYbuZ5qb6DFkHv6ThUEArNPgcDsy3Lyo0rd2fBWFLE95JA.jpg" width="600"/>
+             <img alt="Planta de energía geotérmica" height="400" src="https://storage.googleapis.com/a1aa/image/WxMlpf3xMS1CRatzFh9RsTLdGXeK49oFbbU6kUb3wqAQI6zTA.jpg" width="600"/>
+             <img alt="Proyecto de energía hidroeléctrica" height="400" src="https://storage.googleapis.com/a1aa/image/fqEfxhEem3IRcIwpXtL78PJ9ADKOOMLJnG6nO9uoXtViQ0nnA.jpg" width="600"/>
+             <img alt="Instalación de biogás en una granja" height="400" src="https://storage.googleapis.com/a1aa/image/5iqv8wyekJRge0s6VJRIPGZfEapVhe3Sy3tpG8sKKuAMhoPPB.jpg" width="600"/>
+            </div>
+           </div>
+          </div>
+         </section>
+         <html>
+ <head>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <section id="proyectos-exitosos">
+   <div class="bg-gray-300 p-4 w-[10%5] rounded-lg ml-[-4%]">
+    <h1 class="text-3xl font-bold mb-4 text-green-600 text-center">
+     Proyectos Exitosos de Energía No Contaminante
+    </h1>
+    <p class="text-gray-700 text-1xl mb-5 text-center">
+     Descubre proyectos exitosos que han adoptado energías no contaminantes y han contribuido significativamente a la sostenibilidad y reducción del impacto ambiental.
+    </p>
+    <div class="flex justify-center space-x-4 flex-wrap" id="unique-card-container">
+     <!-- Primera fila de tarjetas -->
+     <div class="unique-card">
+      <img alt="Imagen de un parque eólico con múltiples aerogeneradores" height="200" src="https://storage.googleapis.com/a1aa/image/TYdwyiYq1eXhMizwrsEvfKu4OzzmUH3cvYu3EenGpzaDh9nnA.jpg" width="300"/>
+      <div class="unique-card-content">
+       <div class="unique-card-title" style="color: black;">
+        Parque Eólico
+       </div>
+       <div class="unique-card-description" style="color: black;">
+        Los parques eólicos son una fuente de energía renovable que aprovecha la fuerza del viento para generar electricidad. Este proyecto ha reducido significativamente las emisiones de CO2 en la región.
+       </div>
+      </div>
+     </div>
+     <div class="unique-card">
+      <img alt="Imagen de paneles solares en un campo con montañas al fondo" height="200" src="https://storage.googleapis.com/a1aa/image/6Hcey22OsUTTZKAbA9cd4Zamn34I0UAufX2YyWcVrNykwennA.jpg" width="300"/>
+      <div class="unique-card-content">
+        <div class="unique-card-title" style="color: black;">
+            Planta Solar
+       </div>
+       <div class="unique-card-description" style="color: black;">
+        Las plantas solares convierten la luz solar en electricidad. Este proyecto ha proporcionado energía limpia a miles de hogares y ha reducido la dependencia de combustibles fósiles.
+       </div>
+      </div>
+     </div>
+     <div class="unique-card">
+      <img alt="Imagen de una planta hidroeléctrica con una presa y agua fluyendo" height="200" src="https://storage.googleapis.com/a1aa/image/VghNIKCYn171E12M4R4iYqtbgda8e5iqGAtffqpwgobSh9nnA.jpg" width="300"/>
+      <div class="unique-card-content">
+        <div class="unique-card-title" style="color: black;">
+            Planta Hidroeléctrica
+       </div>
+       <div class="unique-card-description" style="color: black;">
+        Las plantas hidroeléctricas generan electricidad a partir del agua en movimiento. Este proyecto ha aprovechado los recursos hídricos locales para producir energía limpia y sostenible.
+       </div>
+      </div>
+     </div>
+     <div class="unique-card">
+      <img alt="Imagen de una planta de biomasa con pilas de residuos orgánicos" height="200" src="https://storage.googleapis.com/a1aa/image/GErbmnZUeuXASKYrsrJFZcXQAXV7qme0ETVbFNZVw8BlwennA.jpg" width="300"/>
+      <div class="unique-card-content">
+        <div class="unique-card-title" style="color: black;">
+            Planta de Biomasa
+       </div>
+       <div class="unique-card-description" style="color: black;">
+        Las plantas de biomasa utilizan residuos orgánicos para generar energía. Este proyecto ha convertido desechos en una fuente de energía renovable, reduciendo la cantidad de residuos en vertederos.
+       </div>
+      </div>
+     </div>
+     <div class="unique-card">
+      <img alt="Imagen de una planta geotérmica con vapor saliendo de la tierra" height="200" src="https://storage.googleapis.com/a1aa/image/O23GmsmQMfzxaSuoolcFIaU5AQ6GNEseB8AGVFEXbFYiwennA.jpg" width="300"/>
+      <div class="unique-card-content">
+        <div class="unique-card-title" style="color: black;">
+            Planta Geotérmica
+       </div>
+       <div class="unique-card-description" style="color: black;">
+        Las plantas geotérmicas aprovechan el calor de la tierra para generar electricidad. Este proyecto ha proporcionado una fuente de energía constante y sostenible.
+       </div>
+      </div>
+     </div>
+     <!-- Segunda fila de tarjetas -->
+     <div class="unique-card">
+      <img alt="Imagen de una planta de energía mareomotriz con olas del mar" height="200" src="https://storage.googleapis.com/a1aa/image/wT6rjDuWQlpiC1AuSnDAMDkDDrbWpEZEv0feyJckeJHfB7PPB.jpg" width="300"/>
+      <div class="unique-card-content">
+        <div class="unique-card-title" style="color: black;">
+            Planta Mareomotriz
+       </div>
+       <div class="unique-card-description" style="color: black;">
+        Las plantas mareomotrices generan electricidad a partir de las mareas y olas del mar. Este proyecto ha aprovechado el poder del océano para producir energía limpia.
+       </div>
+      </div>
+     </div>
+     <div class="unique-card">
+      <img alt="Imagen de una planta de energía undimotriz con boyas en el mar" height="200" src="https://storage.googleapis.com/a1aa/image/MRQgw3eXpDxkXiaRqlzpyeC256t0dmrd7BOrFzEPMBGrwennA.jpg" width="300"/>
+      <div class="unique-card-content">
+        <div class="unique-card-title" style="color: black;">
+            Planta Undimotriz
+       </div>
+       <div class="unique-card-description" style="color: black;">
+        Las plantas undimotrices utilizan el movimiento de las olas para generar electricidad. Este proyecto ha demostrado ser una solución innovadora para la generación de energía renovable.
+       </div>
+      </div>
+     </div>
+     <div class="unique-card">
+      <img alt="Imagen de una planta de energía de hidrógeno con tanques de almacenamiento" height="200" src="https://storage.googleapis.com/a1aa/image/P0yBw6GNY47mHZwViwE6CiqekprsS8bkrC3bvGCCvAUWYfzTA.jpg" width="300"/>
+      <div class="unique-card-content">
+        <div class="unique-card-title" style="color: black;">
+            Planta de Hidrógeno
+       </div>
+       <div class="unique-card-description" style="color: black;">
+        Las plantas de hidrógeno producen energía a partir de hidrógeno, un combustible limpio. Este proyecto ha explorado el potencial del hidrógeno como una alternativa a los combustibles fósiles.
+       </div>
+      </div>
+     </div>
+     <div class="unique-card">
+      <img alt="Imagen de una planta de energía de biogás con tanques de digestión anaeróbica" height="200" src="https://storage.googleapis.com/a1aa/image/0WUVfobr3nyLEil4iUSMLZ7iuUClU66SY2yB4MbeKsmnwennA.jpg" width="300"/>
+      <div class="unique-card-content">
+        <div class="unique-card-title" style="color: black;">
+            Planta de Biogás
+       </div>
+       <div class="unique-card-description" style="color: black;">
+        Las plantas de biogás generan energía a partir de la descomposición de materia orgánica. Este proyecto ha convertido residuos en una fuente de energía renovable y ha reducido las emisiones de metano.
+       </div>
+      </div>
+     </div>
+     <div class="unique-card">
+      <img alt="Imagen de una planta de energía de biomasa con pilas de residuos orgánicos" height="200" src="https://storage.googleapis.com/a1aa/image/2EoppR4uafzAe0F40kxxpJpsM5IeKqs7rad0iZ6NM8pdh9nnA.jpg" width="300"/>
+      <div class="unique-card-content">
+        <div class="unique-card-title" style="color: black;">
+            Planta de Biomasa
+       </div>
+       <div class="unique-card-description" style="color: black;">
+        Las plantas de biomasa utilizan residuos orgánicos para generar energía. Este proyecto ha convertido desechos en una fuente de energía renovable, reduciendo la cantidad de residuos en vertederos.
+       </div>
+      </div>
+     </div>
+  </section>
+  <script>
+   // Modulo para controlar el comportamiento de las tarjetas
+        const CardToggleModule = (function () {
+            const init = function () {
+                const section = document.querySelector('#proyectos-exitosos'); // Aseguramos que solo afecta a esta sección
+                if (!section) return;
+
+                const cardContainer = section.querySelector('#unique-card-container');
+                if (!cardContainer) return;
+
+                const cards = cardContainer.querySelectorAll('.unique-card');
+                cards.forEach(function (card) {
+                    card.addEventListener('click', function () {
+                        this.classList.toggle('expanded');
+                    });
+                });
+            };
+
+            return {
+                init: init
+            };
+        })();
+
+        document.addEventListener('DOMContentLoaded', function () {
+            CardToggleModule.init(); // Inicializar el módulo solo cuando se cargue la página
+        });
+  </script>
+  <style>
+   #proyectos-exitosos .unique-card {
+            background-color: #fffdfb;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s, max-height 0.2s;
+            max-height: 250px;
+            width: 300px;
+            margin: 2rem;
+            position: relative;
+            left: 60px;
+        }
+
+        #proyectos-exitosos .unique-card:hover {
+            transform: scale(1.05);
+        }
+
+        #proyectos-exitosos .unique-card img {
+            display: block;
+            margin: 0 auto;
+            width: 85%;
+            height: auto;
+        }
+
+        #proyectos-exitosos .unique-card-content {
+            padding: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        #proyectos-exitosos .unique-card-title {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #proyectos-exitosos .unique-card-description {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+        }
+
+        #proyectos-exitosos .unique-card.expanded {
+            max-height: 550px;
+        }
+
+        #proyectos-exitosos .unique-card.expanded .unique-card-content {
+            display: block;
+        }
+  </style>
+ 
+    <!-- Aqui termina  descricioon individuales y descritivas-->
+
+    <!-- aqyui su carrusel de imagenes  de individuales-->
+    
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+ </head>
+ <body class="bg-gray-200 flex flex-col items-center justify-center min-h-screen">
+  <section class="max-w-8xl mx-auto p-8" id="tercera">
+   <div class="title-container text-center mb-8">
+   <div class="max-w-full mx-auto p-4">
+    <h2 class="text-3xl font-bold mb-4 text-black text-left">
+        Contribuyendo a un futuro más sostenible mediante el uso de energías renovables y limpias
+    </h2>    
+    <div class="relative overflow-hidden">
+     <div class="flex transition-transform duration-500 ease-in-out" id="tema-carousel">
+      <!-- Carrusel de temas -->
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Tecnología avanzada en energías renovables" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/SIMxa2MMaeweIUf5xbROIPZeVlfKHa9hVCi1rf2EhOQJgVf5JA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Tecnología
+         </span>
+         <span class="text-sm text-gray-500">
+          54
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Paneles solares en un campo abierto" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/7f9GajOjsHTVISbiSDFdT3OzMecxTWjecbMN5TWQjGgur6nnA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Ahorro
+         </span>
+         <span class="text-xs text-gray-500">
+          27
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Comunidad trabajando en un proyecto de energía renovable" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/xwHc0I8vujrbKJIOegHJbvVMb4kpeVVHihsyjjzxD4fLs6nnA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Colectivo
+         </span>
+         <span class="text-xs text-gray-500">
+          19
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Artículos de prensa sobre energía renovable" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/dKFJB8VLsfWFTCfeccBcUGubPRBfuQv4zshu3noYyO8nX1PPB.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Prensa
+         </span>
+         <span class="text-xs text-gray-500">
+          20
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Normativas y regulaciones sobre energía renovable" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/gkwWDLS6LAr2GxnHYzEhM21j4kmhoyNzoWjUtvck2dZiVf5JA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Normativa
+         </span>
+         <span class="text-xs text-gray-500">
+          21
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Proyectos de energía renovable en desarrollo" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/rvCdkVWe43wXLCim47mCfO2X79fOedmv9TsSFqPJljwNY1PPB.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Proyectos
+         </span>
+         <span class="text-xs text-gray-500">
+          22
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Iniciativas de sostenibilidad energética" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/vNECeeIObslbbU4lNnjinHLrHKdaiFFbBtGgh7Fc0VW9V9zTA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Sostenibilidad
+         </span>
+         <span class="text-xs text-gray-500">
+          23
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Paneles solares en un campo abierto" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/7f9GajOjsHTVISbiSDFdT3OzMecxTWjecbMN5TWQjGgur6nnA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Energía solar
+         </span>
+         <span class="text-xs text-gray-500">
+          24
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Futuro de la energía renovable" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/mEGMC8D4wkrDPZETrLYZ7fkOU4lDOk0jYO2Fm01zEwCfV9zTA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Energía para el futuro
+         </span>
+         <span class="text-xs text-gray-500">
+          25
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Innovaciones en energía renovable" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/82HxK9rtXWKdIhoOD1legbTTZZFScOKyRRm3vFe51Z1BW9zTA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Innovación
+         </span>
+         <span class="text-xs text-gray-500">
+          27
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Energía sostenible para el futuro" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/F70TQTZxOY4ICVBKzXJnyEVU7e93cyo8MoZFd1QlbBXeV9zTA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Energía sostenible
+         </span>
+         <span class="text-xs text-gray-500">
+          26
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Desarrollo de energías limpias" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/Q06HMgubBV6pOh1TJ03LdIHRR80yDVOQZozhu7MSfCY9qezTA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Desarrollo
+         </span>
+         <span class="text-xs text-gray-500">
+          51
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="square-carousel-item flex-none w-80 mr-6">
+       <div class="rounded-lg overflow-hidden shadow-lg">
+        <img alt="Eficiencia energética en hogares" class="w-full h-60 object-cover" height="240" src="https://storage.googleapis.com/a1aa/image/D8vx9ivMdkYDNt2aJVuO66MoHPdkGiX3xpgVYralrCwhVf5JA.jpg" width="320"/>
+        <div class="p-4 text-center bg-white">
+         <span class="block text-lg font-medium text-gray-900">
+          Eficiencia
+         </span>
+         <span class="text-xs text-gray-500">
+          27
+         </span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- Flechas de navegación -->
+     <button class="absolute top-1/2 left-4 transform -translate-y-1/2 text-white bg-black rounded-full p-2 focus:outline-none" id="prev">
+      <i class="fas fa-chevron-left">
+      </i>
+     </button>
+     <button class="absolute top-1/2 right-4 transform -translate-y-1/2 text-white bg-black rounded-full p-2 focus:outline-none" id="next">
+      <i class="fas fa-chevron-right">
+      </i>
+     </button>
+     <script>
+      const squareImages = document.querySelectorAll(".square-carousel-item");
+                    let currentIndex = 0;
+
+                    function showSquareImage(index) {
+                        const carousel = document.getElementById("tema-carousel");
+                        const offset = -index * 236; // Ancho de cada item (80 + 6px de margen)
+
+                        // Desplazamiento con animación
+                        carousel.style.transform = `translateX(${offset}px)`;
+                    }
+
+                    function nextSquareImage() {
+                        currentIndex = (currentIndex + 1) % squareImages.length; // Incrementa y asegura el bucle infinito
+                        showSquareImage(currentIndex);
+                    }
+
+                    function previousSquareImage() {
+                        currentIndex = (currentIndex - 1 + squareImages.length) % squareImages.length; // Decrementa y asegura el bucle infinito
+                        showSquareImage(currentIndex);
+                    }
+
+                    // Control de botones
+                    document.getElementById("next").addEventListener("click", nextSquareImage);
+                    document.getElementById("prev").addEventListener("click", previousSquareImage);
+
+                    // Desplazamiento automático cada 3 segundos
+                    setInterval(nextSquareImage, 3000);
+     </script>
+    </div>
+   </div>
+     <script src="https://cdn.tailwindcss.com">
+     </script>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+     <style>
+      body {
+               font-family: 'Roboto', sans-serif;
+           }
+           .info-box {
+               transition: opacity 0.3s ease;
+           }
+           .hidden-description p {
+               display: none;
+           }
+           .info-box:hover p {
+               display: block;
+           }
+     </style>
+    </head>
+    <body class="bg-white text-gray-800">
+     <div class="text-center py-10">
+       <p class="text-gray-800 mt-4 text-large" style="color: rgb(39, 102, 29); font-size: 2rem;">
+    Descubre cómo las energías renovables y limpias pueden transformar nuestro futuro.
+</p>
+
+         
+     </div>
+     <div class="flex justify-center space-x-6 px-6 flex-wrap">
+      <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+       <img alt="Solar panels in a large field under a clear sky" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/M3ThYTq6ZsrbKp1aLK0BWB4i4IfoR6sRBfv1xJ6DMyZTjfnnA.jpg" width="600"/>
+       <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+        <div class="font-bold text-xl mb-2 text-blue-600">
+         Energía Solar
+        </div>
+        <p class="text-gray-700 text-base">
+         La energía solar es una fuente de energía renovable que puede ser utilizada para generar electricidad y calor.
+        </p>
+       </div>
+      </div>
+      <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+       <img alt="Wind turbines on a hill during sunset" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/iDATxjHmBrqzA5maixHmoqIKfBgdCvf2BfazDoZHACSsGfPPB.jpg" width="600"/>
+       <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+        <div class="font-bold text-xl mb-2 text-blue-600">
+         Energía Eólica
+        </div>
+        <p class="text-gray-700 text-base">
+         La energía eólica utiliza el viento para generar electricidad, siendo una de las formas más limpias de energía.
+        </p>
+       </div>
+      </div>
+      <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+       <img alt="Hydroelectric dam with water flowing" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/kFlFIhIkIXITLdkaWmT4leadfUpmVnZFWyf6IeFCL7xfa8f8E.jpg" width="600"/>
+       <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+        <div class="font-bold text-xl mb-2 text-blue-600">
+         Energía Hidroeléctrica
+        </div>
+        <p class="text-gray-700 text-base">
+         La energía hidroeléctrica aprovecha la fuerza del agua en movimiento para generar electricidad.
+        </p>
+       </div>
+      </div>
+      <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+       <img alt="Geothermal power plant with steam rising" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/37ktfC3YZkSlEqVDhbKUZBDfqVGEj23Spmotwfyf2n3UNef8E.jpg" width="600"/>
+       <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+        <div class="font-bold text-xl mb-2 text-blue-600">
+         Energía Geotérmica
+        </div>
+        <p class="text-gray-700 text-base">
+         La energía geotérmica utiliza el calor del interior de la Tierra para generar electricidad y calefacción.
+        </p>
+       </div>
+      </div>
+     </div>
+            </div>
+            </section>
+            </div>
+            <!-- Aqui termina  las descriciones individules de las ods -->
+
+            <!-- Aqui comiensa  la sesciciones  Involucrar a Estudiantes y Jóvenes en el ODS 7: -->
+
+
+            </footer>
+         <!-- ONCEAVA SECTION -->
+
+  <br><br><br>
+  <!-- Pie de página -->
+  <footer class="bg-gray-900 text-white py-8 w-full">
+      <div class="max-w-full mx-auto px-4">
+          <div class="flex flex-wrap justify-between items-start space-y-12 md:space-y-0 md:flex-row">
+              <!-- Sección Energía -->
+              <div class="flex flex-col space-y-6 w-full md:w-1/3">
+                  <h2 class="text-2xl font-bold mb-4 text-white">Energía</h2>
+                  <p class="text-lg text-gray-300">Soluciones para mejorar la energía no contaminante.</p>
+                  <div class="flex space-x-6 mt-4">
+                      <a href="#" class="text-gray-200 hover:text-blue-400 transition-colors duration-300">
+                          <i class="fab fa-facebook fa-lg"></i>
+                      </a>
+                      <a href="#" class="text-gray-200 hover:text-pink-500 transition-colors duration-300">
+                          <i class="fab fa-instagram fa-lg"></i>
+                      </a>
+                      <a href="#" class="text-gray-200 hover:text-teal-500 transition-colors duration-300">
+                          <i class="fab fa-tiktok fa-lg"></i>
+                      </a>
+                      <a href="#" class="text-gray-200 hover:text-blue-400 transition-colors duration-300">
+                          <i class="fab fa-twitter fa-lg"></i>
+                      </a>
+                      <a href="#" class="text-gray-200 hover:text-red-500 transition-colors duration-300">
+                          <i class="fab fa-youtube fa-lg"></i>
+                      </a>
+                  </div>
+              </div>
+  
+              <!-- Sección Sostenibilidad - Centrada -->
+              <div class="flex flex-col items-center justify-center space-y-6 w-full md:w-1/3 text-center h-[12vh]">
+                  <h2 class="text-xl font-bold mb-4 text-white">Sostenibilidad</h2>
+                  <p class="text-lg text-gray-300">+34 912 345 678</p>
+                  <p class="text-lg text-gray-300">contacto@ejemplo.com</p>
+              </div>
+  
+              <!-- Sección Innovación - Centrando -->
+              <div class="flex flex-col items-center justify-center w-full md:w-1/3 text-center">
+                  <img src="/public/imagen/Logo-VG_Tpt02.png" alt="Logo de Valle Grande" class="h-28 w-auto mb-6" />
+                  <p class="text-lg text-gray-300">Innovación para un futuro sostenible</p>
+              </div>
+          </div>
+  
+          <!-- Derechos reservados -->
+          <div class="mt-12 text-center border-t border-gray-600 pt-6">
+              <p class="text-sm text-gray-400">&copy; 2024. Todos los derechos reservados.</p>
+          </div>
+      </div>
+      <script src="/public/scrips.js/despliege vuelve todo para arriba.js"></script>
+  </footer>
+  </body>
+  </html>
+  
+
+
+
+  

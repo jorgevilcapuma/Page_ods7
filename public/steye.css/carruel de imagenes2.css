@@ -1,0 +1,133 @@
+
+
+.carousel-section .carousel-container {
+    overflow: hidden;
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.carousel-section .carousel {
+    display: flex;
+    transition: transform 0.4s ease;
+}
+
+.carousel-section .carousel-item {
+    min-width: 19%;
+    margin: 0 10px;
+    box-sizing: border-box;
+}
+
+.carousel-section .carousel-item img {
+    width: 100%;
+    height: 310px;
+    object-fit: cover;
+}
+
+.carousel-section .carousel-container .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-section .carousel-container .nav-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-section .carousel-container .prev {
+    left: 10px;
+}
+
+.carousel-section .carousel-container .next {
+    right: 10px;
+}
+
+/* Ocultar los botones de radio */
+.carousel-section input[type="radio"] {
+    display: none;
+}
+
+/* Posicionamiento del carrusel según el slide activo */
+.carousel-section #slide1:checked ~ .carousel {
+    transform: translateX(0);
+}
+.carousel-section #slide2:checked ~ .carousel {
+    transform: translateX(-20%);
+}
+.carousel-section #slide3:checked ~ .carousel {
+    transform: translateX(-40%);
+}
+.carousel-section #slide4:checked ~ .carousel {
+    transform: translateX(-60%);
+}
+.carousel-section #slide5:checked ~ .carousel {
+    transform: translateX(-80%);
+}
+.carousel-section #slide6:checked ~ .carousel {
+    transform: translateX(-100%);
+}
+.carousel-section #slide7:checked ~ .carousel {
+    transform: translateX(-120%);
+}
+.carousel-section #slide8:checked ~ .carousel {
+    transform: translateX(-140%);
+}
+
+/* Botones de navegación */
+.carousel-section .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s;
+}
+
+.carousel-section .nav-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-section .prev {
+    left: 20px;
+}
+
+.carousel-section .next {
+    right: 20px;
+}
+
+/* Controles de slide */
+.carousel-section .controls {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.carousel-section .control-label {
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-section .control-label:hover,
+.carousel-section input[type="radio"]:checked + .control-label {
+    background-color: rgba(255, 255, 255, 1);
+}

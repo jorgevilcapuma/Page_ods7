@@ -1,0 +1,135 @@
+/* Estilo general para la línea de tiempo */
+.timeline {
+  margin: 5em auto;
+  position: relative;
+  background: url(https://images.unsplash.com/photo-1495125057152-b661c82b067c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D) no-repeat center center;
+  background-size: cover; /* Asegura que cubra todo el área */
+  background-attachment: fixed; /* Efecto de paralaje */
+  width: 80%; /* Cambiar a un 90% para mayor balance */
+  height: 10500px; /* Altura fija */
+  max-height: 10500px; /* Altura máxima en caso de ser necesario */
+  padding: 3em 0; /* Espacio añadido en la parte superior e inferior */
+  box-sizing: border-box;
+  border-radius: 1em; /* Bordes redondeados */
+  overflow: hidden; /* Para que no se salga contenido */
+}
+
+
+/* Títulos de la sección */
+.title h1 {
+  font-size: 3.5em; /* Un poco más pequeño para mejor presentación */
+  color: #fff;
+  text-align: center;
+  margin-bottom: 0.5em;
+  text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7);
+}
+
+.title p {
+  font-size: 1.4em;
+  color: #0d71fc;
+  text-align: center;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 2em;
+  font-weight: bold;
+}
+
+/* Estilos generales para los puntos de control */
+.checkpoint {
+  max-width: 35em;
+  padding: 2em;
+  position: relative;
+  margin: 2.5em auto; /* Centrado automático */
+  z-index: 1;
+  transition: transform 0.3s ease-in-out; /* Transición para hover */
+}
+
+.checkpoint:hover {
+  transform: scale(1.05); /* Efecto hover para resaltar */
+}
+
+/* Contenedor de cada punto de control */
+.checkpoint div {
+  border: 2px solid #888;
+  border-radius: 1em;
+  padding: 1.5em;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro para mayor contraste */
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7); /* Sombra sutil */
+}
+
+/* Texto dentro de los checkpoints */
+.checkpoint p {
+  line-height: 1.8; /* Aumento de interlineado */
+  color: #ccc;
+}
+
+/* Puntos indicadores de los checkpoints */
+.checkpoint::before {
+  content: "";
+  background: #0d71fc; /* Color destacado */
+  width: 3em;
+  height: 3px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+
+/* Círculos de los checkpoints */
+.checkpoint div::before {
+  content: "";
+  background: #fff;
+  box-shadow: 0 0 1em #0d71fc;
+  width: 1.2em; /* Círculo más grande */
+  height: 1.2em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  z-index: 4;
+}
+
+/* Puntos de control impares */
+.checkpoint:nth-child(odd) {
+  border-left: 3px solid #888;
+  padding-left: 3em;
+  transform: translateX(17em);
+}
+
+.checkpoint:nth-child(odd)::before {
+  left: 0;
+}
+
+.checkpoint:nth-child(odd) div::before {
+  left: 0;
+}
+
+/* Puntos de control pares */
+.checkpoint:nth-child(even) {
+  border-right: 3px solid #888;
+  padding-right: 3em;
+  transform: translateX(-17em);
+}
+
+.checkpoint:nth-child(even)::before {
+  right: 0;
+}
+
+.checkpoint:nth-child(even) div::before {
+  right: -0;
+}
+
+/* Estilo para las imágenes dentro de los checkpoints */
+.checkpoint img {
+  width: 350px; /* Ajusta el ancho de la imagen */
+  max-width: 70%; /* Para que no exceda el ancho del contenedor */
+  height: auto; /* Mantiene la proporción original */
+  display: block;
+  margin: 1.5em auto; /* Centrado con más espacio entre imagen y texto */
+  border-radius: 12px; /* Bordes más redondeados */
+  z-index: 2;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Sombra sutil */
+}

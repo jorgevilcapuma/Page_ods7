@@ -1,0 +1,46 @@
+body {
+    font-family: 'Roboto', sans-serif; /* Fuente principal */
+}
+
+.nav-button {
+    padding: 1rem 2rem; /* Aumenta el tamaño del padding para hacer el botón más grande */
+    background-color: #7c7776; /* Color de fondo */
+    color: rgb(252, 247, 247); /* Color del texto */
+    border-radius: 0.5rem; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: background-color 0.3s, transform 0.3s; /* Transición suave */
+    font-size: 1.25rem; /* Aumenta el tamaño de la fuente */
+    letter-spacing: 0.05em; /* Espaciado entre letras para mejorar la legibilidad */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse sobre el botón */
+    z-index: 10; /* Asegura que los botones estén por encima del contenido */
+}
+
+.nav-button:hover {
+    background-color: #104ad3; /* Color de fondo al pasar el cursor */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el cursor */
+}
+
+.card {
+    width: 100%; /* Ajusta el ancho para que ocupe todo el espacio disponible */
+    max-width: 450px; /* Limita el ancho máximo de la tarjeta */
+    background-color: #ffffff; /* Fondo blanco para buena visibilidad */
+    color: #090909; /* Color del texto oscuro para buena legibilidad */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 2px solid black; /* Línea negra alrededor del cuadro */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación de transición */
+    overflow: hidden; /* Evita que el contenido sobresalga */
+    margin: 1rem; /* Añade margen para separación entre tarjetas */
+}
+
+.card img {
+    height: 200px; /* Altura de la imagen dentro de la tarjeta */
+    object-fit: cover; /* Mantiene la proporción de la imagen */
+}
+
+/* Animación al pasar el cursor sobre la tarjeta */
+.card:hover {
+    transform: translateY(-5px); /* Eleva la tarjeta ligeramente al pasar el mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el mouse */
+}
+
+  

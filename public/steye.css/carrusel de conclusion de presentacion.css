@@ -1,0 +1,38 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Contenedor principal del carrusel */
+.carousel-container {
+    background-color: #ffffff; /* Color plomo */
+    padding: 16px;
+    border-radius: 8px;
+}
+
+/* Clase personalizada para la imagen del carrusel con borde negro */
+.carousel-container .carousel-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border: 2px solid black; /* Borde negro alrededor de la imagen */
+    border-radius: 4px; /* Opcional: bordes redondeados */
+}
+
+/* Estilo para aumentar el tamaño de la descripción dentro del carrusel */
+.carousel-container h1 {
+    font-size: 2.5rem; /* Aumenta el tamaño del título principal */
+    font-weight: bold;
+    color: #b61414; /* Color del título */
+}
+
+.carousel-container h2 {
+    font-size: 1.5rem; /* Aumenta el tamaño del subtítulo */
+    font-weight: bold;
+    color: #2a1adc; /* Color del subtítulo */
+}
+
+.carousel-container p {
+    font-size: 1.2rem; /* Aumenta el tamaño del texto del párrafo */
+    line-height: 1.6;
+    color: #140b0b; /* Color del texto */
+}

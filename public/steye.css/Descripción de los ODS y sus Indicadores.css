@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600&display=swap');
+
+/* Estilo base */
+* {
+    font-family: 'Nunito', sans-serif;
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+    outline: none; 
+    border: none;
+    text-decoration: none;
+    transition: all 0.2s linear;
+    text-transform: capitalize;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+    animation: slideDown 1s ease-in-out; /* Animación de entrada */
+}
+
+/* Título principal */
+.container .title {
+    font-size: 2.5rem;
+    color: #444;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Contenedor de productos */
+.container .products-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Seis columnas */
+    gap: 1rem;
+}
+
+
+/* Producto individual */
+.container .products-container .product {
+    text-align: left;
+    padding: 1rem;
+    background: #f9f9f9; /* Color de fondo más claro */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+    border: 0.1rem solid #e1e1e1; /* Borde gris claro */
+    animation: bounce 0.5s ease forwards; /* Agregar animación de rebote */
+}
+
+/* Efecto hover en productos */
+.container .products-container .product:hover {
+    transform: translateY(-5px); /* Efecto de desplazamiento hacia arriba más sutil */
+    box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.2); /* Sombra expansiva */
+}
+
+/* Estilo de imagen en productos */
+.container .products-container .product img {
+    height: auto;
+    width: 130%;
+    display: block;
+    margin: 0 auto; /* Centrar imagen */
+    transition: transform 0.3s ease; /* Transición suave para zoom */
+    border-radius: 5px; /* Bordes redondeados en la imagen */
+}
+
+/* Efecto hover en imágenes */
+.container .products-container .product:hover img {
+    transform: scale(1.07); /* Efecto de zoom en la imagen */
+}
+
+/* Título y precio del producto */
+.container .products-container .product h3 {
+    padding: 0.5rem 0;
+    font-size: 1.8rem; /* Ajustar tamaño del título */
+    color: #333; /* Color más oscuro para el título */
+}
+
+.container .products-container .product:hover h3 {
+    color: #27ae60; /* Cambiar color al hacer hover */
+}
+
+.container .products-container .product .price {
+    font-size: 1.6rem; /* Ajustar tamaño del precio */
+    color: #27ae60; /* Color verde para el precio */
+}
+
+/* Vista previa de productos */
+.products-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center; /* Centrar contenido */
+}
+
+/* Cuadro de vista previa */
+.products-preview .preview {
+    display: none;
+    padding: 1rem; /* Ajustar padding para un diseño más compacto */
+    text-align: center;
+    background: #fff;
+    position: relative;
+    margin: 2rem auto; /* Centrar cuadro */
+    width: 40rem; /* Ajustar ancho */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Activar vista previa */
+.products-preview .preview.active {
+    display: inline-block;
+    animation: fadeIn 0.6s ease-in-out; /* Animación de entrada */
+}
+
+/* Imagen en la vista previa */
+.products-preview .preview img {
+    height: 19rem; /* Mantener altura de la imagen ajustada */
+    width: 80%; /* Ajusta el ancho de la imagen */
+    display: block; /* Cambiar a bloque para centrar */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+
+/* Icono de cerrar */
+.products-preview .preview .fa-times {
+    position: absolute;
+    top: 0.5rem; /* Ajustar posición */
+    right: 0.7rem;
+    cursor: pointer;
+    color: #444;
+    font-size: 2rem; /* Reducir tamaño del ícono de cerrar */
+}
+
+/* Título y detalles de la vista previa */
+.products-preview .preview h3 {
+    font-size: 1.2rem; /* Ajustar tamaño del título */
+    color: #444;
+    padding: 0.5rem 0;
+}
+
+.products-preview .preview .stars {
+    padding: 0.4rem 0;
+    font-size: 1.5rem; /* Ajustar tamaño de estrellas */
+}
+
+.products-preview .preview .stars i {
+    color: #27ae60;
+}
+
+.products-preview .preview .stars span {
+    color: #999;
+}
+
+/* Descripción en la vista previa */
+.products-preview .preview p {
+    line-height: 1.5;
+    padding: 0.5rem 0;
+    font-size: 1.2rem; /* Reducir tamaño del texto */
+    color: #777;
+}
+
+/* Precio en la vista previa */
+.products-preview .preview .price {
+    padding: 0.5rem 0;
+    font-size: 1.6rem; /* Ajustar tamaño del precio */
+    color: #27ae60;
+}
+
+/* Botones en la vista previa */
+.products-preview .preview .buttons {
+    display: flex;
+    gap: 0.5rem; /* Espacio entre botones */
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.products-preview .preview .buttons a {
+    flex: 1 1 12rem; /* Ajustar ancho de botones */
+    padding: 0.5rem; /* Reducir padding de botones */
+    font-size: 1.2rem; /* Ajustar tamaño de texto de botones */
+    color: #444;
+    border: 0.1rem solid #444;
+    border-radius: 5px; /* Bordes redondeados en los botones */
+}
+
+/* Estilo para botón de añadir al carrito */
+.products-preview .preview .buttons a.cart {
+    background: #444;
+    color: #fff;
+}
+
+/* Efecto hover en botón de añadir al carrito */
+.products-preview .preview .buttons a.cart:hover {
+    background: #111;
+}
+
+/* Efecto hover en botón de compra */
+.products-preview .preview .buttons a.buy:hover {
+    background: #444;
+    color: #fff;
+}
+
+/* Ajustes para pantallas medianas */
+@media (max-width: 491px) {
+    html {
+        font-size: 50%; /* Ajustar tamaño de fuente */
+    }
+    .container .products-container {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
+    }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .container .products-container {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+    .container .products-container .product {
+        padding: 1.5rem; /* Reducir padding */
+    }
+    .container .products-container .product img {
+        width: 90%; /* Reducir tamaño de imágenes */
+    }
+    .container .products-container .product h3 {
+        font-size: 1.6rem; /* Reducir tamaño del texto del título */
+    }
+    .container .products-container .product .price {
+        font-size: 1.4rem; /* Reducir tamaño del precio */
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 250px) {
+    html {
+        font-size: 30%; /* Ajustar tamaño de fuente */
+    }
+    .container {
+        padding: 1rem; /* Reducir padding general */
+    }
+    .container .products-container .product {
+        padding: 0.5rem; /* Ajustar padding */
+    }
+    .container .products-container .product img {
+        width: 60%; /* Ajustar tamaño de imagen */
+    }
+    .container .products-container .product h3 {
+        font-size: 1.4rem; /* Ajustar tamaño del título */
+    }
+    .container .products-container .product .price {
+        font-size: 1.2rem; /* Ajustar tamaño del precio */
+    }
+}
+
+/* Animaciones */
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+

@@ -1,0 +1,223 @@
+.flip-card {
+    perspective: 1000px;
+    width: 20rem;
+    height: 16rem;
+    margin: 1rem;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 0.5rem;
+    top: 0;
+    left: 0;
+}
+
+.flip-card {
+    perspective: 1000px;
+    width: 30rem;
+    /* Aumenta el ancho para hacer las tarjetas más anchas */
+    height: 30rem;
+    /* Ajusta la altura para mantener la misma proporción */
+    margin: 1rem;
+}
+
+.flip-card-front,
+.flip-card-back {
+    width: 100%;
+    /* Se asegura de que ambas caras tengan el mismo ancho */
+    height: 100%;
+    /* Se asegura de que ambas caras tengan la misma altura */
+}
+
+.flip-card {
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card-front,
+.flip-card-back {
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #203a43;
+    /* Fondo oscuro para la parte trasera */
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-back h3 {
+    margin-top: 20px;
+}
+
+.flip-card-back p {
+    flex-grow: 1;
+    padding: 0 10px;
+}
+
+.flip-card-back .border-t {
+    margin-top: 15px;
+}
+
+
+.flip-card-back p {
+font-size: 1.2rem;
+/* Ajusta el tamaño de la fuente aquí */
+line-height: 1.5;
+/* Controla el espaciado entre líneas */
+margin: 0.5rem;
+/* Agrega espacio alrededor del texto */
+padding: 0.5rem;
+/* Ajusta el espacio interno del párrafo */
+text-align: center;
+/* Centra el texto */
+position: relative;
+}
+
+.flip-card-back p::after {
+content: "";
+position: absolute;
+bottom: -0.4rem; /* Ajusta la distancia debajo del párrafo */
+left: 0;
+width: 100%;
+height: 0.1rem; /* Ajusta el grosor de la línea */
+background-color: rgb(248, 248, 248);
+}
+
+
+.flip-card:nth-child(1) .flip-card-back p {
+    font-size: 1.1rem;
+    /* Tamaño de texto específico para la tarjeta 1 */
+}
+
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}
+
+.flip-card:nth-child(1) .flip-card-back {
+    background: linear-gradient(135deg, #E5243B, #E5243B);
+    /* ODS 1: Fin de la Pobreza (Rojo) */
+}
+
+.flip-card:nth-child(2) .flip-card-back {
+    background: linear-gradient(135deg, #DDA63A, #DDA63A);
+    /* ODS 2: Hambre Cero (Amarillo) */
+}
+
+.flip-card:nth-child(3) .flip-card-back {
+    background: linear-gradient(135deg, #4C9F38, #4C9F38);
+    /* ODS 3: Salud y Bienestar (Verde) */
+}
+
+.flip-card:nth-child(4) .flip-card-back {
+    background: linear-gradient(135deg, #C5192D, #C5192D);
+    /* ODS 4: Educación de Calidad (Rojo oscuro) */
+}
+
+.flip-card:nth-child(5) .flip-card-back {
+    background: linear-gradient(135deg, #FF3A21, #FF3A21);
+    /* ODS 5: Igualdad de Género (Rojo) */
+}
+
+.flip-card:nth-child(6) .flip-card-back {
+    background: linear-gradient(135deg, #26BDE2, #26BDE2);
+    /* ODS 6: Agua Limpia y Saneamiento (Azul claro) */
+}
+
+.flip-card:nth-child(7) .flip-card-back {
+    background: linear-gradient(135deg, #FCC30B, #FCC30B);
+    /* ODS 7: Energía Asequible y No Contaminante (Amarillo) */
+}
+
+.flip-card:nth-child(8) .flip-card-back {
+    background: linear-gradient(135deg, #A21942, #A21942);
+    /* ODS 8: Trabajo Decente y Crecimiento Económico (Rojo) */
+}
+
+.flip-card:nth-child(9) .flip-card-back {
+    background: linear-gradient(135deg, #FD6925, #FD6925);
+    /* ODS 9: Industria, Innovación e Infraestructura (Naranja) */
+}
+
+.flip-card:nth-child(10) .flip-card-back {
+    background: linear-gradient(135deg, #DD1367, #DD1367);
+    /* ODS 10: Reducción de las Desigualdades (Fucsia) */
+}
+
+.flip-card:nth-child(11) .flip-card-back {
+    background: linear-gradient(135deg, #FD9D24, #FD9D24);
+    /* ODS 11: Ciudades y Comunidades Sostenibles (Amarillo oscuro) */
+}
+
+.flip-card:nth-child(12) .flip-card-back {
+    background: linear-gradient(135deg, #BF8B2E, #BF8B2E);
+    /* ODS 12: Producción y Consumo Responsables (Amarillo marrón) */
+}
+
+.flip-card:nth-child(13) .flip-card-back {
+    background: linear-gradient(135deg, #3F7E44, #3F7E44);
+    /* ODS 13: Acción por el Clima (Verde oscuro) */
+}
+
+.flip-card:nth-child(14) .flip-card-back {
+    background: linear-gradient(135deg, #0A97D9, #0A97D9);
+    /* ODS 14: Vida Submarina (Azul) */
+}
+
+.flip-card:nth-child(15) .flip-card-back {
+    background: linear-gradient(135deg, #56C02B, #56C02B);
+    /* ODS 15: Vida de Ecosistemas Terrestres (Verde claro) */
+}
+
+.flip-card:nth-child(16) .flip-card-back {
+    background: linear-gradient(135deg, #00689D, #00689D);
+    /* ODS 16: Paz, Justicia e Instituciones Sólidas (Azul) */
+}
+
+.flip-card:nth-child(17) .flip-card-back {
+    background: linear-gradient(135deg, #19486A, #19486A);
+    /* ODS 17: Alianzas para Lograr los Objetivos (Azul oscuro) */
+}

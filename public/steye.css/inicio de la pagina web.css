@@ -1,0 +1,102 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    background-color: #000; /* Fondo negro para el encabezado */
+}
+
+h1 {
+    color: white; /* Color blanco para el título */
+}
+
+nav a {
+    color: rgb(183, 19, 19); /* Color blanco para los enlaces de navegación */
+}
+
+nav a:hover {
+    text-decoration: underline; /* Subrayar enlaces al pasar el ratón */
+}
+/* Estilos para los enlaces de navegación */
+nav a {
+    color: white; /* Color de texto blanco */
+    padding: 8px 16px; /* Espaciado para dar forma de cuadro */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de fondo */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+nav a:hover {
+    background-color: #FF0000; /* Fondo rojo al pasar el mouse */
+}
+
+.video-half-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 130%;
+    object-fit: cover; /* Ajustar el video para cubrir todo el espacio */
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.4); /* Overlay negro con opacidad */
+}
+
+.content {
+    z-index: 2; /* Asegura que el contenido esté por encima del video */
+    text-align: center; /* Centra el texto horizontalmente */
+    position: absolute; /* Permite posicionar el contenido dentro del contenedor del video */
+    top: 50%; /* Centra verticalmente el contenido en la mitad del video */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta la posición para centrar completamente */
+    color: white; /* Color del texto */
+    padding: 20px; /* Espaciado interno para dar un poco de separación alrededor del contenido */
+}
+
+h2 {
+    color: #4A5568; /* Color gris oscuro para los subtítulos */
+}
+
+section {
+    padding: 2rem; /* Espaciado general para las secciones */
+}
+
+.bg-gray-50 {
+    background-color: #F7FAFC; /* Color de fondo gris claro */
+}
+
+.text-blue-500 {
+    color: #3B82F6; /* Color azul para el texto */
+}
+
+.text-gray-700 {
+    color: #4A5568; /* Color gris para el texto */
+}
+
+.cta-button {
+    background-color: #3B82F6; /* Fondo azul para el botón */
+    color: rgb(247, 247, 247); /* Texto blanco para el botón */
+    padding: 0.75rem 2rem; /* Espaciado interno para el botón */
+    border-radius: 0.5rem; /* Bordes redondeados para el botón */
+}
+
+.cta-button:hover {
+    background-color: #2563EB; /* Cambia a un azul más oscuro al pasar el ratón */
+}
+
+.rounded-full {
+    border-radius: 9999px; /* Bordes completamente redondeados */
+}
+
+.spin-animation {
+    animation: spin 20s linear infinite; /* Animación de rotación infinita */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg); /* Inicia sin rotación */
+    }
+    100% {
+        transform: rotate(360deg); /* Completa una rotación */
+    }
+}

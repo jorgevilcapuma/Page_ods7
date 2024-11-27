@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea del tiempo de las ODS</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* Fondo general de la página principal */
+body {
+    background-color: #0f3369; /* Azul oscuro para el fondo de la página */
+    color: #ffffff; /* Texto blanco para mayor contraste */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo general para la línea de tiempo */
+.timeline {
+    margin: 5em auto;
+    position: relative;
+    background-color: #1565c0; /* Azul más claro */
+    width: 90%; /* Ampliado para mayor balance */
+    padding: 3em 0; /* Espacio añadido en la parte superior e inferior */
+    box-sizing: border-box;
+    border-radius: 1em; /* Bordes redondeados */
+    overflow: hidden; /* Para que no se salga contenido */
+}
+
+/* Títulos de la sección */
+.title h1 {
+    font-size: 3.5em;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5em;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.title p {
+    font-size: 1.4em;
+    color: #bbdefb; /* Azul claro */
+    text-align: center;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 2em;
+    font-weight: bold;
+}
+
+/* Estilos generales para los puntos de control */
+.checkpoint {
+    max-width: 35em;
+    padding: 2em;
+    position: relative;
+    margin: 2.5em auto;
+    z-index: 1;
+    transition: transform 0.3s ease-in-out;
+}
+
+.checkpoint:hover {
+    transform: scale(1.05);
+}
+
+/* Contenedor de cada punto de control */
+.checkpoint div {
+    border: 2px solid #64b5f6; /* Borde azul claro */
+    border-radius: 1em;
+    padding: 1.5em;
+    background-color: rgba(13, 71, 161, 0.9); /* Azul oscuro semitransparente */
+    color: #ffffff;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Texto dentro de los checkpoints */
+.checkpoint p {
+    line-height: 1.8;
+    color: #e3f2fd; /* Azul muy claro */
+}
+
+/* Puntos indicadores de los checkpoints */
+.checkpoint::before {
+    content: "";
+    background: #64b5f6;
+    width: 3em;
+    height: 3px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+}
+
+/* Círculos de los checkpoints */
+.checkpoint div::before {
+    content: "";
+    background: #bbdefb;
+    box-shadow: 0 0 1em #64b5f6;
+    width: 1.2em;
+    height: 1.2em;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    z-index: 4;
+}
+
+/* Puntos de control impares */
+.checkpoint:nth-child(odd) {
+    border-left: 3px solid #64b5f6;
+    padding-left: 3em;
+    transform: translateX(17em);
+}
+
+.checkpoint:nth-child(odd)::before {
+    left: 0;
+}
+
+.checkpoint:nth-child(odd) div::before {
+    left: 0;
+}
+
+/* Puntos de control pares */
+.checkpoint:nth-child(even) {
+    border-right: 3px solid #64b5f6;
+    padding-right: 3em;
+    transform: translateX(-17em);
+}
+
+.checkpoint:nth-child(even)::before {
+    right: 0;
+}
+
+.checkpoint:nth-child(even) div::before {
+    right: 0;
+}
+
+/* Estilo para las imágenes dentro de los checkpoints */
+.checkpoint img {
+    width: 350px;
+    max-width: 70%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+    border-radius: 12px;
+    z-index: 2;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+/* Estilo general para la línea de tiempo */
+.timeline {
+    margin: 5em auto;
+    position: relative;
+    background: url(https://images.unsplash.com/photo-1495125057152-b661c82b067c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed; /* Efecto de paralaje */
+    width: 80%; /* Cambiar a un 90% para mayor balance */
+    padding: 3em 0; /* Espacio añadido en la parte superior e inferior */
+    box-sizing: border-box;
+    border-radius: 1em; /* Bordes redondeados */
+    overflow: hidden; /* Para que no se salga contenido */
+  }
+  
+  /* Títulos de la sección */
+  .title h1 {
+    font-size: 3.5em; /* Un poco más pequeño para mejor presentación */
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5em;
+    text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7);
+  }
+  
+  .title p {
+    font-size: 1.4em;
+    color: #0d71fc;
+    text-align: center;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 2em;
+    font-weight: bold;
+  }
+  
+  /* Estilos generales para los puntos de control */
+  .checkpoint {
+    max-width: 35em;
+    padding: 2em;
+    position: relative;
+    margin: 2.5em auto; /* Centrado automático */
+    z-index: 1;
+    transition: transform 0.3s ease-in-out; /* Transición para hover */
+  }
+  
+  .checkpoint:hover {
+    transform: scale(1.05); /* Efecto hover para resaltar */
+  }
+  
+  /* Contenedor de cada punto de control */
+  .checkpoint div {
+    border: 2px solid #888;
+    border-radius: 1em;
+    padding: 1.5em;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro para mayor contraste */
+    color: #fff;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7); /* Sombra sutil */
+  }
+  
+  /* Texto dentro de los checkpoints */
+  .checkpoint p {
+    line-height: 1.8; /* Aumento de interlineado */
+    color: #ccc;
+  }
+  
+  /* Puntos indicadores de los checkpoints */
+  .checkpoint::before {
+    content: "";
+    background: #0d71fc; /* Color destacado */
+    width: 3em;
+    height: 3px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+  }
+  
+  /* Círculos de los checkpoints */
+  .checkpoint div::before {
+    content: "";
+    background: #fff;
+    box-shadow: 0 0 1em #0d71fc;
+    width: 1.2em; /* Círculo más grande */
+    height: 1.2em;
+    position: absolute;
+    top: 60%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    z-index: 4;
+  }
+  
+  /* Puntos de control impares */
+  .checkpoint:nth-child(odd) {
+    border-left: 3px solid #888;
+    padding-left: 3em;
+    transform: translateX(17em);
+  }
+  
+  .checkpoint:nth-child(odd)::before {
+    left: 0;
+  }
+  
+  .checkpoint:nth-child(odd) div::before {
+    left: 0;
+  }
+  
+  /* Puntos de control pares */
+  .checkpoint:nth-child(even) {
+    border-right: 3px solid #888;
+    padding-right: 3em;
+    transform: translateX(-17em);
+  }
+  
+  .checkpoint:nth-child(even)::before {
+    right: 0;
+  }
+  
+  .checkpoint:nth-child(even) div::before {
+    right: -0;
+  }
+  
+  /* Estilo para las imágenes dentro de los checkpoints */
+  .checkpoint img {
+    width: 350px; /* Ajusta el ancho de la imagen */
+    max-width: 70%; /* Para que no exceda el ancho del contenedor */
+    height: auto; /* Mantiene la proporción original */
+    display: block;
+    margin: 1.5em auto; /* Centrado con más espacio entre imagen y texto */
+    border-radius: 12px; /* Bordes más redondeados */
+    z-index: 2;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Sombra sutil */
+  }
+
+      </style>
+</head>
+<body class="bg-gray-900 text-white font-roboto">
+    <body>
+        <div class="title">
+            <h1>Línea del tiempo de las ODS</h1>
+            <p>Esta línea del tiempo refleja cómo los ODS han evolucionado desde sus raíces en las décadas anteriores hasta
+                convertirse en un marco integral de desarrollo <p>
+                <a href="/public/index.html/historia.html" target="_blank" class="text-red-500 hover:underline">Ver más detalles aquí</a>.
+
+            </p>
+        </div>
+                
+        <div class="timeline">
+            
+            <div class="timeline-container"> <!-- Contenedor exclusivo para la línea de tiempo -->
+                <div class="timeline">
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2>1945: Fundación de las Naciones Unidas (ONU)</h2>
+                    <img src="https://tse1.mm.bing.net/th?id=OIP.haIGfLUEd0oh6ys9IYzowgHaE8&pid=Api&P=0&h=180"
+                        alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>La creación de la ONU en 1945 fue el primer paso hacia el desarrollo de marcos internacionales para
+                        abordar problemas globales. Con el tiempo, estos esfuerzos culminaron en los Objetivos de Desarrollo
+                        del Milenio (ODM) en el año 2000 y, más tarde, los Objetivos de Desarrollo Sostenible (ODS) en 2015.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Checkpoint Day 2 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>1948:Declaración Universal de los Derechos Humanos (DUDH)</h2>
+                    <p>En 1948 , aunque todavía no existían los Objetivos de Desarrollo Sostenible (ODS) , se produjo un
+                        acontecimiento fundamental en la historia de los derechos humanos y el desarrollo global, que
+                        posteriormente influiría en la creación de marcos internacionales como los ODS.</p>
+                </div>
+            </div>
+    
+            <!-- Checkpoint Day 3-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>1960: Creación de la OCDE</h2>
+                    <p>En 1960 , se fundó la Organización para la Cooperación y el Desarrollo Económicos (OCDE) , que surgió
+                        de la anterior Organización para la Cooperación Económica Europea (OCEE). La OCDE se centró en
+                        promover políticas para mejorar el bienestar económico y social en todo el mundo, impulsando un
+                        enfoque global del desarrollo y la cooperación, que luego se reflejaría en iniciativas como los ODS.
+                    </p>
+                </div>
+            </div>
+    
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>1969:Programa de las Naciones Unidas para el Desarrollo (PNUD).</h2>
+                    <p>En 1969 , se presentaron dos hitos clave en el desarrollo global: el Informe Pearson , que
+                        recomendaba que los países donantes asignaran el 0,7% de su PIB a la ayuda internacional, y la
+                        creación del Programa de las Naciones Unidas para el Desarrollo (PNUD). , que se convirtió en una de
+                        las principales organizaciones para promover el desarrollo sostenible. Además, la ONU publicó su
+                        primer informe sobre el medio ambiente, sentando las bases para futuros marcos internacionales sobre
+                        desarrollo y sostenibilidad, como los ODS.
+                    </p>
+                </div>
+            </div>
+    
+            <!-- Checkpoint Day 5-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>1972:Conferencia de Estocolmo sobre el Medio Ambiente.</h2>
+                    <p>En 1972 , la Conferencia de Estocolmo fue un hito clave, marcando el primer gran encuentro
+                        internacional sobre el medio ambiente. Dio lugar a la creación del Programa de las Naciones Unidas
+                        para el Medio Ambiente (PNUMA) y puso el desarrollo sostenible en la agenda global, influyendo en
+                        futuras iniciativas como los ODS.</p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>1980: Estrategia Mundial para la Conservación</h2>
+                    <p>En 1980, la Unión Mundial para la Naturaleza (IUCN) adoptó la Estrategia Mundial para la
+                        Conservación, que impulsó la integración de la conservación ambiental en el desarrollo económico y
+                        social, sentando las bases para futuras políticas sobre sostenibilidad.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>1981: Informe Brundtland</h2>
+                    <p>En 1981, Gro Harlem Brundtland, presidenta de la Comisión Mundial sobre el Medio Ambiente y el
+                        Desarrollo de la ONU, comenzó a trabajar en lo que sería el influyente informe de 1987 que introdujo
+                        el concepto de desarrollo sostenible como un enfoque para abordar las necesidades del presente sin
+                        comprometer las generaciones futuras.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>1982: Informe de la Comisión Mundial sobre el Medio Ambiente y el Desarrollo.</h2>
+                    <p>En 1982, se destacó el Informe de la Comisión Mundial sobre el Medio Ambiente y el Desarrollo, que
+                        subrayó la importancia de la sostenibilidad y comenzó a preparar el terreno para el desarrollo del
+                        concepto de desarrollo sostenible. Aunque el informe completo se presentó en 1987, este año fue
+                        clave en la evolución de las ideas que más tarde influirían en los ODS.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>1983: La ONU establece la Comisión Mundial sobre el Medio Ambiente y el Desarrollo</h2>
+                    <p>1983: La ONU establece la Comisión Mundial sobre el Medio Ambiente y el Desarrollo bajo la
+                        presidencia de Gro Harlem Brundtland, con el objetivo de examinar la relación entre el desarrollo
+                        económico y la sostenibilidad.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>1984: La UNESCO lanza el Programa Hombre y Biosfera (MAB), promoviendo la conservación de
+                        ecosistemas y el desarrollo sostenible a nivel local.</h2>
+                    <p>En 1984, la UNESCO lanzó una fase clave del Programa Hombre y la Biosfera (MAB), cuyo objetivo era
+                        conciliar la conservación de los ecosistemas naturales con el desarrollo económico y social
+                        sostenible. Este programa se centró en crear un equilibrio entre las necesidades humanas y la
+                        protección del medio ambiente mediante la creación de reservas de biosfera.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>1996: Creación del Consejo Empresarial Mundial para el Desarrollo Sostenible (WBCSD).</h2>
+                    <p>En 1996, se fundó el Consejo Empresarial Mundial para el Desarrollo Sostenible (WBCSD), una coalición
+                        global de más de 200 empresas comprometidas con el desarrollo sostenible. El WBCSD promueve
+                        prácticas empresariales sostenibles, centrándose en la responsabilidad social, la eficiencia
+                        energética y el respeto por los recursos naturales.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2000: Objetivos de Desarrollo del Milenio (ODM).</h2>
+                    <p>En el año 2000, durante la Cumbre del Milenio de las Naciones Unidas, se establecieron los Objetivos
+                        de Desarrollo del Milenio (ODM), una serie de 8 objetivos centrados en erradicar la pobreza extrema,
+                        mejorar la salud, la educación y promover la sostenibilidad ambiental para el año 2015. Estos
+                        objetivos sentaron las bases para los futuros Objetivos de Desarrollo Sostenible (ODS) en 2015.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2001: Informe del Panel Intergubernamental sobre el Cambio Climático (IPCC).</h2>
+                    <p>En 2001, el IPCC publicó un nuevo informe de evaluación sobre el cambio climático, subrayando el
+                        impacto humano en el calentamiento global y la necesidad urgente de reducir las emisiones de gases
+                        de efecto invernadero. Este informe reforzó la importancia de las políticas internacionales para
+                        mitigar el cambio climático, un componente central de los ODS.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2002: Cumbre Mundial sobre el Desarrollo Sostenible (Cumbre de Johannesburgo).</h2>
+                    <p>En 2002, tuvo lugar la Cumbre Mundial sobre el Desarrollo Sostenible en Johannesburgo, Sudáfrica.
+                        Esta cumbre evaluó los avances desde la Cumbre de la Tierra de 1992 y reafirmó el compromiso mundial
+                        con el desarrollo sostenible. La cumbre resultó en el Plan de Implementación de Johannesburgo, que
+                        impulsó medidas para promover la sostenibilidad en la lucha contra la pobreza y la protección
+                        ambiental.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2004: Iniciativa de Energía Sostenible para Todos.</h2>
+                    <p>En 2004, la ONU lanzó la iniciativa Energía Sostenible para Todos, que se centró en garantizar el
+                        acceso universal a energía asequible y limpia, mejorar la eficiencia energética y aumentar el uso de
+                        energías renovables. Esta iniciativa fue precursora del ODS 7 sobre energía asequible y no
+                        contaminante.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2005: Protocolo de Kioto entra en vigor.</h2>
+                    <p>En 2005, el Protocolo de Kioto sobre el cambio climático entró en vigor. Este acuerdo internacional
+                        obligaba a los países desarrollados a reducir sus emisiones de gases de efecto invernadero. El
+                        Protocolo marcó un importante paso en los esfuerzos globales para abordar el cambio climático, que
+                        luego se reflejaría en el ODS 13: Acción por el clima.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2007: Informe del IPCC y Premio Nobel de la Paz.</h2>
+                    <p>En 2007, el Panel Intergubernamental sobre el Cambio Climático (IPCC) publicó su Cuarto Informe de
+                        Evaluación, reafirmando el consenso científico sobre el calentamiento global y su relación con las
+                        actividades humanas. Ese mismo año, el IPCC y el ex vicepresidente de EE. UU., Al Gore, recibieron
+                        el Premio Nobel de la Paz por su labor en la sensibilización sobre el cambio climático, destacando
+                        la importancia del desarrollo sostenible.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2010: Año Internacional de la Biodiversidad.</h2>
+                    <p>En 2010, la ONU declaró el Año Internacional de la Biodiversidad para resaltar la necesidad de
+                        proteger la diversidad biológica del planeta, crucial para el equilibrio de los ecosistemas y el
+                        bienestar humano. Esto subrayó la importancia de la biodiversidad en los futuros ODS, especialmente
+                        en los ODS 14 (Vida submarina) y ODS 15 (Vida de ecosistemas terrestres).
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2012: Conferencia de Río+20.</h2>
+                    <p>En 2012, tuvo lugar la Conferencia de las Naciones Unidas sobre el Desarrollo Sostenible (Río+20) en
+                        Río de Janeiro, Brasil. Esta conferencia fue un hito crucial que llevó al desarrollo de los
+                        Objetivos de Desarrollo Sostenible (ODS). El documento final, titulado "El futuro que queremos",
+                        reafirmó el compromiso global con el desarrollo sostenible y lanzó el proceso formal para definir
+                        los ODS, que se basarían en los Objetivos de Desarrollo del Milenio (ODM).
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2015:Adopción de los Objetivos de Desarrollo Sostenible (ODS).</h2>
+                    <p>En 2015, la Asamblea General de las Naciones Unidas adoptó formalmente los 17 Objetivos de Desarrollo
+                        Sostenible (ODS) como parte de la Agenda 2030 para el Desarrollo Sostenible. Los ODS abarcan áreas
+                        clave como la erradicación de la pobreza, la educación, la igualdad de género, el cambio climático y
+                        la protección de los ecosistemas, con el objetivo de transformar el mundo en un lugar más
+                        equitativo, justo y sostenible para to
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2016: Implementación de los ODS.</h2>
+                    <p>En 2016, comenzó la implementación oficial de los Objetivos de Desarrollo Sostenible (ODS), tras su
+                        adopción en 2015. Los países miembros de la ONU iniciaron esfuerzos para integrar los ODS en sus
+                        políticas nacionales y estrategias de desarrollo, con un enfoque en el seguimiento de avances y la
+                        movilización de recursos. Este año también se lanzó el Informe Global sobre los ODS, que proporcionó
+                        una línea de base para medir el progreso hacia las metas de 2030.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2018: Primer Informe de Progreso sobre los ODS.</h2>
+                    <p>En 2018, la ONU presentó el primer Informe de Progreso sobre los ODS, destacando tanto los avances
+                        como los desafíos pendientes. Aunque algunos objetivos mostraron progreso, como el acceso a la
+                        electricidad y la reducción de la pobreza extrema, se señaló que muchos países seguían enfrentando
+                        dificultades, especialmente en áreas como el cambio climático, la desigualdad de género y la
+                        protección de los ecosistemas.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2021: Impacto de la pandemia y recuperación sostenible.</h2>
+                    <p>En 2021, el mundo continuó enfrentando los impactos de la pandemia de COVID-19, lo que ralentizó el
+                        progreso hacia los ODS en áreas como la salud, la educación y la economía. La Agenda 2030 se vio
+                        comprometida por el retroceso en varios objetivos, pero también surgieron oportunidades para una
+                        recuperación verde y sostenible. En este año, los países comenzaron a enfocar sus planes de
+                        recuperación en torno a la resiliencia climática y el crecimiento inclusivo, impulsando la
+                        importancia de los ODS en la reconstrucción pospandemia.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2022: Llamado a la aceleración de los ODS.</h2>
+                    <p>En 2022, la ONU emitió un llamado urgente para acelerar el progreso hacia los ODS, destacando que
+                        solo quedaban ocho años para cumplir con la Agenda 2030. Se subrayó la necesidad de esfuerzos
+                        globales más coordinados, incluyendo financiamiento adecuado, innovación tecnológica y una
+                        cooperación internacional más sólida para superar los desafíos pendientes, como la crisis climática
+                        y la desigualdad.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2>2022-2030: Década de Acción para los ODS</h2>
+                    <p>La Década de Acción para los ODS (2022-2030) es un llamado global para acelerar el progreso hacia los
+                        Objetivos de Desarrollo Sostenible. En este período, la ONU y sus aliados buscan movilizar recursos,
+                        fomentar soluciones tecnológicas y fortalecer alianzas internacionales. El objetivo es cumplir con
+                        las metas de los ODS para erradicar la pobreza, combatir el cambio climático y promover la igualdad
+                        antes de 2030.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS1: Fin de la pobreza</h2>
+                    <img src="https://th.bing.com/th/id/OIP.L79OgSFmkEQyjjUy-NqbogHaEL?w=333&h=187&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Fin de la pobreza: Erradicar la pobreza en todas sus formas en todo el mundo.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS2:Hambre cero</h2>
+                    <img src="https://tse1.mm.bing.net/th?id=OIP.prZASYVlppufyIpimy2KZAHaEC&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Hambre cero: Poner fin al hambre, lograr la seguridad alimentaria y promover la agricultura
+                        sostenible.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS3:Salud y bienestar</h2>
+                    <img src="https://tse1.mm.bing.net/th?id=OIP.PhbM4GqZEM3VEkb0SfzahgHaEC&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Salud y bienestar: Garantizar una vida saludable y promover el bienestar para todos en todas las
+                        edades.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS4:Educación de calidad</h2>
+                    <img src="https://th.bing.com/th/id/OIP.VJTkJaX6krIEOvAfpKTS5AHaEC?w=304&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Educación de calidad: Asegurar una educación inclusiva y equitativa de calidad y promover
+                        oportunidades de aprendizaje para todos.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS5:Igualdad de género</h2>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Sustainable_Development_Goal-es-13.jpg/320px-Sustainable_Development_Goal-es-13.jpg"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Igualdad de género: Lograr la igualdad de género y empoderar a todas las mujeres y niñas.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2>ODS6:Agua limpia y saneamiento</h2>
+                    <img src="https://tse4.mm.bing.net/th?id=OIP.JggPVae0kcAjkGp0B2RjNQHaEC&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Agua limpia y saneamiento: Garantizar la disponibilidad de agua y su gestión sostenible y el
+                        saneamiento para todos.
+    
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS7:Energía asequible y no contaminante</h2>
+                    <img src="https://tse2.mm.bing.net/th?id=OIP.EP0QK0zzth3lwX9LpAWjYQHaEC&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Energía asequible y no contaminante: Asegurar el acceso a una energía asequible, fiable, sostenible y
+                        moderna.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2>ODS8:Trabajo decente y crecimiento económico</h2>
+                    <img src="https://tse2.mm.bing.net/th?id=OIP.ddS5YJuX_9QwKEYZkzpBnQAAAA&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Trabajo decente y crecimiento económico: Promover el crecimiento económico inclusivo y sostenido, el
+                        empleo pleno y productivo.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS9:Industria innovación e infraestructura</h2>
+                    <img src="https://tse2.mm.bing.net/th?id=OIP.qErNGh4_jDC7EvkskjBqHAHaEK&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Industria, innovación e infraestructura: Construir infraestructuras resilientes, promover la
+                        industrialización sostenible y fomentar la innovación.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS10:Reducción de las desigualdades</h2>
+                    <img src="https://tse1.mm.bing.net/th?id=OIP.jMMgsN6aO84qZDJjkl_bQAHaEC&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Reducción de las desigualdades: Reducir la desigualdad dentro y entre los países.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS11:Ciudades y comunidades sostenibles</h2>
+                    <img src="https://tse3.mm.bing.net/th?id=OIP.wLCRLegfTv5YSTDxxjtlsAHaEC&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Ciudades y comunidades sostenibles: Lograr que las ciudades y los asentamientos humanos sean
+                        inclusivos, seguros, resilientes y sostenibles.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS12:Producción y consumo responsables</h2>
+                    <img src="https://th.bing.com/th/id/OIP.JhUi3GmYVQ2QXhtwfqHAEwHaD4?w=312&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Producción y consumo responsables: Garantizar patrones de consumo y producción sostenibles.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint">
+                <div>
+                    <h2> ODS13:Acción por el clima</h2>
+                    <img src="https://tse3.mm.bing.net/th?id=OIP.6W3gFII05V3nh0t3EEs56AHaFj&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Acción por el clima: Adoptar medidas urgentes para combatir el cambio climático y sus efectos.
+    
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS14:Vida submarina</h2>
+                    <img src="https://th.bing.com/th/id/R.b1576eaef901f4dbbf5c7de52cb3313a?rik=%2br%2bNGQ0rDarcnQ&pid=ImgRaw&r=0"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Vida submarina: Conservar y utilizar sosteniblemente los océanos, los mares y los recursos marinos.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS15:Vida de ecosistemas terrestres</h2>
+                    <img src="https://tse2.mm.bing.net/th?id=OIP.DfaHMkmf_g4Gqfbm6Eb8SgHaEC&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Vida de ecosistemas terrestres: Proteger, restaurar y promover el uso sostenible de los ecosistemas
+                        terrestres.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2>ODS16:Paz justicia e instituciones sólidas</h2>
+                    <img src="https://tse3.mm.bing.net/th?id=OIP.CUs6dWzJFNDExlYvNj2XlQHaEC&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Paz, justicia e instituciones sólidas: Promover sociedades pacíficas e inclusivas y fortalecer las
+                        instituciones.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> ODS17:Alianzas para lograr los objetivos</h2>
+                    <img src="https://tse3.mm.bing.net/th?id=OIP.8YrsT3jbLOfs7fiJOkyI1gHaEK&pid=Api&P=0&h=180"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Alianzas para lograr los objetivos: Revitalizar la alianza mundial para el desarrollo sostenible.
+                    </p>
+                </div>
+            </div>
+            <!-- Checkpoint Day 4-6 -->
+            <div class="checkpoint aos aos-fade-in" data-aos-duration="1000">
+                <div>
+                    <h2> Objetivos y metas de desarrollo sostenible Desarrollo</h2>
+                    <img src="https://img.genially.com/66f34191d0d8a200154ad08a/d888cb97-8540-42aa-88f5-73af1d069e0b.png"
+                    alt="Helsinki, Finlandia" width="300" data-aos="flip-left" data-aos-duration="1500">
+                    <p>Los ODS son una hoja de ruta global para transformar el mundo en un lugar más justo, equitativo y
+                        sostenible para las generaciones futuras.
+                    </p>
+                </div>
+                
+            </div>
+            <script src="/public/scrips.js/despliege vuelve todo para arriba.js"></script>
+            <section></section>
+            <div>
+            <!-- Puedes agregar más puntos con animaciones similares -->
+        </div>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+    </body>
+    
+</body>
+</html>
+
+
+

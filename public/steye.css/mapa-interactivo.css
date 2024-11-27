@@ -1,0 +1,245 @@
+  /* Configuración de la fuente principal */
+
+  .country-info a {
+    color: #FFEB3B;
+    text-decoration: none;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.country-info .country-name {
+    font-weight: bold;
+}
+
+.country-image {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Carrusel de ODS */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.ods-list {
+    display: flex;
+    animation: scroll 20s linear infinite;
+    padding: 10px 0;
+    gap: 20px; /* Espacio entre las imágenes */
+}
+
+.ods-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ods-item img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.ods-item:hover {
+    border-color: #ff9800;
+    transform: scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ods-item:hover img {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Controles del Carrusel */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-control.left {
+    left: 10px;
+}
+
+.carousel-control.right {
+    right: 10px;
+}
+
+/* Diseño Responsivo */
+@media (max-width: 768px) {
+    .ods-item {
+        width: 170px;
+        height: 200px;
+        padding: 20px;
+    }
+
+    .ods-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .ods-info {
+        font-size: 1.2em;
+    }
+}
+
+/* Botón de Reset del Mapa */
+#reset-map {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 900;
+    padding: 15px 20px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+#reset-map:hover {
+    background-color: #1b18c2;
+}
+
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #1976d2;
+    color: white;
+    font-size: 2.5em;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+    border-bottom: 4px solid #090495;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Información de ODS */
+.ods-info {
+    text-align: center;
+    margin: 20px 10px;
+    font-size: 1.3em;
+    color: #444;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+
+/* Mapa */
+#map {
+    width: 100%;
+    height: 75vh;
+    border-top: 3px solid #4CAF50;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 20px 20px;
+}
+
+/* Información de País */
+.country-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+}
+
+.country-info a {
+    color: #FFD700; /* Color amarillo dorado */
+    text-decoration: none;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Efecto de transición para el color */
+}
+
+.country-info a:hover {
+    color: hsl(61, 100%, 52%); /* Cambio de color al pasar el ratón (tomate) */
+}
+
+.country-info .country-name {
+    font-weight: bold;
+    font-size: 1.2rem; /* Tamaño de fuente un poco mayor */
+    color: #333; /* Color de texto más oscuro para resaltar el nombre */
+}
+
+
+.country-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Carrusel de ODS */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 40px 0;
+}
+
+/* Estilos para la lista de ODS */
+.ods-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.ods-item {
+    text-align: center;
+    cursor: pointer;
+}
+
+.ods-item img {
+    width: 95px;
+    height: 95px;
+}
+
+/* Botón de Reset del Mapa */
+#reset-map {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    padding: 15px 20px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+#reset-map:hover {
+    background-color: #1b18c2;
+}
+
+
+
+
+
+
+

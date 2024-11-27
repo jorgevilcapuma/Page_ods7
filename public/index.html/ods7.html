@@ -1,0 +1,1433 @@
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <link href="https://sinia.minam.gob.pe/portal/wp-content/plugins/esam/assets/images/ods/header-link-icon-ods.png"
+        rel="icon" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <title>
+        ODS - Team 19
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    <link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet" />
+    <style>
+        nav a,
+        #mobile-menu a {
+            transition: background-color 0.3s ease;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            line-height: 1.5;
+            font-size: 1rem;
+        }
+
+        nav a:hover,
+        #mobile-menu a:hover,
+        nav a.active,
+        #mobile-menu a.active {
+            background-color: #FF0000;
+            color: #FFFFFF;
+        }
+
+        .carousel {
+            position: relative;
+        }
+
+        .carousel-items {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+       
+
+        .title-left {
+            text-align: left;
+        }
+
+        .title-left .line {
+            display: block;
+            width: 50px;
+            height: 5px;
+            background-color: #17B6D2;
+            margin-bottom: 10px;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .wrapper .image {
+            flex: 1;
+            max-width: 50%;
+            padding: 20px;
+        }
+
+        .wrapper .text {
+            flex: 1;
+            max-width: 50%;
+            padding: 20px;
+        }
+
+        .wrapper .text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .wrapper .text p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #000;
+            min-width: 10rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #FF0000;
+        }
+    </style>
+</head>
+
+<header class="w-full bg-black">
+    <nav class="flex justify-between items-center p-6">
+        <div class="text-white text-2xl font-bold flex items-center space-x-4">
+            <img alt="Logotipo"
+                src="https://storage.googleapis.com/a1aa/image/F8DfTHfNV4lylUC825Uuzm6fuRcRtQXWcUd07V0biTrtcCmnA.jpg"
+                style="height: 4rem; width: 7rem;" />
+            <span class="small-text" style="font-size: 14px;">
+                ENERGÍA ASEQUIBLE Y NO CONTAMINANTE
+            </span>
+        </div>
+        <div class="hidden lg:flex space-x-6" id="nav-menu">
+            <a class="text-white hover:underline px-6" href="/index.html" onclick="setActive(this)"
+                style="font-size: 16px;">
+                Inicio
+            </a>
+            <a class="text-white hover:underline px-6" href="/public/index.html/explore las ods.html"
+                onclick="setActive(this)" style="font-size: 16px;">
+                Explora tu ODS
+            </a>
+            <a class="text-white hover:underline px-6" href="/public/index.html/historia.html" onclick="setActive(this)"
+                style="font-size: 16px;">
+                Historia
+            </a>
+            <a class="text-white hover:underline px-6" href="/archivo.html/nosotros.html" onclick="setActive(this)"
+                style="font-size: 16px;">
+                Nosotros
+            </a>
+            <div class="relative dropdown mt-4">
+                <a class="text-white hover:underline px-6" href="/public/index.html/inportancia.html"
+                    style="font-size: 16px;">
+                    Importancia
+                </a>
+                <div class="absolute hidden dropdown-menu bg-black text-white mt-2 rounded-lg shadow-lg">
+                    <a class="block px-4 py-2 hover:bg-gray-800" href="/public/index.html/ods7.html"
+                        onclick="setActive(this)">
+                        ODS7
+                    </a>
+                   
+                </div>
+            </div>
+            <a class="text-white hover:underline px-6" href="/public/index.html/Contacto.html" onclick="setActive(this)"
+                style="font-size: 16px;">
+                Contacto
+            </a>
+        </div>
+        <div class="md:hidden">
+            <button aria-label="Abrir menú móvil" class="text-white focus:outline-none" id="menu-button">
+                <i class="fas fa-bars">
+                </i>
+            </button>
+        </div>
+    </nav>
+</header>
+<div class="hidden md:hidden bg-black text-white" id="mobile-menu">
+    <div class="flex flex-col items-center space-y-4 py-4">
+        <a class="hover:text-gray-400 px-6 py-2" href="/index.html" onclick="setActive(this)">
+            Inicio
+        </a>
+        <a class="hover:text-gray-400 px-6 py-2" href="/public/index.html/explore las ods.html" onclick="setActive(this)">
+            Explora tu ODS
+        </a>
+        <a class="hover:text-gray-400 px-6 py-2" href="/public/index.html/historia.html" onclick="setActive(this)">
+            Historia
+        </a>
+        <a class="hover:text-gray-400 px-6 py-2" href="" onclick="setActive(this)">
+            Nosotros
+        </a>
+        <div class="dropdown relative">
+            <a class="hover:text-gray-400 px-6 py-2" href="/public/index.html/inportancia.html">
+                Importancia
+            </a>
+            <div class="dropdown-menu absolute hidden bg-black text-white">
+                <a class="hover:text-gray-400 px-6 py-2" href="/public/index.html/ods7.html"
+                    onclick="setActive(this)">
+                    ODS7
+                </a>
+               
+            </div>
+        </div>
+        <a class="hover:text-gray-400 px-6 py-2" href="/public/index.html/Contacto.html" onclick="setActive(this)">
+            Contacto
+        </a>
+    </div>
+</div>
+<div class="relative">
+    <img alt="Imagen de fondo con un paisaje de energía renovable, mostrando paneles solares y turbinas eólicas bajo un cielo azul claro"
+        class="w-full h-screen object-cover" height="1000"
+        src="https://storage.googleapis.com/a1aa/image/mSkeqSdnHQxLdK04U77V9V47kn6ft6vHjE30pd5x9F3OmS0TA.jpg"
+        width="1920" />
+    <div class="absolute inset-0 flex items-center justify-center">
+        <h1 class="text-white text-4xl md:text-6xl font-bold">
+            Energía Asequible y No Contaminante
+        </h1>
+    </div>
+</div>
+<script>
+    document.getElementById('menu-button').addEventListener('click', function () {
+        var menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    });
+
+    function setActive(element) {
+        document.querySelectorAll('nav a, #mobile-menu a').forEach(function (link) {
+            link.classList.remove('active');
+        });
+        element.classList.add('active');
+    }
+</script>
+</body>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        17 Objetivos para Transformar Nuestro Mundo
+    </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        /* Estilos específicos para esta sección */
+        .mi-carousel-seccion .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        .mi-carousel-seccion .carousel img {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            width: 100%;
+            height: 30rem;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .mi-carousel-seccion .custom-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<!-- Contenedor principal -->
+<section class="mi-carousel-seccion max-w-full mx-auto p-10 bg-white rounded-lg shadow-lg custom-container">
+    <div class="flex flex-col md:flex-row items-center justify-between">
+        <!-- Texto de descripción -->
+        <div class="md:w-1/2 p-8">
+            <h1 class="text-3xl font-bold text-black mb-4">
+                Objetivos para Transformar Nuestro Mundo hacia un Futuro de Energía Limpia.
+            </h1>
+            <p class="text-black mb-4">
+                El Objetivo de Desarrollo Sostenible 7 busca garantizar el acceso a una energía asequible, segura,
+                sostenible y moderna para todos. Para lograrlo, es fundamental la participación tanto individual como
+                colectiva. A nivel personal, podemos adoptar medidas como el uso de bombillas LED, la reducción del
+                consumo energético y la preferencia por electrodomésticos eficientes. Además, es importante fomentar el
+                uso de energías renovables en nuestros hogares, como la instalación de paneles solares.
+            </p>
+            <p class="text-black mb-4">
+                Colectivamente, las comunidades pueden organizarse para promover proyectos de energía limpia, como
+                parques eólicos comunitarios o cooperativas solares. Las políticas públicas también juegan un papel
+                crucial, incentivando la inversión en infraestructuras sostenibles y la investigación en tecnologías
+                innovadoras. La colaboración entre gobiernos, empresas y organizaciones no gubernamentales es esencial
+                para crear un entorno propicio que facilite la transición hacia una energía no contaminante.
+            </p>
+            <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded transition duration-300">
+                Leer Biografía
+            </button>
+        </div>
+        <!-- Carrusel de imágenes -->
+        <div class="md:w-1/2 flex items-center justify-center">
+            <div class="carousel">
+                <img alt="Infografía sobre energía limpia" height="400"
+                    src="https://storage.googleapis.com/a1aa/image/VQVJ9BgAU1YtBhIUtLpvvN0d4XN3E27Ra56JGBVdcfC4oJ6JA.jpg"
+                    width="600" />
+                <img alt="Póster educativo sobre energías renovables" height="400"
+                    src="https://storage.googleapis.com/a1aa/image/FFRxRP2vZxKGNhkp0GyAffw8zUaVLMrxrrj9O0fCcPCWjmonA.jpg"
+                    width="600" />
+                <img alt="Guía detallada sobre eficiencia energética" height="400"
+                    src="https://storage.googleapis.com/a1aa/image/7cczQHpfJ13ibKNyfbAok3GX2Cff0Myum6gkcugp7ffkb0E9E.jpg"
+                    width="600" />
+                <img alt="Presentación interactiva sobre energía solar" height="400"
+                    src="https://storage.googleapis.com/a1aa/image/MwHNSOxIpKZMMZMesbBlldfi9ZXedZJvia9judjtdddajmonA.jpg"
+                    width="600" />
+                <img alt="Juego educativo sobre energías limpias" height="400"
+                    src="https://storage.googleapis.com/a1aa/image/KzPUrWcX7XqMGNHIU6WtOse7e5heG9r0vOwv1wlt8XuZjmonA.jpg"
+                    width="600" />
+            </div>
+        </div>
+    </div>
+</section>
+<html>
+
+<head>
+    <title>
+        La importancia de Energía Asequible y No Contaminante
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+
+<div class="max-w-4xl mx-auto p-8">
+    <h1 class="text-center text-orange-600 text-2xl font-bold mb-4">
+        La importancia de Energía Asequible y No Contaminante
+    </h1>
+    <p class="text-center text-gray-600 mb-8">
+        La energía asequible y no contaminante es esencial para el desarrollo sostenible y el bienestar de las
+        comunidades. Permite el acceso a servicios básicos, mejora la calidad de vida y contribuye a la protección del
+        medio ambiente.
+    </p>
+    <p class="text-center text-gray-600 mb-8">
+        Promover el uso de fuentes de energía renovable y tecnologías limpias es fundamental para reducir las emisiones
+        de gases de efecto invernadero y combatir el cambio climático.
+    </p>
+    <p class="text-center text-gray-600 mb-8">
+        Factores que podrían afectar la adopción de energía asequible y no contaminante:
+    </p>
+    <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2">
+            <h2 class="text-gray-800 text-lg font-bold mb-2">
+                Accesibilidad
+            </h2>
+            <p class="text-gray-600 mb-4">
+                Es crucial garantizar que todas las personas, independientemente de su ubicación geográfica o situación
+                económica, tengan acceso a fuentes de energía asequibles y sostenibles.
+            </p>
+            <h2 class="text-gray-800 text-lg font-bold mb-2">
+                Infraestructura
+            </h2>
+            <p class="text-gray-600 mb-4">
+                La inversión en infraestructura adecuada es necesaria para la generación, distribución y almacenamiento
+                de energía renovable. Esto incluye redes eléctricas inteligentes y sistemas de almacenamiento de
+                energía.
+            </p>
+            <h2 class="text-gray-800 text-lg font-bold mb-2">
+                Educación y Conciencia
+            </h2>
+            <p class="text-gray-600 mb-4">
+                La educación y la concienciación sobre los beneficios de la energía renovable y las prácticas
+                sostenibles son fundamentales para fomentar su adopción y uso responsable.
+            </p>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+            <img alt="Paneles solares y turbinas eólicas en un paisaje" class="rounded-lg shadow-lg" height="300"
+                src="https://storage.googleapis.com/a1aa/image/sh44SPzsfKR3CCsofzRRaV48LpxFWBBxLH2wEMYWHtXbUT0TA.jpg"
+                width="400" />
+        </div>
+    </div>
+</div>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Éxitos de las Energías No Contaminantes
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Sección de contenido -->
+    <div
+        class="flex flex-col md:flex-row items-center justify-between max-w-full mx-auto p-10 bg-white rounded-lg shadow-lg">
+        <!-- Texto de la izquierda -->
+        <div class="md:w-1/2 p-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">
+                Éxitos de las Energías No Contaminantes
+            </h1>
+            <p class="text-gray-600 mb-4">
+                Las energías no contaminantes han logrado avances significativos en la lucha contra el cambio climático
+                y la promoción de un desarrollo sostenible. Estas fuentes de energía, como la solar, eólica,
+                hidroeléctrica y geotérmica, han demostrado ser eficaces y viables en diversas partes del mundo.
+            </p>
+            <p class="text-gray-600 mb-4">
+                <strong> Energía Solar:</strong> La energía solar ha experimentado un crecimiento exponencial en las
+                últimas décadas. Países como Alemania, China y Estados Unidos han liderado la instalación de paneles
+                solares, reduciendo significativamente sus emisiones de carbono y generando empleo en el sector de las
+                energías renovables.
+            </p>
+            <p class="text-gray-600 mb-4">
+                <strong> Energía Eólica:</strong> La energía eólica también ha tenido un impacto notable. Dinamarca, por
+                ejemplo, genera casi el 50% de su electricidad a partir de parques eólicos. Este éxito ha inspirado a
+                otros países a invertir en esta tecnología limpia y eficiente.
+            </p>
+            <button class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded transition duration-300">
+                Leer Más
+            </button>
+        </div>
+        <!-- Imagen de la derecha -->
+        <div class="md:w-1/2 flex items-center justify-center">
+            <img alt="Paneles solares y turbinas eólicas en un paisaje"
+                class="w-3/4 h-[30rem] object-cover border border-gray-300 rounded-lg shadow-md" height="400"
+                src="https://storage.googleapis.com/a1aa/image/1rxDDkWcXI6ECdVe7MGSu2dgRQe1t3Lxlh0KCxA76CufpImnA.jpg"
+                width="600" />
+        </div>
+    </div>
+    <html>
+ <head>
+  <title>
+   Casos de éxito sobre energía no contaminante
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+        }
+  </style>
+ </head>
+ <body class="bg-white text-gray-800">
+  <div class="container mx-auto px-4 py-8">
+   <h1 class="text-center text-2xl font-bold text-red-600 mb-8">
+    Casos de éxito sobre energía no contaminante
+   </h1>
+   <div class="flex flex-col md:flex-row items-center mb-8">
+    <img alt="Dos ingenieros trabajando en múltiples monitores que muestran datos" class="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4" height="400" src="https://storage.googleapis.com/a1aa/image/PfjTKOpiZx1gdqoHHFhGIZOGr0OdnhA4cNfGZrl9FvOmqU0TA.jpg"   style="width: 600px; height: 500px;" />
+    <div class="md:w-1/2">
+     <h2 class="text-xl font-bold mb-2">
+      De la Idea a la Acción
+     </h2>
+     <p class="mb-2">
+      Este proyecto muestra cómo una idea innovadora puede convertirse en una solución práctica para la generación de energía limpia.
+     </p>
+     <p class="mb-2">
+      A través de la colaboración y el uso de tecnologías avanzadas, hemos logrado implementar sistemas eficientes y sostenibles.
+     </p>
+     <p class="mb-2">
+      La clave del éxito ha sido la integración de diferentes disciplinas y la constante búsqueda de mejoras.
+     </p>
+    </div>
+   </div>
+   <div class="flex flex-col md:flex-row items-center mb-8">
+    <div class="md:w-1/2 mb-4 md:mb-0 md:mr-4">
+     <h2 class="text-xl font-bold mb-2">
+      Reto tecnológico junto a Galp
+     </h2>
+     <p class="mb-2">
+      En colaboración con Galp, hemos superado desafíos tecnológicos para optimizar la producción de energía renovable.
+     </p>
+     <p class="mb-2">
+      Este proyecto ha permitido la implementación de nuevas tecnologías que mejoran la eficiencia y reducen el impacto ambiental.
+     </p>
+     <p class="mb-2">
+      La sinergia entre nuestros equipos ha sido fundamental para alcanzar los objetivos propuestos.
+     </p>
+    </div>
+    <img alt="Desafío tecnológico con Galp" class="w-full md:w-1/2" height="450" src="https://storage.googleapis.com/a1aa/image/0OyuZKYZX7aNDxDkSisLYemv9DlEnfkdXOVbjsqQfJlfqSRPB.jpg"  style="width: 600px; height: 500px;"/>
+   </div>
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+    <div class="relative">
+    </div>
+</div>
+</section>
+<html>
+    <html lang="es">
+        <head>
+         <meta charset="utf-8"/>
+         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+         <title>
+          Casos de Éxito en Energía No Contaminante
+         </title>
+         <script src="https://cdn.tailwindcss.com">
+         </script>
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+        </head>
+        <body class="bg-white font-roboto">
+         <div class="container mx-auto p-8">
+          <h1 class="text-center text-green-500 text-4xl font-bold mb-8">
+           Casos de Éxito en Energía No Contaminante
+          </h1>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+           <div class="relative bg-white shadow-lg rounded-lg overflow-hidden">
+            <img alt="Imagen de una instalación de paneles solares en un edificio corporativo" class="w-full" height="400" src="https://storage.googleapis.com/a1aa/image/mRWtPFPbtLZqC5Cqq8O1cnDPQpRKhIOxvbpOyvIrgc3A8F9E.jpg" width="600"/>
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 p-6">
+             <h2 class="text-lg font-bold mb-2 text-white">
+              Corporación SolarTech
+             </h2>
+             <p class="text-white">
+              SolarTech ha instalado más de 10,000 paneles solares en edificios corporativos, reduciendo significativamente la huella de carbono.
+             </p>
+            </div>
+           </div>
+           <div class="relative bg-white shadow-lg rounded-lg overflow-hidden">
+            <img alt="Imagen de un parque eólico en una zona rural" class="w-full" height="400" src="https://storage.googleapis.com/a1aa/image/RsZiSFrPxDJLPVwLLcugfThkQyrDyKFmvkRNL98U5XVC4L6JA.jpg" width="600"/>
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 p-6">
+             <h2 class="text-lg font-bold mb-2 text-white">
+              Parque Eólico Ventus
+             </h2>
+             <p class="text-white">
+              El Parque Eólico Ventus genera suficiente energía para abastecer a más de 50,000 hogares, utilizando la fuerza del viento.
+             </p>
+            </div>
+           </div>
+           <div class="relative bg-white shadow-lg rounded-lg overflow-hidden">
+            <img alt="Imagen de una planta hidroeléctrica en funcionamiento" class="w-full" height="400" src="https://storage.googleapis.com/a1aa/image/bsu3QA2pd7qFD1FF7DYRz1GfXvOcNdLTPm1kfImb7r8IwX0TA.jpg" width="600"/>
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 p-6">
+             <h2 class="text-lg font-bold mb-2 text-white">
+              Central Hidroeléctrica AquaPower
+             </h2>
+             <p class="text-white">
+              AquaPower ha implementado tecnologías avanzadas para maximizar la eficiencia en la generación de energía hidroeléctrica.
+             </p>
+            </div>
+           </div>
+           <div class="relative bg-white shadow-lg rounded-lg overflow-hidden">
+            <img alt="Imagen de una planta de energía geotérmica" class="w-full" height="400" src="https://storage.googleapis.com/a1aa/image/1fd5XDJVThyQL6CzOYtJOvbwUu9tsUK2YhudLXmLRF3A4L6JA.jpg" width="600"/>
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 p-6">
+             <h2 class="text-lg font-bold mb-2 text-white">
+              Geotermia Verde
+             </h2>
+             <p class="text-white">
+              Geotermia Verde ha desarrollado plantas de energía geotérmica que aprovechan el calor de la tierra para generar electricidad limpia.
+             </p>
+            </div>
+           </div>
+           <div class="relative bg-white shadow-lg rounded-lg overflow-hidden">
+            <img alt="Imagen de una planta de energía mareomotriz en la costa" class="w-full" height="400" src="https://storage.googleapis.com/a1aa/image/fj0LGqfB43mw7k8FvZDEtrDJRsoDMjn2ToZgy3kSWtLGwX0TA.jpg" width="600"/>
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 p-6">
+             <h2 class="text-lg font-bold mb-2 text-white">
+              Energía Mareomotriz Oceana
+             </h2>
+             <p class="text-white">
+              Oceana ha implementado una planta de energía mareomotriz que utiliza el movimiento de las mareas para generar electricidad sostenible.
+             </p>
+            </div>
+           </div>
+           <div class="relative bg-white shadow-lg rounded-lg overflow-hidden">
+            <img alt="Imagen de una planta de biogás en una zona rural" class="w-full" height="400" src="https://storage.googleapis.com/a1aa/image/EekILIxWrsyCVCOQt53sKLKdCtG8mvW4zhTuH2rF9kbA4L6JA.jpg" width="600"/>
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 p-6">
+             <h2 class="text-lg font-bold mb-2 text-white">
+              Biogás Rural
+             </h2>
+             <p class="text-white">
+              Biogás Rural ha desarrollado una planta que convierte residuos orgánicos en biogás, proporcionando una fuente de energía renovable para comunidades rurales.
+             </p>
+            </a>
+        </div>
+    </div>
+    </div>
+                     
+    
+    </div>
+    </section>
+    </button>
+    </div>
+    </div>
+    </div>
+    
+    <!-- Aqui termina  descricioon descion organisaciones-->
+    
+    <!-- aqyui  una descicion sobre vrecursos y hrraminetas
+    -->
+    <footer>
+        <html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   ¿Qué sabemos sobre la energía no contaminante?
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+   }
+   .carousel img {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 10px;
+   }
+  </style>
+ </head>
+ <body class="bg-gray-100">
+  <section class="mi-carousel-seccion max-w-full mx-auto p-10 bg-white rounded-lg shadow-lg custom-container">
+   <div class="flex flex-col md:flex-row items-center justify-between">
+    <!-- Carrusel de imágenes -->
+    <div class="md:w-1/2 flex items-center justify-center">
+     <div class="carousel">
+      <img alt="Paneles solares en un campo" height="400" src="https://storage.googleapis.com/a1aa/image/OOz8CRyPfE0sT6XmPIxeeJCfsiJMNDeUMudHgODBVf41nBG9E.jpg" width="600"/>
+      <img alt="Aerogeneradores en un paisaje montañoso" height="400" src="https://storage.googleapis.com/a1aa/image/taFvB3KkaXqPE9ylPSDeDj3PkcLhcxrtWleP8cpihEzkGY0TA.jpg" width="600"/>
+      <img alt="Planta hidroeléctrica en un río" height="400" src="https://storage.googleapis.com/a1aa/image/aZd6szRSNQIffUsINGFRqRfoXr3wtqp8YSZyihkgU2NBNwonA.jpg" width="600"/>
+      <img alt="Instalación geotérmica en un área volcánica" height="400" src="https://storage.googleapis.com/a1aa/image/nIXsW6YyuWbbNR1rkJqZpi4dfySU5o729GKIwovRlQeiGY0TA.jpg" width="600"/>
+      <img alt="Vehículos eléctricos cargando en una estación" height="400" src="https://storage.googleapis.com/a1aa/image/wKpHrrvNBJoZJljD5wWRF9lpdjnKZFmBDWq4dno4i6unBG9E.jpg" width="600"/>
+     </div>
+    </div>
+    <!-- Texto de descripción -->
+    <div class="md:w-1/2 p-8">
+     <h1 class="text-3xl font-bold text-black mb-4">
+      ¿Qué sabemos sobre la energía no contaminante?
+     </h1>
+     <p class="text-black mb-4">
+      La energía no contaminante es aquella que se produce sin emitir contaminantes al medio ambiente. Incluye fuentes como la solar, eólica, hidroeléctrica y geotérmica. Estas energías son renovables y ayudan a reducir la huella de carbono, contribuyendo a un planeta más limpio y sostenible.
+     </p>
+     <p class="text-black mb-4">
+      A nivel personal, podemos adoptar medidas como el uso de bombillas LED, la reducción del consumo energético y la preferencia por electrodomésticos eficientes. Además, es importante fomentar el uso de energías renovables en nuestros hogares, como la instalación de paneles solares.
+     </p>
+     <p class="text-black mb-4">
+      Colectivamente, las comunidades pueden organizarse para promover proyectos de energía limpia, como parques eólicos comunitarios o cooperativas solares. Las políticas públicas también juegan un papel crucial, incentivando la inversión en infraestructuras sostenibles y la investigación en tecnologías innovadoras. La colaboración entre gobiernos, empresas y organizaciones no gubernamentales es esencial para crear un entorno propicio que facilite la transición hacia una energía no contaminante.
+     </p>
+     <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded transition duration-300">
+      Leer Más
+     </button>
+    </div>
+   </div>
+  </section>
+  <html lang="es">
+    <head>
+     <meta charset="utf-8"/>
+     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+     <title>
+      ¿Qué sabemos sobre la energía no contaminante?
+     </title>
+     <script src="https://cdn.tailwindcss.com">
+     </script>
+  
+     <style>
+   
+           .info-box {
+               transition: opacity 0.3s ease;
+           }
+           .hidden-description p {
+               display: none;
+           }
+           .info-box:hover p {
+               display: block;
+           }
+     </style>
+    </head>
+    <body class="bg-white text-gray-800">
+     <div class="text-center py-10">
+      <h1 class="text-3xl font-bold text-green-600">
+       ¿Qué sabemos sobre la energía no contaminante?
+      </h1>
+      <p class="text-gray-600 mt-2">
+       Descubre cómo la energía no contaminante puede transformar nuestro mundo.
+      </p>
+     </div>
+     <div class="flex justify-center space-x-6 px-6 flex-wrap">
+      <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+       <img alt="Paneles solares en un campo" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/OOz8CRyPfE0sT6XmPIxeeJCfsiJMNDeUMudHgODBVf41nBG9E.jpg" width="600"/>
+       <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+        <div class="font-bold text-xl mb-2 text-blue-600">
+         Energía Solar
+        </div>
+        <p class="text-gray-700 text-base">
+         La energía solar es una fuente inagotable y limpia que puede ser utilizada para generar electricidad y calor.
+        </p>
+       </div>
+      </div>
+      <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+       <img alt="Aerogeneradores en un paisaje montañoso" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/taFvB3KkaXqPE9ylPSDeDj3PkcLhcxrtWleP8cpihEzkGY0TA.jpg" width="600"/>
+       <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+        <div class="font-bold text-xl mb-2 text-blue-600">
+         Energía Eólica
+        </div>
+        <p class="text-gray-700 text-base">
+         La energía eólica aprovecha la fuerza del viento para generar electricidad de manera limpia y sostenible.
+        </p>
+       </div>
+      </div>
+      <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+       <img alt="Planta hidroeléctrica en un río" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/aZd6szRSNQIffUsINGFRqRfoXr3wtqp8YSZyihkgU2NBNwonA.jpg" width="600"/>
+       <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+        <div class="font-bold text-xl mb-2 text-blue-600">
+         Energía Hidroeléctrica
+        </div>
+        <p class="text-gray-700 text-base">
+         La energía hidroeléctrica utiliza el agua en movimiento para generar electricidad sin emisiones contaminantes.
+        </p>
+       </div>
+      </div>
+      <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+       <img alt="Instalación geotérmica en un área volcánica" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/nIXsW6YyuWbbNR1rkJqZpi4dfySU5o729GKIwovRlQeiGY0TA.jpg" width="600"/>
+       <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+        <div class="font-bold text-xl mb-2 text-blue-600">
+         Energía Geotérmica
+        </div>
+        <p class="text-gray-700 text-base">
+         La energía geotérmica aprovecha el calor del interior de la Tierra para generar electricidad y calefacción.
+        </p>
+       </div>
+      </div>
+      <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+       <img alt="Vehículos eléctricos cargando en una estación" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/wKpHrrvNBJoZJljD5wWRF9lpdjnKZFmBDWq4dno4i6unBG9E.jpg" width="600"/>
+       <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+        <div class="font-bold text-xl mb-2 text-blue-600">
+         Movilidad Eléctrica
+        </div>
+        <p class="text-gray-700 text-base">
+         La movilidad eléctrica reduce las emisiones de gases contaminantes y mejora la calidad del aire en las ciudades.
+        </p>
+       </div>
+      </div>
+      <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+        <img alt="Planta hidroeléctrica en un río" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/XCencwZsBpQAf0AJ5OgXkxwTOtyNz09gfXWRoTsWWOPdfhRPB.jpg" width="600"/>
+        <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+         <div class="font-bold text-xl mb-2 text-blue-600">
+          Energía Hidroeléctrica
+         </div>
+         <p class="text-gray-700 text-base">
+          La energía hidroeléctrica utiliza el agua en movimiento para generar electricidad sin emisiones contaminantes.
+         </p>
+        </div>
+       </div>
+       <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+        <img alt="Instalación geotérmica en un área volcánica" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/w3IpGG6KIjpsKVQS1IlUbWq51kBbj39effSJjfLRy7ZSeDjeE.jpg" width="600"/>
+        <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+         <div class="font-bold text-xl mb-2 text-blue-600">
+          Energía Geotérmica
+         </div>
+         <p class="text-gray-700 text-base">
+          La energía geotérmica aprovecha el calor del interior de la Tierra para generar electricidad y calefacción.
+         </p>
+        </div>
+       </div>
+       <div class="relative max-w-sm rounded overflow-hidden shadow-lg mb-6">
+        <img alt="Vehículos eléctricos cargando en una estación" class="w-full cursor-pointer" height="400" src="https://storage.googleapis.com/a1aa/image/ZT0K272VzKLPApXejffoRn1vKX1gCwSDjusjEhlsdQ0TfhRPB.jpg" width="600"/>
+        <div class="absolute bottom-0 left-0 bg-white bg-opacity-100 w-4/5 p-4 info-box hidden-description">
+         <div class="font-bold text-xl mb-2 text-blue-600">
+          Movilidad Eléctrica
+         </div>
+         <p class="text-gray-700 text-base">
+          La movilidad eléctrica reduce las emisiones de gases contaminantes y mejora la calidad del aire en las ciudades.
+         </p>
+        </div>
+       </div>
+      
+    
+      </div>
+     </div>
+     <html lang="es">
+        <head>
+         <meta charset="utf-8"/>
+         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+         <title>
+          Objetivos de Sostenibilidad
+         </title>
+         <script src="https://cdn.tailwindcss.com">
+         </script>
+         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+         <style>
+          body {
+                   font-family: 'Roboto', sans-serif;
+               }
+               .carousel-button {
+                   transition: background-color 0.3s;
+               }
+               .carousel-button.active {
+                   background-color: #f97316; /* Tailwind orange-500 */
+                   color: white;
+               }
+               .content {
+                   display: none;
+               }
+               .content.active {
+                   display: block;
+               }
+         </style>
+        </head>
+        <body class="bg-white text-gray-800">
+         <div class="container mx-auto px-4 py-8">
+          <h1 class="text-center text-orange-600 text-2xl font-bold mb-8">
+           Objetivos de sostenibilidad
+          </h1>
+          <p class="text-center mb-8">
+           El modelo de sostenibilidad se materializa en distintos planos (globales y locales) con ambiciones, objetivos y 
+                   modelos para todas las sociedades en las cuales se lleva a cabo el modelo. Conoce los objetivos del Plan Global 
+                   de Sostenibilidad que reflejan nuestro compromiso con el desarrollo sostenible, la seguridad y los servicios 
+                   donde llevamos a cabo nuestras actividades.
+          </p>
+          <div class="flex justify-center mb-8">
+           <img alt="Diagrama de objetivos de sostenibilidad con íconos representando Cambio climático, Medio Ambiente, Operación segura, Ética y transparencia, Innovación y tecnología, y Personas" height="400" src="https://storage.googleapis.com/a1aa/image/vtEvRvJTHlbQEhBBddaYC3FQve0df8Oe7temO3TfGZvQBHjeE.jpg" width="600"/>
+          </div>
+          <h2 class="text-center text-orange-600 text-xl font-bold mb-4">
+           Cambio climático
+          </h2>
+          <p class="text-center mb-8">
+           Ser una compañía con cero emisiones netas en 2050, en línea con los objetivos establecidos en el Acuerdo de París.
+          </p>
+          <div class="flex justify-center space-x-4 mb-8">
+           <img alt="Icono representando el objetivo 1" class="w-32 h-32" height="128" src="https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-07.jpg" width="128"/>
+           <img alt="Icono representando el objetivo 2" class="w-32 h-32" height="128" src="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2015/09/S_SDG_Icons-01-09.jpg" width="128"/>
+           <img alt="Icono representando el objetivo 3" class="w-32 h-32" height="128" src="https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-11.jpg" width="128"/>
+           <img alt="Icono representando el objetivo 4" class="w-32 h-32" height="128" src="https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-13.jpg" width="128"/>
+           <img alt="Icono representando el objetivo 5" class="w-32 h-32" height="128" src="https://www.un.org/sustainabledevelopment/es/wp-content/uploads/sites/3/2016/01/S_SDG_Icons-01-17.jpg" width="128"/>
+          </div>
+          
+          <div class="flex justify-center space-x-4 mb-8">
+           <button class="carousel-button bg-gray-200 text-gray-800 py-4 px-6 rounded" onclick="showContent('content-2024', this)">
+            Objetivos 2024
+           </button>
+           <button class="carousel-button bg-gray-200 text-gray-800 py-4 px-6 rounded" onclick="showContent('content-2025', this)">
+            Objetivos 2025
+           </button>
+           <button class="carousel-button bg-gray-200 text-gray-800 py-4 px-6 rounded" onclick="showContent('content-2027', this)">
+            Objetivos 2027
+           </button>
+           <button class="carousel-button bg-gray-200 text-gray-800 py-4 px-6 rounded" onclick="showContent('content-2030', this)">
+            Objetivos 2030
+           </button>
+           <button class="carousel-button bg-gray-200 text-gray-800 py-4 px-6 rounded" onclick="showContent('content-2050', this)">
+            Objetivos 2050 alcanzados
+           </button>
+          </div>
+          <div class="flex justify-center">
+           <div class="content active text-left w-3/4" id="content-2024">
+            <ul class="list-disc list-inside space-y-2">
+             <li>
+              Presentar y validar con los accionistas cómo la asociación cubre la estrategia climática de Repsol durante la Junta General de Accionistas de 2024.
+             </li>
+             <li>
+              Aumentar las instalaciones flexibles de almacenamiento en la geografía nacional.
+             </li>
+             <li>
+              Instalar infraestructuras de recarga de acceso público, así como estaciones de servicio con energías renovables.
+             </li>
+            </ul>
+            <div class="grid grid-cols-2 gap-4 mt-4">
+             <img alt="Imagen de una instalación de almacenamiento flexible" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/hfyC0enerOPVxJljfaRaqAUl2BQuckwMrCTUtJnuB24dvoRPB.jpg" width="600"/>
+             <img alt="Imagen de una estación de recarga de vehículos eléctricos" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/lLkuT0M56eVCNCpsS3U1dnu7lBWE6HYymYdeVRDIE8O5La0TA.jpg" width="600"/>
+             <img alt="Imagen de una estación de servicio con energías renovables" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/USqHREEQ0abeZKKt6RpGRdKOUlyIoaP9xKWbZbNfDnAxLa0TA.jpg" width="600"/>
+             <img alt="Imagen de una reunión de accionistas" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/zUzMFniBy046IRKn1U8hMwdGBPUMG8WEwPy2sOaRzKuAjG9E.jpg" width="600"/>
+            </div>
+           </div>
+           <div class="content text-left w-3/4" id="content-2025">
+            <ul class="list-disc list-inside space-y-2">
+             <li>
+              Desarrollar proyectos de energía renovable en diferentes regiones del país.
+             </li>
+             <li>
+              Implementar tecnologías avanzadas para la reducción de emisiones de CO2.
+             </li>
+             <li>
+              Fomentar la investigación y desarrollo en energías limpias y sostenibles.
+             </li>
+            </ul>
+            <div class="grid grid-cols-2 gap-4 mt-4">
+             <img alt="Imagen de un proyecto de energía renovable" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/nAxrBY0XynqWNBTSticFfgTmgXzhvLGYN1oatBx6a0V5FN6JA.jpg" width="600"/>
+             <img alt="Imagen de una tecnología avanzada para la reducción de emisiones de CO2" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/pUejpd7dtvymIKpcgqktXhYhQQDc2IgQ0q29diwyGwF8FN6JA.jpg" width="600"/>
+             <img alt="Imagen de un laboratorio de investigación en energías limpias" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/O9lj4g3im1KLH5tc3uJzqKaT1OxBy4W6ctKjSzqfbTEFGN6JA.jpg" width="600"/>
+             <img alt="Imagen de una planta de energía renovable" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/GTZmxfer23qFoEJF902MbB40zURd8Fb0USEmljH3ceVqX0onA.jpg" width="600"/>
+            </div>
+           </div>
+           <div class="content text-left w-3/4" id="content-2027">
+            <ul class="list-disc list-inside space-y-2">
+             <li>
+              Ampliar la red de estaciones de carga para vehículos eléctricos.
+             </li>
+             <li>
+              Promover el uso de biocombustibles en el sector del transporte.
+             </li>
+             <li>
+              Establecer alianzas estratégicas con empresas tecnológicas para innovar en sostenibilidad.
+             </li>
+            </ul>
+            <div class="grid grid-cols-2 gap-4 mt-4">
+             <img alt="Imagen de una estación de carga para vehículos eléctricos" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/nZuC7YEkCrpRGpEA9pcgKmKLaxfdPrxxPVqfd0NfqUVMY0onA.jpg" width="600"/>
+             <img alt="Imagen de biocombustibles" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/FwHNqnXZbF6ICx2VBJyz9zOWMdcTmZHWnewtEGgCPgq9FN6JA.jpg" width="600"/>
+             <img alt="Imagen de una alianza estratégica con una empresa tecnológica" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/LvDRVKCKa24cJZ7q1eDLaX8JkfCJTyYYLbK4lwAxPgaIMa0TA.jpg" width="600"/>
+             <img alt="Imagen de un vehículo eléctrico cargando" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/l95m5VfGy33gfExeEr8UQdeGdVyh1NAKK1BAo7wjLrWedRjeE.jpg" width="600"/>
+            </div>
+           </div>
+           <div class="content text-left w-3/4" id="content-2030">
+            <ul class="list-disc list-inside space-y-2">
+             <li>
+              Lograr una reducción del 50% en las emisiones de gases de efecto invernadero.
+             </li>
+             <li>
+              Implementar programas de educación y concienciación ambiental en comunidades locales.
+             </li>
+             <li>
+              Desarrollar infraestructuras resilientes al cambio climático.
+             </li>
+            </ul>
+            <div class="grid grid-cols-2 gap-4 mt-4">
+             <img alt="Imagen de una reducción de emisiones de gases de efecto invernadero" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/Tf5V6kRIH50VFqmDkA2syJ1kJfaGDV0hl7bUubH4tv3tLa0TA.jpg" width="600"/>
+             <img alt="Imagen de un programa de educación ambiental" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/FUKIcNGJQRaBPZDlyyvNx9MZ7r58R3I09aFy8D0me0euLa0TA.jpg" width="600"/>
+             <img alt="Imagen de una infraestructura resiliente al cambio climático" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/lWJhdvhihHrTPN0cLye2mofvdQtlpDPtleZLK74sa0fNwoRPB.jpg" width="600"/>
+             <img alt="Imagen de una comunidad local participando en un programa ambiental" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/5d4UnA2n9E5oA1F5NYozMq45z5eFaLXhD22zsROu0COfLa0TA.jpg" width="600"/>
+            </div>
+           </div>
+           <div class="content text-left w-3/4" id="content-2050">
+            <ul class="list-disc list-inside space-y-2">
+             <li>
+              Alcanzar la neutralidad en carbono en todas las operaciones de la compañía.
+             </li>
+             <li>
+              Convertirse en un líder global en sostenibilidad y energías renovables.
+             </li>
+             <li>
+              Continuar innovando y adaptándose a los desafíos ambientales del futuro.
+             </li>
+            </ul>
+            <div class="grid grid-cols-2 gap-4 mt-4">
+             <img alt="Imagen de una operación de la compañía alcanzando la neutralidad en carbono" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/0n5o5rEOn5IZAlpfWm9tthktobftSZ5U079fcYJoXHvAY0onA.jpg" width="600"/>
+             <img alt="Imagen de una planta de energía renovable líder global" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/pyRtZWIuvso7NN8D462GaE9qcvnR4w2q0WYgklk4fzdeLa0TA.jpg" width="600"/>
+             <img alt="Imagen de una innovación tecnológica en sostenibilidad" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/B53jjQQwwmqPNhjDBkMyFJRlAJKLCT2AY7TPnRA0oaWBjG9E.jpg" width="600"/>
+             <img alt="Imagen de una operación de la compañía adaptándose a desafíos ambientales" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/NjsveKNtuepM70JGYk9Oa7ynZfc1e63GJxsdympdSQiQvoRPB.jpg" width="600"/>
+            </div>
+           </div>
+          </div>
+         </div>
+         <script>
+          function showContent(contentId, button) {
+                   // Hide all content divs
+                   document.querySelectorAll('.content').forEach(div => {
+                       div.classList.remove('active');
+                   });
+                   // Show the selected content div
+                   document.getElementById(contentId).classList.add('active');
+                   
+                   // Remove active class from all buttons
+                   document.querySelectorAll('.carousel-button').forEach(btn => {
+                       btn.classList.remove('active');
+                   });
+                   // Add active class to the clicked button
+                   button.classList.add('active');
+               }
+         </script>
+        
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   ¿Qué sabemos sobre la energía no contaminante?
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+        .carousel img {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+  </style>
+ </head>
+ <body class="bg-gray-100">
+  <section class="mi-carousel-seccion max-w-full mx-auto p-10 bg-white rounded-lg shadow-lg custom-container">
+   <div class="flex flex-col md:flex-row items-center justify-between">
+    <!-- Texto de descripción -->
+    <div class="md:w-1/2 p-8">
+     <h1 class="text-3xl font-bold text-black mb-4">
+      Realizar un correcto mantenimiento de tus placas solares
+     </h1>
+     <p class="text-black mb-4">
+      El mantenimiento adecuado de las placas solares es esencial para garantizar su eficiencia y prolongar su vida útil. Aquí te ofrecemos algunos consejos para mantener tus paneles solares en óptimas condiciones.
+     </p>
+     <p class="text-black mb-4">
+      1. Limpieza regular: La acumulación de polvo, hojas y otros residuos puede reducir la eficiencia de los paneles solares. Limpia tus paneles regularmente con agua y un paño suave. Evita el uso de detergentes abrasivos que puedan dañar la superficie.
+     </p>
+     <p class="text-black mb-4">
+      2. Inspección visual: Revisa periódicamente tus paneles solares para detectar posibles daños, como grietas o decoloración. Si encuentras algún problema, contacta a un profesional para su reparación.
+     </p>
+     <p class="text-black mb-4">
+      3. Monitoreo del rendimiento: Utiliza sistemas de monitoreo para verificar el rendimiento de tus paneles solares. Si notas una disminución en la producción de energía, podría ser un indicio de que los paneles necesitan mantenimiento.
+     </p>
+     <p class="text-black mb-4">
+      4. Revisión de conexiones: Asegúrate de que todas las conexiones eléctricas estén seguras y libres de corrosión. Las conexiones sueltas o corroídas pueden afectar el rendimiento de los paneles solares.
+     </p>
+     <p class="text-black mb-4">
+      5. Protección contra sombras: Asegúrate de que los paneles solares no estén sombreados por árboles, edificios u otros objetos. Las sombras pueden reducir significativamente la eficiencia de los paneles.
+     </p>
+     <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 transition duration-300 rounded">
+      Leer más
+     </button>
+    </div>
+    <!-- Carrusel de imágenes -->
+    <div class="md:w-1/2 flex items-center justify-center">
+     <div class="carousel">
+      <img alt="Paneles solares en un campo" height="400" src="https://storage.googleapis.com/a1aa/image/8PTSduodisb1EVfEsaYoaviKrkmEKA3T06m50Ymdevx8yb0TA.jpg" width="600"/>
+      <img alt="Paneles solares en un techo de una casa" height="400" src="https://storage.googleapis.com/a1aa/image/MsUImut7SQamHpOmsO8eLWRNOlcv1Hr3kLZ88gvM9qTfyb0TA.jpg" width="600"/>
+      <img alt="Paneles solares en una instalación industrial" height="400" src="https://storage.googleapis.com/a1aa/image/2I1VYPXGwWoyPlb01SBcIf4lxd0Y0y5IaMoE6OubPn3fyb0TA.jpg" width="600"/>
+      <img alt="Paneles solares en un área rural" height="400" src="https://storage.googleapis.com/a1aa/image/vRZefxDoGyjfjpti7UCYUo3MzR4P48BCRmN96GQBfvLOMvRPB.jpg" width="600"/>
+      <img alt="Paneles solares en un parque solar" height="400" src="https://storage.googleapis.com/a1aa/image/RbjrNX2i3MpoHJOeck102mP7a2B2sehEZbCR37V9vDWBzb0TA.jpg" width="600"/>
+     </div>
+    </div>
+   </div>
+<section>  <img 
+    src="/public/imagen/InfografíaPlacasSolaresDESKTOP (1).png"  alt="center"  style="display: block; margin: 0 auto;"/>
+</section>
+<html lang="es">
+ <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <style>
+   @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&family=Permanent+Marker&display=swap");
+
+
+body {
+ 
+  min-height: 100vh;
+  width: 100%;
+  background-color: rgb(14, 16, 26);
+ 
+}
+
+
+header h1 {
+  font-family: "Permanent Marker", cursive;
+  font-size: clamp(2.5rem, 3vw, 3rem);
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  width: 90vw;
+  margin: 20px;
+}
+
+.hero {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  flex: 0.5;
+  margin: 10px;
+  transition: flex 0.5s linear;
+}
+
+.hero:nth-child(1) {
+  background-image: url('https://www.repsol.com/content/dam/repsol-corporate/es/energia-e-innovacion/refineria-campo.jpg');
+}
+
+.hero:nth-child(2) {
+  background-image: url('https://www.repsol.com/content/dam/repsol-corporate/es/accionistas-e-inversores/paisaje-verde-aerogeneradores-responsive.jpg');
+}
+
+.hero:nth-child(3) {
+  background-image: url('https://storage.googleapis.com/a1aa/image/E342lLIdRLrbIxwofbxDkYUk7GVH9onGzUTuPD9fy4HfHEpnA.jpg');
+}
+
+.hero:nth-child(4) {
+  background-image: url('https://storage.googleapis.com/a1aa/image/tK3MThbe5ZU6eUTo20UAxyyyNeUUfNhT5aFteAZG5GO2tQkeE.jpg');
+}
+
+.hero:nth-child(5) {
+  background-image: url('https://storage.googleapis.com/a1aa/image/foOUw7DBpZTwMig17tJfJJ96tXArGICym1B0Jie3SBbQNEpnA.jpg');
+}
+
+.hero:nth-child(6) {
+  background-image: url('https://storage.googleapis.com/a1aa/image/zbema5gvJMy7T68wU0TXF9Vi9AF4sFUykiEh3DgPTMMuDR6JA.jpg');
+}
+
+.hero:nth-child(7) {
+  background-image: url('https://storage.googleapis.com/a1aa/image/sOfKeTfVAiLn0JKKsnfRVA2VvdeiPFcPZqX7q7iqmkHYCRkeE.jpg');
+}
+
+.hero:nth-child(8) {
+  background-image: url('https://storage.googleapis.com/a1aa/image/BpgV5kNMZLImIp8lwN4nDn3i1z4npENG1YJeowWNemqLJi0TA.jpg');
+}
+
+.hero:nth-child(9) {
+  background-image: url('https://storage.googleapis.com/a1aa/image/zSC5gSJFcbJVP17ENtRicj4CQbqh5k0cNXv4MkefF9sDKi0TA.jpg');
+}
+
+.hero:nth-child(10) {
+  background-image: url('https://storage.googleapis.com/a1aa/image/dl2eL6yi1DwAXKM2HhQ23RoIZzlefneWAVknEBaGIqYDtISPB.jpg');
+}
+
+.hero:nth-child(11) {
+  background-image: url('https://storage.googleapis.com/a1aa/image/n1GEGWR4h3KWENBRQssJPtU1FNvOlYEON30nNPWKX5bGjI9E.jpg');
+}
+
+.hero:nth-child(12) {
+  background-image: url('https://storage.googleapis.com/a1aa/image/PRcHTze2xelUwkfK2E6Z757k2gAdH0ELPiCIAuu8PD5daEpnA.jpg');
+}
+
+.hero h1 {
+  position: absolute;
+  font-size: 1.5rem;
+  bottom: 20px;
+  left: 20px;
+  opacity: 0;
+}
+
+.hero.active {
+  flex: 5;
+}
+
+.hero.active h1 {
+  opacity: 1;
+  transition: opacity 0.3s ease-in 0.4s;
+}
+
+@media (max-width: 1000px) {
+  .hero:nth-of-type(7),
+  .hero:nth-of-type(8),
+  .hero:nth-of-type(9),
+  .hero:nth-of-type(10),
+  .hero:nth-of-type(11),
+  .hero:nth-of-type(12) {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .hero:nth-of-type(4),
+  .hero:nth-of-type(5),
+  .hero:nth-of-type(6),
+  .hero:nth-of-type(7),
+  .hero:nth-of-type(8),
+  .hero:nth-of-type(9),
+  .hero:nth-of-type(10),
+  .hero:nth-of-type(11),
+  .hero:nth-of-type(12) {
+    display: none;
+  }
+}
+  </style>
+  <title>Expanding Cards with Clean Energy</title>
+ </head>
+ <body>
+  <header>
+    <h1 style="color: black; font-weight: 400;">Paneles solares para energía no contaminante en el mundo</h1>
+</header>
+  <main>
+   <div class="hero active">
+    <h1>Paneles solares en un campo</h1>
+   </div>
+   <div class="hero">
+    <h1>Aerogeneradores en un paisaje montañoso</h1>
+   </div>
+   <div class="hero">
+    <h1>Planta hidroeléctrica en un río</h1>
+   </div>
+   <div class="hero">
+    <h1>Instalación geotérmica en un área volcánica</h1>
+   </div>
+   <div class="hero">
+    <h1>Vehículos eléctricos cargando en una estación</h1>
+   </div>
+   <div class="hero">
+    <h1>Paneles solares en un techo de una casa</h1>
+   </div>
+   <div class="hero">
+    <h1>Paneles solares en una instalación industrial</h1>
+   </div>
+   <div class="hero">
+    <h1>Paneles solares en un área rural</h1>
+   </div>
+   <div class="hero">
+    <h1>Paneles solares en un parque solar</h1>
+   </div>
+   <div class="hero">
+    <h1>Paneles solares en un desierto</h1>
+   </div>
+   <div class="hero">
+    <h1>Paneles solares en una granja</h1>
+   </div>
+   <div class="hero">
+    <h1>Paneles solares en una ciudad</h1>
+   </div>
+  </main>
+  <script>
+   const heroes = document.querySelectorAll(".hero");
+
+heroes.forEach((hero) => {
+  hero.addEventListener("click", () => {
+    removeActiveClasses();
+    hero.classList.add("active");
+  });
+});
+
+function removeActiveClasses() {
+  heroes.forEach((hero) => {
+    hero.classList.remove("active");
+  });
+}
+  </script>
+ 
+</div>
+</div>
+      </div>
+      </section>
+      
+      <!-- Aqui termina  las descriciones individules de las ods -->
+
+      <!-- Aqui comiensa  la sesciciones  Involucrar a Estudiantes y Jóvenes en el ODS 7: -->
+
+
+      
+   <!-- ONCEAVA SECTION -->
+
+   
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Garantizar el acceso a una energía asequible, segura, sostenible y moderna
+  </title>
+ 
+  </style>
+ </head>
+  <section class="mi-carousel-seccion max-w-full mx-auto p-10 bg-white rounded-lg shadow-lg custom-container">
+   <div class="flex flex-col md:flex-row items-center justify-between">
+    <!-- Texto de descripción -->
+    <div class="md:w-1/2 p-8">
+     <h1 class="text-3xl font-bold text-black mb-4">
+      Garantizar el acceso a una energía asequible, segura, sostenible y moderna
+     </h1>
+     <p class="text-black mb-4">
+      El acceso a una energía asequible, segura, sostenible y moderna es fundamental para el desarrollo económico y social. A continuación, te presentamos algunas de las características y beneficios de este tipo de energía.
+     </p>
+     <ul class="text-black mb-4 list-disc list-inside">
+      <li class="mb-4">
+       <strong>
+        Asequibilidad:
+       </strong>
+       <p>
+        La energía asequible permite a las familias y empresas reducir sus costos energéticos, lo que contribuye a mejorar la calidad de vida y la competitividad económica.
+       </p>
+      </li>
+      <li class="mb-4">
+       <strong>
+        Seguridad:
+       </strong>
+       <p>
+        Una energía segura minimiza los riesgos de accidentes y garantiza un suministro constante y confiable, lo que es esencial para el funcionamiento de infraestructuras críticas y servicios básicos.
+       </p>
+      </li>
+      <li class="mb-4">
+       <strong>
+        Sostenibilidad:
+       </strong>
+       <p>
+        La energía sostenible se obtiene de fuentes renovables que no agotan los recursos naturales y tienen un impacto ambiental reducido, contribuyendo a la lucha contra el cambio climático.
+       </p>
+      </li>
+      <li class="mb-4">
+       <strong>
+        Modernidad:
+       </strong>
+       <p>
+        La modernización de las infraestructuras energéticas permite la integración de tecnologías avanzadas, como las redes inteligentes y el almacenamiento de energía, mejorando la eficiencia y la resiliencia del sistema energético.
+       </p>
+      </li>
+      <li>
+       <strong>
+        Inclusión:
+       </strong>
+       <p>
+        Garantizar el acceso universal a la energía moderna es clave para reducir las desigualdades y promover el desarrollo inclusivo, asegurando que todas las personas puedan beneficiarse de los avances tecnológicos y económicos.
+       </p>
+      </li>
+     </ul>
+     <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 transition duration-300 rounded">
+      Leer más
+     </button>
+    </div>
+    <!-- Carrusel de imágenes -->
+    <div class="md:w-1/2 flex items-center justify-center">
+     <div class="carousel">
+      <img alt="Paneles solares en un campo" height="400" src="https://storage.googleapis.com/a1aa/image/5iHwi4r9l4LKOhS1seHxZgsfOjq3lP0urcGLRztOOYFe2IpnA.jpg" width="600"/>
+      <img alt="Paneles solares en el techo de una casa" height="400" src="https://storage.googleapis.com/a1aa/image/3MmbopSSvg6WMVwOY5ayMENgMapmhvavvHscOiW5cTG4GJ9E.jpg" width="600"/>
+      <img alt="Paneles solares en una instalación industrial" height="400" src="https://storage.googleapis.com/a1aa/image/MtxIafLDTD2ZCaYzKe0WqpvI201BLe09g3S7tQaMffMRcjkeE.jpg" width="600"/>
+      <img alt="Paneles solares en un área rural" height="400" src="https://storage.googleapis.com/a1aa/image/45livWG6QmI4ExFeltluDd7HHP9VoRbqZAYXKe17CjMlbk0TA.jpg" width="600"/>
+      <img alt="Paneles solares en un parque solar" height="400" src="https://storage.googleapis.com/a1aa/image/Oz82YKRR4TZMIJhOnx9gtnCAl0XTsQobeRMVgNhTPaNzNS6JA.jpg" width="600"/>
+    </div>
+ 
+</div>
+</div>
+      </div>
+      </section>
+      
+      <!-- Aqui termina  las descriciones individules de las ods -->
+
+      <!-- Aqui comiensa  la sesciciones  Involucrar a Estudiantes y Jóvenes en el ODS 7: -->
+
+
+      
+   <!-- ONCEAVA SECTION -->
+<head>
+    <title>Objetivo 7</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+       
+    </style>
+</head>
+
+    </div>
+         
+            <img src="https://storage.googleapis.com/a1aa/image/0GdTaREkmXJDHhgHeoC86oTNt0kv289lwVf5mvSTiLwx3l0TA.jpg" alt="Imagen de paneles solares" class="w-24 h-24 rounded mr-4">
+            <h1 class="text-2xl font-bold">Objetivo 7</h1>
+        </div>
+        <div class="border-b border-gray-300 mb-4">
+            <ul class="flex space-x-4 w-full">
+                <li class="py-2 px-4 cursor-pointer w-full text-center" id="tab1" onclick="showSection('section1', 'tab1')">Datos destacables</li>
+                <li class="py-2 px-4 cursor-pointer w-full text-center" id="tab2" onclick="showSection('section2', 'tab2')">Metas del objetivo 7</li>
+                <li class="py-2 px-4 cursor-pointer w-full text-center" id="tab3" onclick="showSection('section3', 'tab3')">Enlaces</li>
+            </ul>
+        </div>
+        <div class="text-gray-700" id="section1">
+            <p class="mb-4">El mundo continúa avanzando hacia objetivos energéticos sostenibles, pero no lo suficientemente rápido. Al ritmo actual, unos 660 millones de personas seguirán sin acceso a la electricidad y cerca de 2.000 millones seguirán dependiendo de tecnologías contaminantes para cocinar en 2030.</p>
+            <p class="mb-4">Las energías renovables representan casi el 30% de la generación de electricidad mundial. Este es un desarrollo positivo que está haciendo posible un cambio en los sectores de la electrificación y el transporte, los países en desarrollo han avanzado en la adopción de energías renovables, pero aún se necesita más apoyo para acelerar la transición energética.</p>
+            <p class="mb-4">Para garantizar el acceso de todo el mundo a la energía en 2030, debemos acelerar la electrificación, mejorar la eficiencia energética y aumentar el uso de energías renovables.</p>
+            <p class="mb-4">723 millones de personas aún no tienen acceso a la electricidad. Eso es aproximadamente una de cada diez personas en todo el mundo. Acceso a la energía | Programa de las Naciones Unidas para el Desarrollo.</p>
+            <p class="mb-4">La electrificación aumentó del 73% en 1990 al 91% en 2020. Acceso a la electricidad | Programa de las Naciones Unidas para el Desarrollo.</p>
+            <p class="mb-4">Se calcula que se necesitan entre 35.000 y 40.000 millones de dólares anuales para alcanzar el acceso universal a la electricidad en 2030. Acceso a la electricidad | Programa de las Naciones Unidas para el Desarrollo.</p>
+            <p class="mb-4">El acceso mundial a la electricidad ha aumentado del 87% en 2015 al 91% en 2021, aunque 675 millones de personas, principalmente en los países menos desarrollados (PMD) y el África subsahariana, siguen sin poder acceder a ella.</p>
+            <p class="mb-4">Sin embargo, el mundo aún no ha logrado avances en la misma región del acceso a la electricidad y las combustibles limpios para cocinar. 675 millones de personas siguen sin acceso a la electricidad y 2.300 millones dependen de combustibles y tecnologías contaminantes para cocinar.</p>
+            <p class="mb-4">Las fuentes renovables representan casi el 30% de la generación de electricidad mundial, aunque sigue siendo necesario un mayor apoyo para acelerar la transición energética en los países en desarrollo.</p>
+            <p class="mb-4">En 2021, el 71% de la población mundial tenía acceso a tecnologías y combustibles limpios para cocinar, frente al 64% en 2015. La región con la tasa más baja de acceso sigue siendo el África subsahariana, en la que el 85% de la población aún no tiene acceso. Debido al rápido crecimiento demográfico, se prevé que el número de personas sin acceso en la región se mantenga en torno a los 900 millones de personas.</p>
+        </div>
+        <div class="text-gray-700 hidden" id="section2">
+            <p class="mb-4">Meta 7.1: Garantizar el acceso universal a servicios energéticos asequibles, fiables y modernos.</p>
+            <p class="mb-4">Meta 7.2: Aumentar considerablemente la proporción de energía renovable en el conjunto de fuentes energéticas.</p>
+            <p class="mb-4">Meta 7.3: Duplicar la tasa mundial de mejora de la eficiencia energética.</p>
+            <p class="mb-4">Meta 7.a: Aumentar la cooperación internacional para facilitar el acceso a la investigación y la tecnología de energía limpia.</p>
+            <p class="mb-4">Meta 7.b: Ampliar la infraestructura y mejorar la tecnología para prestar servicios energéticos modernos y sostenibles para todos en los países en desarrollo.</p>
+        </div>
+        <div class="text-gray-700 hidden" id="section3">
+            <p class="mb-4"><a href="#" class="text-blue-500">Informe sobre los ODS 2023</a></p>
+            <p class="mb-4"><a href="#" class="text-blue-500">Programa de las Naciones Unidas para el Desarrollo</a></p>
+            <p class="mb-4"><a href="#" class="text-blue-500">Acceso a la energía | Programa de las Naciones Unidas para el Desarrollo</a></p>
+            <p class="mb-4"><a href="#" class="text-blue-500">Acceso a la electricidad | Programa de las Naciones Unidas para el Desarrollo</a></p>
+        </div>
+        <div class="mt-4 text-gray-500">
+            <p>Fuente: <a href="#" class="text-blue-500">Informe sobre los ODS 2023</a></p>
+        </div>
+    </div>
+    <script>
+        function showSection(sectionId, tabId) {
+            document.getElementById('section1').classList.add('hidden');
+            document.getElementById('section2').classList.add('hidden');
+            document.getElementById('section3').classList.add('hidden');
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            document.getElementById('tab1').classList.remove('bg-gray-200', 'border-b-2', 'border-red-500', 'font-semibold');
+            document.getElementById('tab2').classList.remove('bg-gray-200', 'border-b-2', 'border-red-500', 'font-semibold');
+            document.getElementById('tab3').classList.remove('bg-gray-200', 'border-b-2', 'border-red-500', 'font-semibold');
+            document.getElementById(tabId).classList.add('bg-gray-200', 'border-b-2', 'border-red-500', 'font-semibold');
+        }
+    </script>
+
+</div>
+</div>
+
+
+<!-- aqyui su  termina carrusel de imagenes  colectiva-->
+
+<!-- Aqui comienza  descricioon relacionados las ods-->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-roboto">
+    <div class="bg-cover bg-center h-[55vh]" style="background-image: url('https://www.repsol.com/content/dam/repsol-corporate/es/energia-e-innovacion/tipos-energias-renovables.jpg');">
+        <div class="flex flex-col items-center justify-center h-full bg-black bg-opacity-50">
+            <h1 class="text-white text-center text-2xl md:text-4xl font-semibold mb-4">
+                Innovación y Tecnología: Impulsando el Futuro
+            </h1>
+            <div class="flex flex-col md:flex-row justify-center items-center text-white text-center space-y-4 md:space-y-0 md:space-x-8 mb-8">
+                <p class="max-w-xs">
+                    Desarrollamos tecnologías avanzadas para un futuro sostenible.
+                </p>
+                <p class="max-w-xs">
+                    Innovamos en energías limpias y renovables.
+                </p>
+                <p class="max-w-xs">
+                    Colaboramos con líderes del sector para impulsar el cambio.
+                </p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+                <a href="https://www.repsol.com/es/energia-futuro/futuro-planeta/energia-solar/index.cshtml" class="bg-white text-black px-4 py-2 rounded">
+                    Descubrir más
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
